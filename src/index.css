@@ -4,6 +4,8 @@
 @plugin "daisyui";
 @theme {
   --font-inter: "Inter", sans-serif;
+  --color-brandPrimary: #a6c2b3;
+  --color-brandSecondary: #d4e6c1;
 }
 
 @plugin "daisyui/theme" {

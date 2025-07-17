@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import StartYourRestButton from "../Buttons/StartYourRestButton";
 
 const Navbar = () => {
   // Phone and Tablet Dropdown opener Uses state
@@ -17,7 +18,7 @@ const Navbar = () => {
     { tab: "About", path: "/about" },
   ];
   return (
-    <div className="fixed top-0 left-0 w-full z-50 backdrop-blur-3xl bg-base-100 ">
+    <div className=" fixed top-0 left-0 w-full z-50 backdrop-blur-3xl bg-base-100 ">
       <div className="flex justify-between items-center lg:mx-[60px] mx-5  py-5">
         <div className="flex justify-center items-center grow-0 gap-7">
           {/* Brand logo started */}
@@ -103,9 +104,9 @@ const Navbar = () => {
 
           {/* For Desktop device Get started button Started*/}
           <div className="hidden lg:flex">
-            <button className="font-semibold text-[20px] text-white px-[35px] py-[13px] rounded-[6px] bg-brandPrimary">
-              Get Started
-            </button>
+            <StartYourRestButton
+              text={"Start Your Reset"}
+            ></StartYourRestButton>
           </div>
           {/* For Desktop device Get started button Ended*/}
         </div>

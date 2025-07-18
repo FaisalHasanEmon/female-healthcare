@@ -6,15 +6,12 @@ const Home = () => {
       <div className="border border-black container px-5 mx-auto">
         <div className="flex">
           <div className="border border-red-500 ">
-            <div className="w-full text-[60px] font-extrabold">
+            <h2 className="uppercase font-extrabold text-[60px] text-transparent  font-playfair-display  [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#a6c2b3] ">
               your body's been talking
-              <h2 className=" absolute   uppercase font-extrabold text-[60px] text-transparent  font-playfair-display  [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#a6c2b3] ">
-                your body's been talking
-                <h2 className="absolute text-red-500  z-50  top-31 w-full uppercase  font-extrabold text-[60px] font-playfair-display ">
-                  your body's been talking
-                </h2>
-              </h2>
-            </div>
+            </h2>
+            <h2 className="absolute top-31  text-base-100 uppercase font-extrabold text-[60px]  font-playfair-display text white">
+              your body's been talking
+            </h2>
 
             <h2 className="uppercase ">
               change to your body's been <br /> talking. fenyx helps you listen

@@ -18,8 +18,8 @@ const Navbar = () => {
     { tab: "About", path: "/about" },
   ];
   return (
-    <div className=" fixed top-0 left-0 w-full z-50 backdrop-blur-3xl bg-base-100 ">
-      <div className="flex justify-between items-center lg:mx-[60px] mx-5  py-5">
+    <div className="fixed top-0 left-0 w-full z-50 backdrop-blur-3xl bg-base-100 ">
+      <div className="container flex justify-between items-center mx-auto px-5 py-5">
         <div className="flex justify-center items-center grow-0 gap-7">
           {/* Brand logo started */}
           <figure className="w-[50px] h-[50px] md:w-[62px] md:h-[62px]">

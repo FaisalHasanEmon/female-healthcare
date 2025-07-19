@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <div className="font-inter">
       <Navbar></Navbar>
-      <div className="mt-[122px] h-[calc(100vh-102px)]">
+      <div className="mt-[122px] min-h-[calc(100vh-102px)]">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>

@@ -27,7 +27,7 @@ const Navbar = () => {
           </figure>
           {/* Brand logo ended */}
           {/* Tabs for Large device started */}
-          <ul className="hidden lg:flex justify-center items-center gap-10 *:font-normal *:text-[20px]">
+          <ul className="hidden md:flex justify-center items-center gap-10 *:font-normal *:text-[20px]">
             {tabs?.map((tab, index) => (
               <li key={index}>
                 <NavLink
@@ -47,7 +47,7 @@ const Navbar = () => {
         </div>
         <div>
           {/* Phone and Tablet Menubar */}
-          <div className="lg:hidden relative inline-block">
+          <div className="md:hidden relative inline-block">
             {/* Button */}
             <button
               onClick={toggleDropdown}

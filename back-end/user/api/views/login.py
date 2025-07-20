@@ -16,4 +16,6 @@ class LoginView(APIView):
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
+            'user': user.email,
+            "detais": "Login successful"
         })

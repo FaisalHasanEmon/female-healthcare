@@ -6,6 +6,8 @@ import About from "../pages/about/About";
 import FenyxLibrary from "../pages/fenyx-library/FenyxLibrary";
 import HomeLayout from "../layout/HomeLayout/HomeLayout";
 import ContactUs from "../pages/contact-us/ContactUs";
+import SignUp from "../pages/authentication/signup/SignUp";
+import Login from "../pages/authentication/login/Login";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
         element: <ContactUs></ContactUs>,
       },
     ],
+  },
+  {
+    path: "/signup",
+    element: <SignUp></SignUp>,
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
   },
 ]);
 

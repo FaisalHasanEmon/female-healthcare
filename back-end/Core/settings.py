@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # Ensure Django REST Framework is included
+    'rest_framework_simplejwt.token_blacklist',
     'API',  # Ensure API app is included
     'user',  # Ensure user app is included
 

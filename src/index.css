@@ -10,6 +10,7 @@
   /* Colors */
   --color-brandPrimary: #a6c2b3;
   --color-brandSecondary: #d4e6c1;
+  --color-textGray: #4d4d4d;
 }
 
 @plugin "daisyui/theme" {

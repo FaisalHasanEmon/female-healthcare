@@ -80,9 +80,9 @@ const FenyxLibrary = () => {
         {fenyxLibraryCardsContent?.map((cardContent) => (
           <div
             key={cardContent?.content_id}
-            className="flex flex-col lg:flex-row justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary"
+            className="flex flex-col lg:flex-row  justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary"
           >
-            <figure className="lg:max-w-[256px]">
+            <figure className="lg:max-w-[256px] ">
               <img
                 className="w-full"
                 src={cardContent?.image}

@@ -1,15 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home/Home";
-import MainLayout from "../layout/MainLayout";
 import AIChatBot from "../pages/ai-chatbot/AIChatBot";
 import Testimonials from "../pages/testimonials/Testimonials";
 import About from "../pages/about/About";
 import FenyxLibrary from "../pages/fenyx-library/FenyxLibrary";
+import HomeLayout from "../layout/HomeLayout/HomeLayout";
+import ContactUs from "../pages/contact-us/ContactUs";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <HomeLayout></HomeLayout>,
     children: [
       {
         path: "/",
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs></ContactUs>,
       },
     ],
   },

@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+
+# Static and media files
+/staticfiles/
+/media/
+
+# Local settings
+.env
+*.local
+settings_local.py
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Node (if using React frontend)
+node_modules/
+build/
+dist/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Migrations (optional, keep if shared between team)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+# Uncomment below to ignore migration files themselves
+# **/migrations/*.py
+
+# System files
+*.swp
+*.bak

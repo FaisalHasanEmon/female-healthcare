@@ -1,10 +1,7 @@
-from django.contrib import admin
 from django.urls import path
 from user.api.views.register import RegisterView
 from user.api.views.login import LoginView
 from user.api.views.logout import LogoutView
-
-
 
 
 urlpatterns = [
@@ -22,5 +19,5 @@ urlpatterns = [
         'logout/',
         LogoutView.as_view(),
         name='logout'
-    ),  
+    ),
 ]

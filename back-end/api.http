@@ -1,0 +1,30 @@
+### Register
+
+POST http://127.0.0.1:8000/api/v1/register/
+Content-Type: application/json
+
+{
+  "email": "sagor@gmail.com",
+  "password": "Sagor1234#",
+  "confirm_password": "Sagor1234#"
+}
+
+### Login
+
+POST http://127.0.0.1:8000/api/v1/login/
+Content-Type: application/json
+
+{
+  "email": "sagor@gmail.com",
+  "password": "Sagor1234#"
+}
+
+### Logout
+
+POST http://127.0.0.1:8000/api/v1/logout/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzMTIzODgxLCJpYXQiOjE3NTMxMjM1ODEsImp0aSI6IjM1ODg3ZjUwYTBmYTQxODBhNTk2OWU2ZWZkNTY3MWE5IiwidXNlcl9pZCI6M30.WFoa1LYVUHpEj5V6iiW6xc9jlyXildM7BYTC3g_qyqs
+
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MzIwOTk4MSwiaWF0IjoxNzUzMTIzNTgxLCJqdGkiOiJmOTdiMzdlNDcyY2M0ZWExYjVjODU2NDY0NTU1YmNhNiIsInVzZXJfaWQiOjN9.PVTARM43vh2Tv8B1I2DODrySCQ1feVwHUShQxFa56hc"
+}

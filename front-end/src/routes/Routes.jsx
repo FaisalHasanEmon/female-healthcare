@@ -4,12 +4,14 @@ import AIChatBot from "../pages/ai-chatbot/AIChatBot";
 import Testimonials from "../pages/testimonials/Testimonials";
 import About from "../pages/about/About";
 import FenyxLibrary from "../pages/fenyx-library/FenyxLibrary";
-import HomeLayout from "../layout/HomeLayout/HomeLayout";
+import HomeLayout from "../layout/home-layout/HomeLayout";
 import ContactUs from "../pages/contact-us/ContactUs";
 import SignUp from "../pages/authentication/signup/SignUp";
 import Login from "../pages/authentication/login/Login";
+import OnBoardingLayout from "../layout/on-boarding-layout/OnBoardingLayout";
 
 const router = createBrowserRouter([
+  // Home Layout Paths
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
@@ -40,13 +42,20 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // Sign up path
   {
     path: "/signup",
     element: <SignUp></SignUp>,
   },
+  // Login path
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  // Onboarding Layout Paths
+  {
+    path: "/onboarding",
+    element: <OnBoardingLayout></OnBoardingLayout>,
   },
 ]);
 

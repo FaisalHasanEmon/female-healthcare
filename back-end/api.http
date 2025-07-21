@@ -28,3 +28,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 {
   "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MzIwOTk4MSwiaWF0IjoxNzUzMTIzNTgxLCJqdGkiOiJmOTdiMzdlNDcyY2M0ZWExYjVjODU2NDY0NTU1YmNhNiIsInVzZXJfaWQiOjN9.PVTARM43vh2Tv8B1I2DODrySCQ1feVwHUShQxFa56hc"
 }
+
+
+### Request password reset
+POST http://127.0.0.1:8000/api/v1/password-reset/
+Content-Type: application/json
+
+{
+  "email": "sagor@gmail.com"
+}
+
+
+### Confirm reset (after getting token and uid from console/email)
+POST http://127.0.0.1:8000/api/v1/password-reset-confirm/Mw/ctb4bj-08afb757daeeb9f42a4b0ccec050ee4e/
+Content-Type: application/json
+
+{
+  "password": "NewPassword123",
+  "confirm_password": "NewPassword123"
+}

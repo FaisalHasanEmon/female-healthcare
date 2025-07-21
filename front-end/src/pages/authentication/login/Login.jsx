@@ -38,7 +38,7 @@ const Login = () => {
         {/* Google Registration Starts*/}
         <div className="w-full mt-[26px] h-16">
           <button
-            className="btn input w-full h-full bg-brandPrimary text-white pl-[76px] placeholder:font-medium placeholder:text-[16px]  placeholder:text-white flex justify-center items-center gap-4 "
+            className="btn input w-full h-full bg-brandPrimary text-white placeholder:font-medium placeholder:text-[16px]  placeholder:text-white flex justify-center items-center gap-4 "
             onClick={handleGoogleLogin}
           >
             <figure className="h-[18px] w-[18px]">

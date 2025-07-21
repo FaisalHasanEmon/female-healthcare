@@ -17,10 +17,23 @@ const SignUp = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
+    const confirm_password = e.target.confirmPassword.value;
 
-    const registrationData = { email, password, confirmPassword };
+    const registrationData = { email, password, confirm_password };
     console.log(registrationData);
+    try {
+      const res = await fetch("http://10.10.12.91:4000/api/v1/register/", {
+        method: "POST", // Specify the HTTP method as POST
+        headers: {
+          "Content-Type": "application/json", // Indicate that the body contains JSON data
+        },
+        body: JSON.stringify(registrationData), // Convert the JavaScript object to a JSON string
+      });
+      const data = await res.json();
+      console.log("Response From Backend:", data);
+    } catch (er) {
+      console.log("Error: ", er);
+    }
   };
   return (
     <div className="min-h-screen flex justify-center items-center font-inter ">
@@ -39,7 +52,7 @@ const SignUp = () => {
         {/* Google Registration Starts*/}
         <div className="w-full mt-[26px] h-16">
           <button
-            className="btn input w-full h-full bg-brandPrimary text-white pl-[76px] placeholder:font-medium placeholder:text-[16px]  placeholder:text-white flex justify-center items-center gap-4 "
+            className="btn input w-full h-full bg-brandPrimary text-white placeholder:font-medium placeholder:text-[16px]  placeholder:text-white flex justify-center items-center gap-4 "
             onClick={handleGoogleSignUp}
           >
             <figure className="h-[18px] w-[18px]">

@@ -1,7 +1,7 @@
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { HiMiniChevronRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+export default function Footer() {
   // Quick Links
   const quickLinks = [
     { text: "Home", link: "/home" },
@@ -28,82 +28,92 @@ const Footer = () => {
   // Social Links
   const socialLinks = [
     {
-      text: "Instagram",
-      link: "#",
-    },
-    {
       text: "Facebook",
       link: "#",
+      img: "/socialMediaLogo/facebook.png",
+    },
+    {
+      text: "Instagram",
+      link: "#",
+      img: "/socialMediaLogo/instagram.png",
+    },
+    {
+      text: "LinkedIn",
+      link: "#",
+      img: "/socialMediaLogo/linkedin.png",
+    },
+    {
+      text: "Twitter",
+      link: "#",
+      img: "/socialMediaLogo/twitter.png",
     },
   ];
+
   return (
-    <div className="container mx-auto px-5 font-inter border border-red-500">
-      <div className="flex py-[60px]">
-        {/* Fenyx Femme */}
-        <div className="border border-green-600">
-          <h3 className="uppercase font-bold text-2xl">fenyx femme</h3>
-          <p className="text-[18px] font-normal mt-[18px]">
+    <footer className="bg-gradient-to-br from-[#f0f5ef] to-[#eaf3e4] text-gray-800 py-10">
+      <div className="container px-5 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 ">
+        {/* FENYX FEMME Section */}
+        <div className="col-span-6">
+          <h2 className="text-xl font-bold mb-4">FENYX FEMME</h2>
+          <p className="text-sm text-gray-700 mb-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare
-            cursus sed nunc eget dictum Sed ornare cursus sed nunc eget dictumd
-            nunc eget dictum Sed ornare cursus sed nunc eget dictum{" "}
+            cursus sed nunc eget dictum Sed ornare cursus sed nunc eget dictum
+            nunc eget dictum Sed ornare cursus sed nunc eget dictum
           </p>
-          <div></div>
+          <div className="flex space-x-3 mt-4 text-lg text-gray-600">
+            {socialLinks?.map((link, index) => (
+              <Link className="cursor-pointer" key={index} to={link?.link}>
+                <img className="w-4" src={link?.img} alt={link?.text} />
+              </Link>
+            ))}
+          </div>
         </div>
-        {/* Quick Links Starts*/}
-        <div className="border border-black min-w-[112px]">
-          <h3 className="font-semibold text-[20px] text-textGray">
-            Quick Links
-          </h3>
-          <ul>
+
+        {/* Quick Links */}
+        <div className="col-span-2">
+          <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
+          <ul className="space-y-2 text-sm">
             {quickLinks?.map((link, index) => (
               <li key={index}>
-                <Link to={link?.link}>
-                  <button className="flex items-center justify-center font-medium gap-2.5 text-[16px] mt-[18px] mb-[22px] text-[#090909]">
-                    <MdOutlineKeyboardArrowRight size={18} /> {link?.text}
-                  </button>
+                <Link
+                  to={link?.link}
+                  className="flex items-center gap-2 hover:text-black cursor-pointer"
+                >
+                  <HiMiniChevronRight />
+                  {link?.text}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Legal Starts */}
-        <div className="border border-orange-500">
-          <h3 className="font-semibold text-[20px] text-textGray">Legal</h3>
-          <ul>
+        {/* Legal */}
+        <div className="col-span-2">
+          <h2 className="text-lg font-semibold mb-4">Legal</h2>
+          <ul className="space-y-2 text-sm">
             {legal?.map((link, index) => (
-              <li
-                key={index}
-                className=" font-medium text-[16px] mt-[18px] mb-[22px] text-[#090909]"
-              >
-                <Link to={link?.link}>{link?.text}</Link>
+              <li key={index} className="hover:text-black cursor-pointer">
+                <Link to={link?.link}>{link.text}</Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Social Links Starts */}
-        <div className="border border-blue-500 min-w-[115px]">
-          <h3 className="font-semibold text-[20px] text-textGray">
-            Social Links
-          </h3>
-          <ul>
+        {/* Social Icons */}
+        <div className="col-span-2">
+          <h2 className="text-lg font-semibold mb-4">Social Icons</h2>
+          <ul className="space-y-2 text-sm">
             {socialLinks?.map((link, index) => (
               <li key={index}>
-                <Link to={link?.link}>
-                  <button className="flex items-center justify-center font-medium gap-2.5 text-[16px] mt-[18px] mb-[22px] text-[#090909]">
-                    <MdOutlineKeyboardArrowRight />
-                    {link?.text}
-                  </button>
+                <Link className="flex items-center gap-2 hover:text-black cursor-pointer">
+                  <HiMiniChevronRight />
+                  {link?.text}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-        {/* Social Links Ends */}
       </div>
-    </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

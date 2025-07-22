@@ -13,12 +13,20 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+
         if not user.email_verified:
             raise AuthenticationFailed("Please verify your email before logging in.")
+
         refresh = RefreshToken.for_user(user)
+
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-            'user': user,
-            "detais": "Login successful"
+            'user': {
+                'id': user.id,
+                'email': user.email,
+                'email_verified': user.email_verified
+                # Add more fields if needed (e.g., name)
+            },
+            "details": "Login successful"
         })

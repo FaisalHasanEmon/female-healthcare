@@ -14,6 +14,8 @@ from user.api.serializers.reset_password import (
     PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer
 )
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 
 class PasswordResetRequestView(CreateAPIView):
@@ -26,16 +28,26 @@ class PasswordResetRequestView(CreateAPIView):
         token = PasswordResetTokenGenerator().make_token(user)
 
         reset_link = f"http://127.0.0.1:8000/api/v1/password-reset-confirm/{uid}/{token}/"
-        print(reset_link)
-        # Send the reset link to the user's email
 
-        send_mail(
-            subject="Password Reset Request",
-            message=f"Click the link to reset your password:\n{reset_link}",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[email],
-            fail_silently=False
+        # ✅ Render HTML email content
+        html_message = render_to_string('email/password_reset_email.html', {
+            'reset_link': reset_link,
+        })
+
+        subject = "Reset Your Password"
+        from_email = settings.DEFAULT_FROM_EMAIL
+        to = [email]
+
+        # ✅ Email with plain text and HTML
+        email_message = EmailMultiAlternatives(
+            subject=subject,
+            body="Click the link to reset your password: " + reset_link,  # plain text fallback
+            from_email=from_email,
+            to=to
         )
+        email_message.attach_alternative(html_message, "text/html")
+        email_message.send()
+
 
 
 class PasswordResetConfirmView(APIView):

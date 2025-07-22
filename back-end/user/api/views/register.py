@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 from django.core.mail import send_mail
 from user.api.serializers.register import RegisterSerializer
 from user.models import User
-from user.utils import generate_verification_link
+from user.utils import send_verification_email
 
 
 class RegisterView(CreateAPIView):
@@ -16,22 +16,12 @@ class RegisterView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        # SAVE THE USER FIRST
         user = serializer.save()
 
-        # THEN generate token
-        verification_link = generate_verification_link(user, request)
-
-        # Send email
-        send_mail(
-            subject='Verify Your Email',
-            message=f'Click the link to verify your email: {verification_link}',
-            from_email=None,
-            recipient_list=[user.email],
-        )
+        # ✅ Send HTML email
+        send_verification_email(user, request)
 
         return Response({
-            "message": "User registered successfully. Please check your email to verify your account.",
+            "message": "User registered successfully. Please check your inbox to verify your email.",
             "user": {"email": user.email}
         }, status=status.HTTP_201_CREATED)

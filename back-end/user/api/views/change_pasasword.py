@@ -7,7 +7,7 @@ from user.api.serializers import ChangePasswordSerializer
 
 class ChangePasswordView(CreateAPIView):
     serializer_class = ChangePasswordSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, context={'request': request})
@@ -21,7 +21,6 @@ class ChangePasswordView(CreateAPIView):
                 status=status.HTTP_200_OK
             )
         return Response(
-            {"error": "Password change failed."},
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )

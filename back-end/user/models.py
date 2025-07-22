@@ -7,7 +7,7 @@ from django.contrib.auth.models import (
 )
 
 
-class CustomUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email must be set')
@@ -23,7 +23,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
     
 
-class CustomUser(AbstractBaseUser, PermissionsMixin, BaseModel):
+class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     email = models.EmailField(unique=True)
     username = models.CharField(
         max_length=150,
@@ -34,7 +34,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, BaseModel):
     is_staff = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
 
-    objects = CustomUserManager()
+    objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

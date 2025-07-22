@@ -1,6 +1,6 @@
 import re
 from rest_framework import serializers
-from  user.models import CustomUser
+from  user.models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -8,11 +8,11 @@ class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['email', 'password', 'confirm_password']
 
     def validate_email(self, value):
-        if CustomUser.objects.filter(email=value).exists():
+        if User.objects.filter(email=value).exists():
             raise serializers.ValidationError(
                 "user with this email already exists."
             )
@@ -53,4 +53,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data.pop('confirm_password')
-        return CustomUser.objects.create_user(**validated_data)
+        return User.objects.create_user(**validated_data)

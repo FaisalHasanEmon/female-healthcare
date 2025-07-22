@@ -4,7 +4,7 @@ POST http://127.0.0.1:8000/api/v1/register/
 Content-Type: application/json
 
 {
-  "email": "emon12@gmail.com",
+  "email": "admin123@gmail.com",
   "password": "Sagor1234#",
   "confirm_password": "Sagor1234#"
 }
@@ -16,17 +16,30 @@ Content-Type: application/json
 
 {
   "email": "emon12@gmail.com",
-  "password": "Sagor1234#"
+  "password": "newStrongPassword4567"
+}
+
+
+
+### Change Password
+POST http://127.0.0.1:8000/api/v1/change-password/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzMjEyMjI2LCJpYXQiOjE3NTMyMTE5MjYsImp0aSI6ImI4NTkxMGYwZDBmOTRmNjJiMGQ4Yzk3NzRhNTA3YzhmIiwidXNlcl9pZCI6Nn0.2yqxuoupl5DGalk8E8nHSOWB9zsGLRtJznzozT8uZTE
+
+{
+  "old_password": "newStrongPassword456",
+  "new_password": "newStrongPassword4567",
+  "confirm_password": "newStrongPassword4567"
 }
 
 ### Logout
 
 POST http://127.0.0.1:8000/api/v1/logout/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzMjA3Nzk3LCJpYXQiOjE3NTMyMDc0OTcsImp0aSI6Ijc4Y2M2ZTY1NWJmYjRhN2Q4YWU5NzlkYjhkM2IzNGUyIiwidXNlcl9pZCI6NX0.RMKpC89LB2unf9Dg0fDUpzj3FqQb9UyaOypPtxh3n0w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzMjEyMjgyLCJpYXQiOjE3NTMyMTE5ODIsImp0aSI6IjkyYmY5YzQ0MGUxODRjYzg5NThjMThmMDFhNzRlZjBjIiwidXNlcl9pZCI6Nn0.G6lpWFVQu2SqmVmVOkIqForPaM9854XE-u-mOr9WKqQ
 
 {
-  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MzI5Mzg5NywiaWF0IjoxNzUzMjA3NDk3LCJqdGkiOiI0OTIxYTJkZTExNWM0NzEwYmU0NDVmMmNhZjgxYWI3YiIsInVzZXJfaWQiOjV9.N6HL3azuOwyHAoUpVifL21Y2yjY8HbwVSoTsCzHT3ec",
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MzI5ODM4MiwiaWF0IjoxNzUzMjExOTgyLCJqdGkiOiJiYzFhODRiZmViZTk0ZTM0YjZmZGM4MWMxMjg5ODVhYyIsInVzZXJfaWQiOjZ9.tydNRrt3QytlgUc1CDFor1Em7Exa6a8wdiViQG-4KJ4"
 }
 
 
@@ -40,7 +53,7 @@ Content-Type: application/json
 
 
 ### Confirm reset (after getting token and uid from console/email)
-POST http://127.0.0.1:8000/api/v1/password-reset-confirm/NQ/ctcta4-ed5968a15ae55d209a00259db6050752/
+POST http://127.0.0.1:8000/api/v1/password-reset-confirm/Ng/ctcweg-fd22da308b77f79b8456e87835518d17/
 Content-Type: application/json
 
 {

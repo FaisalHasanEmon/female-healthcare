@@ -7,6 +7,7 @@ from .reset_password import (
     PasswordResetConfirmView
 )
 from .change_pasasword import ChangePasswordView
+from .verify_email import VerifyEmailView
 
 
 __all__ = [
@@ -15,6 +16,6 @@ __all__ = [
     LogoutView,
     PasswordResetRequestView,
     PasswordResetConfirmView,
-    ChangePasswordView
-
+    ChangePasswordView,
+    VerifyEmailView,
 ]

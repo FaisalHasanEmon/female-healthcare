@@ -63,7 +63,7 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'Core.urls'
-AUTH_USER_MODEL = 'user.CustomUser'
+AUTH_USER_MODEL = 'user.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -155,15 +155,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For dev
-DEFAULT_FROM_EMAIL = 'noreply@example.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For dev
+# DEFAULT_FROM_EMAIL = 'noreply@example.com'
 
 
 # For production 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'your@gmail.com'
-# EMAIL_HOST_PASSWORD = 'your_app_password'
-# EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'shagorrobidasjvai@gmail.com'
+EMAIL_HOST_PASSWORD = 'cbon yomy uynv bxoq'
+EMAIL_USE_TLS = True

@@ -2,14 +2,14 @@ from rest_framework import serializers
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str, smart_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from user.models import CustomUser
+from user.models import User
 
 
 class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
     def validate_email(self, value):
-        if not CustomUser.objects.filter(email=value).exists():
+        if not User.objects.filter(email=value).exists():
             raise serializers.ValidationError("No user found with this email.")
         return value
 
@@ -26,8 +26,8 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     def save(self, uidb64, token):
         try:
             uid = smart_str(urlsafe_base64_decode(uidb64))
-            user = CustomUser.objects.get(id=uid)
-        except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+            user = User.objects.get(id=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             raise serializers.ValidationError("Invalid link or expired")
 
         if not PasswordResetTokenGenerator().check_token(user, token):

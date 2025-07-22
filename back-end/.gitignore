@@ -16,6 +16,7 @@ __pycache__/
 *.pot
 *.pyc
 
+
 # Media and static files
 /media/
 staticfiles/
@@ -84,3 +85,6 @@ build/
 dist/
 *.egg-info/
 .eggs/
+
+# Ignore .http files (e.g. Postman, REST Client)
+*.http

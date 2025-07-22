@@ -6,13 +6,15 @@ from .reset_password import (
     PasswordResetRequestView,
     PasswordResetConfirmView
 )
+from .change_pasasword import ChangePasswordView
 
 
 __all__ = [
-    'RegisterView',
-    'LoginView',
-    'LogoutView',
-    'PasswordResetRequestView',
-    'PasswordResetConfirmView'
+    RegisterView,
+    LoginView,
+    LogoutView,
+    PasswordResetRequestView,
+    PasswordResetConfirmView,
+    ChangePasswordView
 
 ]

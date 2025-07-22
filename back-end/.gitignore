@@ -1,55 +1,86 @@
-# Byte-compiled / optimized / DLL files
+# Python bytecode and cache
 __pycache__/
 *.py[cod]
-*$py.class
+*.pyo
+*.pyd
+*.pyc
 
-# C extensions
-*.so
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
 
-# Virtual environment
-venv/
-env/
-ENV/
-
-# Django specific
+# Django cache and database
+*.sqlite3
+*.db
 *.log
 *.pot
 *.pyc
-*.sqlite3
-db.sqlite3
 
-# Static and media files
-/staticfiles/
+# Media and static files
 /media/
+staticfiles/
+static/
 
-# Local settings
+# Environment variables and secrets
 .env
-*.local
-settings_local.py
+.env.*
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.ENV/
 
 # VSCode
 .vscode/
 
-# MacOS
+# PyCharm
+.idea/
+
+# macOS
 .DS_Store
 
-# Node (if using React frontend)
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Test coverage reports
+htmlcov/
+coverage.xml
+*.cover
+*.py,cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Local config
+*.local
+*.pid
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*~
+
+# Node (if using JS tools like Tailwind or React frontend)
 node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Build artifacts
 build/
 dist/
-
-# Coverage reports
-htmlcov/
-.coverage
-coverage.xml
-
-# Migrations (optional, keep if shared between team)
-**/migrations/*.pyc
-**/migrations/__pycache__/
-# Uncomment below to ignore migration files themselves
-# **/migrations/*.py
-
-# System files
-*.swp
-*.bak
-
+*.egg-info/
+.eggs/

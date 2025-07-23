@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   // Quick Links
   const quickLinks = [
-    { text: "Home", link: "/home" },
+    { text: "Home", link: "/" },
     { text: "About", link: "/about" },
     { text: "Contact", link: "/contact-us" },
   ];

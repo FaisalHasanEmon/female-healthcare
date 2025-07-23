@@ -18,7 +18,7 @@ const Navbar = () => {
     { tab: "About", path: "/about" },
   ];
   return (
-    <div className="fixed top-0 left-0 w-full z-50 backdrop-blur-3xl bg-base-100 ">
+    <div className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-3xl ">
       <div className="container flex justify-between items-center mx-auto px-5 py-5">
         <div className="flex justify-center items-center grow-0 gap-7">
           {/* Brand logo started */}

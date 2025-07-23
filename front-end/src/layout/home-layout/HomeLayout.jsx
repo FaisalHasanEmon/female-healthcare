@@ -6,8 +6,8 @@ const HomeLayout = () => {
   return (
     <div className="font-inter">
       <Navbar></Navbar>
-      <div className="mt-[122px] min-h-[calc(100vh-102px)]">
-        <Outlet></Outlet>
+      <div className="min-h-[calc(100vh-228px)]">
+        <Outlet></Outlet>{" "}
       </div>
       <Footer></Footer>
     </div>

@@ -1,0 +1,90 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# Django cache and database
+*.sqlite3
+*.db
+*.log
+*.pot
+*.pyc
+
+
+# Media and static files
+/media/
+staticfiles/
+static/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Test coverage reports
+htmlcov/
+coverage.xml
+*.cover
+*.py,cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Local config
+*.local
+*.pid
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*~
+
+# Node (if using JS tools like Tailwind or React frontend)
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Ignore .http files (e.g. Postman, REST Client)
+*.http

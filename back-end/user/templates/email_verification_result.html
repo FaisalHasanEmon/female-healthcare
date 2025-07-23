@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Email Verification</title>
+    <meta http-equiv="refresh" content="2;url=http://10.10.12.9:5173/login" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .modal {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal .redirect {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal">
+            <h2 class="{% if 'successfully' in message %}success{% else %}error{% endif %}">
+                {{ message }}
+            </h2>
+            <div class="redirect">Redirecting to login page in 2 seconds...</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,20 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// first form
+
 const Page1 = () => {
   return (
     <div className="text-center flex flex-col gap-10 w-2/4">
-      <h1 className="text-3xl font-semibold font-playfair-display">
+      <h1 className="text-3xl font-bold font-playfair-display">
         Tell us about your cycle
       </h1>
       <div className="flex flex-col gap-5">
         {options.map((data)=><label key={data.id} className="border border-brandPrimary rounded flex justify-between p-3 items-center">
           <span className="font-montserrat">{data?.title}</span>
-          <input type="radio" name="healthStatus" value={data?.value}/>
+          <input type="radio" className="" name="healthStatus" value={data?.value}/>
         </label>)}
       </div>
       <div>
-        <Link to="/onboarding/page2" className=" btn bg-brandPrimary px-20">Continue</Link>
+        <Link to="/onboarding/page2" className=" btn bg-brandPrimary text-center px-40">Continue</Link>
       </div>
     </div>
   );
@@ -22,6 +24,8 @@ const Page1 = () => {
 
 export default Page1;
 
+
+// from options
 
 const options = [
     {

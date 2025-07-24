@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function OnBoardingNavbar() {
   const navigate = useNavigate();
+  // navigating routes 
   const pages = [
     "/onboarding/page1",
     "/onboarding/page2",
@@ -12,7 +13,9 @@ export default function OnBoardingNavbar() {
     "/onboarding/page4",
     "/onboarding/page5",
     "/onboarding/page6",
+    "/onboarding/last-page",
   ];
+  // get route index from pages
   const currentIndex = pages.indexOf(location.pathname);
 
   return (

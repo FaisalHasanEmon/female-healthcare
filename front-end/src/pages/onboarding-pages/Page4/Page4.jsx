@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 //onboarding page4
 const Page4 = () => {
     return (
-        <div className="flex flex-col gap-10">
-      <h1 className="text-3xl font-playfair-display font-bold text-center ">
+        <div className="flex flex-col gap-5 items-center md:gap-10">
+      <h1 className="text-2xl md:text-3xl font-playfair-display font-bold text-center ">
         What are your goals?
       </h1>
-      <div className="flex flex-col gap-3 text-left w-[600px]">
+      <div className="flex flex-col gap-1 md:gap-3 text-left  md:w-[600px]">
         {options.map((data) => (
           <label
             key={data.id}
@@ -19,14 +19,14 @@ const Page4 = () => {
               type="checkbox"
               name="healthStatus"
               value={data?.value}
-              className="w-4 h-4 accent-brandPrimary"
+              className="w-3 md:w-4 h-3 md:h-4 accent-brandPrimary"
             />
-            <span className="font-montserrat">{data?.title}</span>
+            <span className="font-montserrat text-sm md:text-base">{data?.title}</span>
           </label>
         ))}
       </div>
       <div className="text-right">
-        <Link to="/onboarding/page5" className="btn btn-md bg-brandPrimary px-10 py-2 rounded border-brandPrimary">
+        <Link to="/onboarding/page5" className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary">
           Continue
         </Link>
       </div>

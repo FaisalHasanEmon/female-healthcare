@@ -13,25 +13,26 @@ const Page3 = () => {
 
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-center">
+    <div className="mx-5">
+      <h1 className="text-2xl font-bold text-center font-playfair-display mb-5">
         Tell us about your lifestyle
       </h1>
       <div className="">
         <div className="">
-          <h3 className="font-semibold my-3">Dietary Style</h3>
-          <div className="flex gap-3">
+          <h3 className="font-semibold my-2 md:my-3">Dietary Style</h3>
+          <div className="grid grid-cols-3 md:flex gap-3">
             {options.dietary.map((data) => (
               <label
                 key={data.id}
-                className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${dietary === data.value?"bg-brandPrimary" : "bg-transparent"}` }
+                className={`border border-brandPrimary rounded flex justify-between px-2 py-2  items-center ${dietary === data.value?"bg-brandPrimary" : "bg-transparent"}` }
               >
-                <span className="font-montserrat">{data?.title}</span>
+                <span className="font-montserrat text-sm md:text-base mx-auto ">{data?.title}</span>
                 <input
                   onClick={(e)=>setDietary(e.target.value)}
                   type="radio"
-                  className="hidden"
+                  className="hidden "
                   name="healthStatus"
+                  
                   value={data?.value}
                 />
               </label>
@@ -46,7 +47,7 @@ const Page3 = () => {
                 key={data.id}
                 className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${activity === data.value?"bg-brandPrimary" : "bg-transparent"}` }
               >
-                <span className="font-montserrat">{data?.title}</span>
+                <span className="font-montserrat text-sm md:text-base">{data?.title}</span>
                 <input
                 onClick={(e)=>setActivity(e.target.value)}
                   type="radio"
@@ -66,7 +67,7 @@ const Page3 = () => {
                 key={data.id}
                 className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${stress === data.value?"bg-brandPrimary" : "bg-transparent"}` }
               >
-                <span className="font-montserrat">{data?.title}</span>
+                <span className="font-montserrat text-sm md:text-base">{data?.title}</span>
                 <input
                  onClick={(e)=>setStress(e.target.value)}
                   type="radio"
@@ -86,7 +87,7 @@ const Page3 = () => {
           <div className="">
             <Link
               to="/onboarding/page4"
-              className="btn btn-md bg-brandPrimary px-10 py-2 rounded w-2/4 border-brandPrimary"
+              className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded w-2/4 border-brandPrimary hover:bg-[#7f9e90]"
             >
               Continue
             </Link>

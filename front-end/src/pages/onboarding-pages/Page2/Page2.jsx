@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 //onboarding second form
 const Page2 = () => {
   return (
-    <div className="flex flex-col gap-10">
-      <h1 className="text-3xl font-playfair-display font-bold text-center mx-20">
+    <div className="flex flex-col gap-5 mx-10 md:mx-0 md:gap-10">
+      <h1 className="text-2xl md:text-3xl font-playfair-display font-bold text-center md:mx-20">
         What are your top 3 concerns right now?
       </h1>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1 md:gap-3">
         {options.map((data) => (
           <label
             key={data.id}
@@ -18,14 +18,14 @@ const Page2 = () => {
               type="checkbox"
               name="healthStatus"
               value={data?.value}
-              className="w-4 h-4 accent-brandPrimary"
+              className=" w-3 h-3 text-sm md:text-base md:w-4 md:h-4 accent-brandPrimary"
             />
             <span className="font-montserrat">{data?.title}</span>
           </label>
         ))}
       </div>
       <div className="text-right">
-        <Link to="/onboarding/page3" className="btn btn-md bg-brandPrimary px-10 py-2 rounded border-brandPrimary">
+        <Link to="/onboarding/page3" className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90]">
           Continue
         </Link>
       </div>

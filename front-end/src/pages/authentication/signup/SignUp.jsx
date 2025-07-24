@@ -3,8 +3,10 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const SignUp = () => {
+  const { userRegistration } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   // Handle Goolge Sign Up
@@ -21,19 +23,8 @@ const SignUp = () => {
 
     const registrationData = { email, password, confirm_password };
     console.log(registrationData);
-    try {
-      const res = await fetch("http://10.10.12.91:4000/api/v1/register/", {
-        method: "POST", // Specify the HTTP method as POST
-        headers: {
-          "Content-Type": "application/json", // Indicate that the body contains JSON data
-        },
-        body: JSON.stringify(registrationData), // Convert the JavaScript object to a JSON string
-      });
-      const data = await res.json();
-      console.log("Response From Backend:", data);
-    } catch (er) {
-      console.log("Error: ", er);
-    }
+    const res = await userRegistration(email, password, confirm_password);
+    console.log(res.data);
   };
   return (
     <div className="min-h-screen flex justify-center items-center font-inter ">

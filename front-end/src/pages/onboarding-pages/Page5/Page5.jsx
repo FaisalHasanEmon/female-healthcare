@@ -22,9 +22,9 @@ const Page5 = () => {
             <option disabled selected>
               Select time
             </option>
-            <option>Light mode</option>
-            <option>Dark mode</option>
-            <option>System</option>
+            <option>9:00 A.M.</option>
+            <option>12:00 P.M.</option>
+            <option>4:00 P.M.</option>
           </select>
         </div>
         <div className="mr-auto">

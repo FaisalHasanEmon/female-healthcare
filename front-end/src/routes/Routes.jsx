@@ -16,7 +16,6 @@ import Page3 from "../pages/onboarding-pages/Page3/Page3";
 import Page4 from "../pages/onboarding-pages/Page4/Page4";
 import Page5 from "../pages/onboarding-pages/Page5/Page5";
 import Page6 from "../pages/onboarding-pages/Page6/Page6";
-import LastPage from "../pages/onboarding-pages/LastPage/LastPage";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -92,10 +91,6 @@ const router = createBrowserRouter([
       {
         path: "/onboarding/page6",
         element:<Page6/>
-      },
-      {
-        path: "/onboarding/last-page",
-        element:<LastPage/>
       }
     ]
   },

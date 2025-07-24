@@ -3,8 +3,10 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import UseAuth from "../../../hooks/useAuth";
 
 const Login = () => {
+  const { userLogin } = UseAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   // Handle Goolge Sign Up
@@ -18,8 +20,10 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const registrationData = { email, password };
-    console.log(registrationData);
+    // const loginData = { email, password };
+    const res = await userLogin(email, password);
+    console.log(res.data);
+    // console.log(registrationData);
   };
   return (
     <div className="min-h-screen flex justify-center items-center font-inter ">

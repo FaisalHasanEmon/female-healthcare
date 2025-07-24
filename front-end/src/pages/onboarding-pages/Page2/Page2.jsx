@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 const Page2 = () => {
   return (
     <div className="flex flex-col gap-5 mx-10 md:mx-0 md:gap-10">
+      {/* page2 title  */}
       <h1 className="text-2xl md:text-3xl font-playfair-display font-bold text-center md:mx-20">
         What are your top 3 concerns right now?
       </h1>
       <div className="flex flex-col gap-1 md:gap-3">
+        {/* maped form option  */}
         {options.map((data) => (
           <label
             key={data.id}
@@ -35,7 +37,7 @@ const Page2 = () => {
 
 export default Page2;
 
-// form options
+//----------------------------- form options data for page2--------------------------
 
 const options = [
   {

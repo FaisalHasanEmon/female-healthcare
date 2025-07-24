@@ -1,7 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Page6 = () => {
+    // last page 
     return (
         <div className='text-center flex flex-col gap-5'>
             <h1 className='text-xl font-bold font-playfair-display'>You're In</h1>
@@ -12,3 +12,9 @@ const Page6 = () => {
 };
 
 export default Page6;
+
+
+
+
+
+

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -10,6 +9,7 @@ const Page4 = () => {
         What are your goals?
       </h1>
       <div className="flex flex-col gap-1 md:gap-3 text-left  md:w-[600px]">
+        {/* maped option  */}
         {options.map((data) => (
           <label
             key={data.id}
@@ -25,6 +25,7 @@ const Page4 = () => {
           </label>
         ))}
       </div>
+      {/* navigation link  */}
       <div className="text-right">
         <Link to="/onboarding/page5" className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary">
           Continue
@@ -36,7 +37,7 @@ const Page4 = () => {
 
 export default Page4;
 
-//options
+//options for page4
 const options = [
   {
     id: 1,

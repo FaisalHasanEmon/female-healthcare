@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // onboarding 3rd form
 
 const Page3 = () => {
-    //get selected form
+    //state to take select option
     const [dietary, setDietary] = useState("")
     const [activity, setActivity] = useState("")
     const [stress, setStress] = useState("")
@@ -21,6 +21,7 @@ const Page3 = () => {
         <div className="">
           <h3 className="font-semibold my-2 md:my-3">Dietary Style</h3>
           <div className="grid grid-cols-3 md:flex gap-3">
+            {/* maped options dietary  */}
             {options.dietary.map((data) => (
               <label
                 key={data.id}
@@ -28,6 +29,7 @@ const Page3 = () => {
               >
                 <span className="font-montserrat text-sm md:text-base mx-auto ">{data?.title}</span>
                 <input
+                  // sete value in state for dietary
                   onClick={(e)=>setDietary(e.target.value)}
                   type="radio"
                   className="hidden "
@@ -42,6 +44,7 @@ const Page3 = () => {
         <div>
           <h3 className="font-semibold my-3">Activity Level</h3>
           <div className="flex gap-3">
+            {/* maped option activity  */}
             {options.activity.map((data) => (
               <label
                 key={data.id}
@@ -49,6 +52,7 @@ const Page3 = () => {
               >
                 <span className="font-montserrat text-sm md:text-base">{data?.title}</span>
                 <input
+                // set activity in state 
                 onClick={(e)=>setActivity(e.target.value)}
                   type="radio"
                   className="hidden"
@@ -62,6 +66,7 @@ const Page3 = () => {
         <div>
           <h3 className="font-semibold my-3">Stress Level</h3>
           <div className="flex gap-3">
+            {/* maped stress option */}
             {options.stress.map((data) => (
               <label
                 key={data.id}
@@ -69,6 +74,7 @@ const Page3 = () => {
               >
                 <span className="font-montserrat text-sm md:text-base">{data?.title}</span>
                 <input
+                // set value in state 
                  onClick={(e)=>setStress(e.target.value)}
                   type="radio"
                   className="hidden"
@@ -79,11 +85,13 @@ const Page3 = () => {
             ))}
           </div>
         </div>
+        {/* textarea  */}
         <div className="flex flex-col gap-8 mt-8">
           <textarea
             placeholder="Your Note..."
             className="textarea bg-brandPrimary"
           ></textarea>
+          {/* navigation button  */}
           <div className="">
             <Link
               to="/onboarding/page4"

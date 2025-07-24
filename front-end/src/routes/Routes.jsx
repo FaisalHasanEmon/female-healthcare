@@ -16,6 +16,7 @@ import Page3 from "../pages/onboarding-pages/Page3/Page3";
 import Page4 from "../pages/onboarding-pages/Page4/Page4";
 import Page5 from "../pages/onboarding-pages/Page5/Page5";
 import Page6 from "../pages/onboarding-pages/Page6/Page6";
+import ResetPassword from "../pages/authentication/reset-password/ResetPassword";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -59,34 +60,38 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login></Login>,
   },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
+  },
   // Onboarding Layout Paths
   {
     path: "/onboarding",
-    element: <OnBoardingLayout></OnBoardingLayout>,
+    element: <OnBoardingLayout />,
     children: [
       {
         path: "/onboarding",
-        element: <OnboardingHome/>
+        element: <OnboardingHome />,
       },
       {
         path: "/onboarding/page1",
-        element:<Page1/>
+        element: <Page1 />,
       },
       {
         path: "/onboarding/page2",
-        element:<Page2/>
+        element: <Page2 />,
       },
       {
         path: "/onboarding/page3",
-        element:<Page3/>
+        element: <Page3 />,
       },
       {
         path: "/onboarding/page4",
-        element:<Page4/>
+        element: <Page4 />,
       },
       {
         path: "/onboarding/page5",
-        element:<Page5/>
+        element: <Page5 />,
       },
       {
         path: "/onboarding/page6",

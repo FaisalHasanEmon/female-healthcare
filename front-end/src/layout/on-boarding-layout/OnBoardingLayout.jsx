@@ -10,10 +10,10 @@ const OnBoardingLayout = () => {
         <Outlet/>
       </div>
       {/* Image top */}
-      <figure className="absolute right-0 top-0 -z-10   mr-5">
+      <figure className="absolute right-0 top-0 -z-10  mr-5">
         <img
           src="/onboarding-images/top-right.png"
-          className="w-[300px]"
+          className="w-[150px] md:w-[300px]"
           alt=""
         />
       </figure>
@@ -21,7 +21,7 @@ const OnBoardingLayout = () => {
       <figure className="absolute bottom-0 -z-10 right-0">
         <img
           src="/onboarding-images/bottom-right.png"
-          className="w-[629px]"
+          className="w-[229px] md:w-[629px]"
           alt="Right Bottom Background Image"
         />
       </figure>
@@ -30,7 +30,7 @@ const OnBoardingLayout = () => {
         <img
           src="/onboarding-images/left-bottom.png"
           alt="Left Bottom Background Image"
-          className="h-[570px]"
+          className="h-[170px] md:h-[570px]"
         />
       </figure>
     </div>

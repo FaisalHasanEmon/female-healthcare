@@ -1,12 +1,46 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
+
+
+
+
+
 
 // first form
-
 const Page1 = () => {
   const [cycle, setCycle] = useState("");
-  console.log(cycle);
+  const navigate = useNavigate();
 
+  // get cycle 
+  useEffect(()=>{
+    const getCycle = localStorage.getItem("cycle");
+    if(getCycle?.length > 0){
+      setCycle(getCycle)
+    }
+  },[])
+
+
+  // set cycle 
+  // useEffect(()=>{
+  //    if(cycle?.length > 0){
+  //     localStorage.setItem("cycle", cycle);
+  //    }
+  // },[cycle])
+
+  //set cycle in localstorage
+  const handleValues=()=>{
+       if(cycle?.length > 0){
+      localStorage.setItem("cycle", cycle);
+     }
+    navigate("/onboarding/page2")
+  }
+
+
+
+  // rander ui 
   return (
     <div className="text-center flex flex-col gap-10 w-3/4">
       <h1 className="text-2xl md:text-3xl font-bold font-playfair-display">
@@ -22,25 +56,26 @@ const Page1 = () => {
             key={data.id}
             className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center"
           >
-
             <span className="font-montserrat ">{data?.title}</span>
             <input
+              checked={data.value === cycle}
               type="radio"
               className=""
               name="healthStatus"
               value={data?.value}
+              onChange={() => {}}
             />
           </label>
         ))}
       </form>
 
       <div>
-        <Link
-          to="/onboarding/page2"
+        <button
+          onClick={handleValues}
           className=" btn bg-brandPrimary text-center px-5 md:px-40 hover:bg-[#7f9e90]"
         >
           Continue
-        </Link>
+        </button>
       </div>
     </div>
   );
@@ -59,7 +94,7 @@ const options = [
   {
     id: 2,
     title: "Are you in menopause?",
-    value: "monopause",
+    value: "menopause",
   },
   {
     id: 3,

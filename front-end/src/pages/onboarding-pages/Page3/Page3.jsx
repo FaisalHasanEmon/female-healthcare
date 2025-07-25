@@ -1,15 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Form, useNavigate } from "react-router-dom";
 
 // onboarding 3rd form
 
 const Page3 = () => {
     //state to take select option
-    const [dietary, setDietary] = useState("")
-    const [activity, setActivity] = useState("")
-    const [stress, setStress] = useState("")
+    const [dietary, setDietary] = useState("");
+    const [activity, setActivity] = useState("");
+    const [stress, setStress] = useState("");
+    const navigate = useNavigate();
 
 
+    // manage input value and set in local storage
+    const handleSubmit=(event)=>{
+      const details = event.target.details.value;
+      console.log(details);
+      const lifestyle = {
+        dietary,
+        activity,
+        stress,
+        details
+      }
+      console.log(lifestyle);
+      navigate("/onboarding/page4")
+    }
 
 
   return (
@@ -17,7 +31,7 @@ const Page3 = () => {
       <h1 className="text-2xl font-bold text-center font-playfair-display mb-5">
         Tell us about your lifestyle
       </h1>
-      <div className="">
+      <Form className="">
         <div className="">
           <h3 className="font-semibold my-2 md:my-3">Dietary Style</h3>
           <div className="grid grid-cols-3 md:flex gap-3">
@@ -89,19 +103,18 @@ const Page3 = () => {
         <div className="flex flex-col gap-8 mt-8">
           <textarea
             placeholder="Your Note..."
+            name="details"
             className="textarea bg-brandPrimary"
           ></textarea>
           {/* navigation button  */}
           <div className="">
-            <Link
-              to="/onboarding/page4"
+            <button type="submit"
+              onClick={handleSubmit}
               className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded w-2/4 border-brandPrimary hover:bg-[#7f9e90]"
-            >
-              Continue
-            </Link>
+            >Continue</button>
           </div>
         </div>
-      </div>
+      </Form>
     </div>
   );
 };

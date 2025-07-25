@@ -1,8 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //onboarding second form
 const Page2 = () => {
+  const [selectedValues, setSelectedValues] = useState([]);
+  const navigate = useNavigate();
+
+  // get selected values
+  const handleOptions = (event) => {
+    const checked = event.target.checked;
+    const value = event.target.value;
+
+    // set selected value in useState and filter which are unselected
+    setSelectedValues((prev) => {
+      if (checked) {
+        if (prev?.length >= 3) {
+          return prev;
+        }
+        return [...prev, value];
+      } else {
+        return prev?.filter((item) => item !== value);
+      }
+    });
+  };
+
+  // set concers in localstorage and navigate
+  const setToLocalStorage = (event) => {
+    event.preventDefault();
+    localStorage.setItem("concerns", JSON.stringify(selectedValues));
+    navigate("/onboarding/page3");
+  };
+
+  //get item from localstorage
+  useEffect(() => {
+    let items = localStorage.getItem("concerns");
+    if(items){
+      setSelectedValues(JSON.parse(items));
+    }
+  }, []);
+
+  // rander ui
   return (
     <div className="flex flex-col gap-5 mx-10 md:mx-0 md:gap-10">
       {/* page2 title  */}
@@ -11,12 +48,14 @@ const Page2 = () => {
       </h1>
       <div className="flex flex-col gap-1 md:gap-3">
         {/* maped form option  */}
-        {options.map((data) => (
+        {options?.map((data) => (
           <label
             key={data.id}
             className="flex items-center gap-2 cursor-pointer"
           >
             <input
+              onChange={handleOptions}
+              checked={selectedValues?.includes(data?.value)}
               type="checkbox"
               name="healthStatus"
               value={data?.value}
@@ -27,9 +66,7 @@ const Page2 = () => {
         ))}
       </div>
       <div className="text-right">
-        <Link to="/onboarding/page3" className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90]">
-          Continue
-        </Link>
+        <button className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90]" onClick={setToLocalStorage}>Continue</button>
       </div>
     </div>
   );

@@ -8,6 +8,10 @@ from user.api.views import (
     PasswordResetRequestView,
     ChangePasswordView,
     VerifyEmailView,
+    ProfileCreateView,
+    ProfileDetailView,
+    ProfileUpdateView,
+    ProfileDeleteView
     
 )
 
@@ -47,6 +51,26 @@ urlpatterns = [
         'verify-email/<uidb64>/<token>/',
         VerifyEmailView.as_view(),
         name='verify-email'
+    ),
+    path(
+        'profile/create/',
+        ProfileCreateView.as_view(),
+        name='profile-create'
+    ),
+    path(
+        'profile/me/',
+        ProfileDetailView.as_view(),
+        name='profile-detail'
+    ),
+    path(
+        'profile/me/update/',
+        ProfileUpdateView.as_view(),
+        name='profile-update'
+    ),
+    path(
+        'profile/me/delete/',
+        ProfileDeleteView.as_view(),
+        name='profile-delete'
     ),
 
 

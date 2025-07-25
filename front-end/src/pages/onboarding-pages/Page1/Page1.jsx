@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 // first form
 const Page1 = () => {
+
   const [cycle, setCycle] = useState("");
   const navigate = useNavigate();
 

@@ -1,6 +1,62 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+//----------------------------- form options data for page2--------------------------
+
+const options = [
+  {
+    id: 1,
+    title: "Fatiuge",
+    value: "Fatiuge",
+  },
+  {
+    id: 2,
+    title: "Mood",
+    value: "Mood",
+  },
+  {
+    id: 3,
+    title: "Sleep",
+    value: "Sleep",
+  },
+  {
+    id: 4,
+    title: "Cravings",
+    value: "Cravings",
+  },
+  {
+    id: 5,
+    title: "Weight",
+    value: "Weight",
+  },
+  {
+    id: 6,
+    title: "Cramps",
+    value: "Cramps",
+  },
+  {
+    id: 7,
+    title: "Anxiety",
+    value: "Anxiety",
+  },
+  {
+    id: 8,
+    title: "Brain fog",
+    value: "Brain fog",
+  },
+  {
+    id: 9,
+    title: "Hot flashes",
+    value: "Hot flashes",
+  },
+  {
+    id: 10,
+    title: "Irregular cycles",
+    value: "Irregular cycles",
+  },
+];
+
 //onboarding second form
 const Page2 = () => {
   const [selectedValues, setSelectedValues] = useState([]);
@@ -10,7 +66,6 @@ const Page2 = () => {
   const handleOptions = (event) => {
     const checked = event.target.checked;
     const value = event.target.value;
-
     // set selected value in useState and filter which are unselected
     setSelectedValues((prev) => {
       if (checked) {
@@ -47,15 +102,15 @@ const Page2 = () => {
         What are your top 3 concerns right now?
       </h1>
       <div className="flex flex-col gap-1 md:gap-3">
-        {/* maped form option  */}
-        {options?.map((data) => (
+        {/* mapped form option  */}
+        {options?.map((data, index) => (
           <label
-            key={data.id}
+            key={index}
             className="flex items-center gap-2 cursor-pointer"
           >
             <input
               onChange={handleOptions}
-              checked={selectedValues?.includes(data?.value)}
+              checked={selectedValues?.includes(data.value)}
               type="checkbox"
               name="healthStatus"
               value={data?.value}
@@ -74,57 +129,4 @@ const Page2 = () => {
 
 export default Page2;
 
-//----------------------------- form options data for page2--------------------------
 
-const options = [
-  {
-    id: 1,
-    title: "Fatiuge",
-    value: "fatiuge",
-  },
-  {
-    id: 2,
-    title: "Mode",
-    value: "mode",
-  },
-  {
-    id: 3,
-    title: "Sleep",
-    value: "sleep",
-  },
-  {
-    id: 4,
-    title: "Cravings",
-    value: "cravings",
-  },
-  {
-    id: 5,
-    title: "Weight",
-    value: "weight",
-  },
-  {
-    id: 6,
-    title: "Cramps",
-    value: "cramps",
-  },
-  {
-    id: 7,
-    title: "Anxiety",
-    value: "anxiety",
-  },
-  {
-    id: 8,
-    title: "Brain fog",
-    value: "brain fog",
-  },
-  {
-    id: 9,
-    title: "Hot flashes",
-    value: "hot flashes",
-  },
-  {
-    id: 10,
-    title: "Irregular cycles",
-    value: "irregular cycles",
-  },
-];

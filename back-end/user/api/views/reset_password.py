@@ -26,7 +26,9 @@ class PasswordResetRequestView(CreateAPIView):
         user = User.objects.get(email=email)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = PasswordResetTokenGenerator().make_token(user)
-
+        if not user:
+            return Response("User not found", status=status.HTTP_404_NOT_FOUND)
+        
         reset_link = f"http://127.0.0.1:8000/api/v1/password-reset-confirm/{uid}/{token}/"
 
         # ✅ Render HTML email content

@@ -50,7 +50,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-[#f0f5ef] to-[#eaf3e4] text-gray-800 py-10">
+    <footer className="bg-gradient-to-r from-[#f0f5ef] via-base-10 to-[#f0f5ef] text-gray-800 py-10">
       <div className="container px-5 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 ">
         {/* FENYX FEMME Section */}
         <div className="col-span-6">

@@ -95,9 +95,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/onboarding/page6",
-        element: <Page6 />,
-      },
-    ],
+        element:<Page6/>
+      }
+    ]
   },
 ]);
 

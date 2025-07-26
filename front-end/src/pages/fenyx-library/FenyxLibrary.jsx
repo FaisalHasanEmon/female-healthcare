@@ -65,11 +65,11 @@ const FenyxLibrary = () => {
   ];
 
   return (
-    <div className="container mx-auto px-5">
+    <div className="container mx-auto px-5 mb-[100px]  mt-36">
       {/* Heading section Starts */}
-      <section className="*:text-center">
+      <section className="*:text-center ">
         <h1 className="font-bold text-4xl">Welcome to the FENYX Library</h1>
-        <p className="font-normal text-[20px] mt-[30px]">
+        <p className="mt-[30px]">
           Real Answers. Real Bodies. Curated hormone & Cycle health insights-
           just like inside the platform
         </p>

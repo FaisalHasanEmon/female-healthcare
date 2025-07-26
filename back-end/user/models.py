@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         return self.email
 
 
-class Gender(models.Model, BaseModel):
+class Gender(BaseModel):
     name = models.CharField(
         max_length=50,
         unique=True,
@@ -59,10 +59,14 @@ class Gender(models.Model, BaseModel):
     )
 
     def __str__(self):
-        return self.name
+        return self.name or "unnamed Gender"
+
+    class Meta:
+        verbose_name = "Gender"
+        verbose_name_plural = "Genders"
 
 
-class Lifestyle(models.Model, BaseModel):
+class Lifestyle(BaseModel):
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -81,10 +85,14 @@ class Lifestyle(models.Model, BaseModel):
     )
 
     def __str__(self):
-        return self.name
+        return self.name or "unnamed Lifestyle"
+
+    class Meta:
+        verbose_name = "Lifestyle"
+        verbose_name_plural = "Lifestyles"
 
 
-class DietType(models.Model, BaseModel):
+class DietType(BaseModel):
     name = models.CharField(
         max_length=100,
         unique=True,
@@ -103,18 +111,39 @@ class DietType(models.Model, BaseModel):
     )
 
     def __str__(self):
-        return self.name
+        return self.name or "unnamed Diet Type"
+
+    class Meta:
+        verbose_name = "Diet_Type"
+        verbose_name_plural = "Diet_Types"
 
 
-class Profile(models.Mode, BaseModel):
+class Profile(BaseModel):
+    BLOOD_GROUP_CHOICES = [
+
+        ('A+', 'A+'),
+        ('A-', 'A-'),
+        ('B+', 'B+'),
+        ('B-', 'B-'),
+        ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
+        ('O+', 'O+'),
+        ('O-', 'O-'),
+    ]
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='profile'
     )
-    name = models.CharField(max_length=200, blank=True, null=True)
-    age = models.PositiveIntegerField(blank=True, null=True)
-    date_of_birth = models.DateField(blank=True, null=True)
+    name = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+    date_of_birth = models.DateField(
+        blank=True,
+        null=True
+    )
     profile_picture = models.ImageField(
         upload_to='profile_pictures/',
         blank=True,
@@ -125,10 +154,29 @@ class Profile(models.Mode, BaseModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='user_profiles'
+        related_name='profiles'
     )
-    height = models.PositiveIntegerField(blank=True, null=True)
-    weight = models.PositiveIntegerField(blank=True, null=True)
+    height = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        help_text="Height in centimeters"
+    )
+    weight = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        help_text="Weight in kilograms"
+    )
+    blood_group = models.CharField(
+        max_length=3,
+        choices=BLOOD_GROUP_CHOICES,
+        blank=True,
+        null=True,
+        help_text="Select your blood group"
+    )
+    adderess = models.TextField(
+        blank=True,
+        null=True
+    )
     lifestyle = models.ForeignKey(
         Lifestyle,
         on_delete=models.SET_NULL,

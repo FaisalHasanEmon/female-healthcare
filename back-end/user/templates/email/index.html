@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set New Password</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Heroicons + Feather icons via unpkg (React Icons equivalent) -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Inter font (optional, based on your JSX) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/tailwindcss">
+      @theme {
+        /* Fonts */
+        --font-inter: "Inter", sans-serif;
+
+        /* Colors */
+        --color-brandPrimary: #a6c2b3;
+        --color-brandSecondary: #d4e6c1;
+        --color-textGray: #4d4d4d;
+      }
+
+      input::placeholder {
+        color: white;
+        opacity: 0.8;
+        font-weight: 500;
+      }
+
+      input:focus {
+        outline: none;
+      }
+    </style>
+  </head>
+  <body class="bg-white min-h-screen flex items-center justify-center">
+    <div
+      class="w-[350px] md:w-[580px] bg-gradient-to-b from-brandSecondary to-brandPrimary rounded-lg p-6 md:p-10 font-inter"
+    >
+      <h2 class="text-2xl md:text-[32px] font-semibold text-center mb-6">
+        Set New Password
+      </h2>
+
+      <form id="passwordForm">
+        <!-- Password Field -->
+        <div class="h-16 mb-5 relative">
+          <span
+            class="flex justify-start items-center gap-2 text-white text-[22px] absolute ml-5 top-4 z-50 w-[50px]"
+          >
+            <i class="bx bx-lock-alt"></i>
+            <span>|</span>
+          </span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+            class="w-full h-full bg-brandPrimary text-white pl-[76px] rounded-md placeholder:text-[16px]"
+          />
+          <button
+            type="button"
+            onclick="toggleVisibility('password', this)"
+            class="absolute right-5 top-4 text-white z-50 text-xl"
+          >
+            <i class="bx bx-show"></i>
+          </button>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="h-16 mb-5 relative">
+          <span
+            class="flex justify-start items-center gap-2 text-white text-[22px] absolute ml-5 top-4 z-50 w-[50px]"
+          >
+            <i class="bx bx-lock-alt"></i>
+            <span>|</span>
+          </span>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            required
+            class="w-full h-full bg-brandPrimary text-white pl-[76px] rounded-md placeholder:text-[16px]"
+          />
+          <button
+            type="button"
+            onclick="toggleVisibility('confirmPassword', this)"
+            class="absolute right-5 top-4 text-white z-50 text-xl"
+          >
+            <i class="bx bx-show"></i>
+          </button>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full h-16 mt-4 bg-gradient-to-r from-brandSecondary to-brandPrimary text-black font-semibold border border-brandSecondary rounded-md"
+        >
+          Update Password
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function toggleVisibility(id, btn) {
+        const input = document.getElementById(id);
+        const icon = btn.querySelector("i");
+
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.remove("bx-show");
+          icon.classList.add("bx-hide");
+        } else {
+          input.type = "password";
+          icon.classList.remove("bx-hide");
+          icon.classList.add("bx-show");
+        }
+      }
+
+      document
+        .getElementById("passwordForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+          console.log({ password, confirmPassword });
+          alert("Password Updated!");
+        });
+    </script>
+  </body>
+</html>

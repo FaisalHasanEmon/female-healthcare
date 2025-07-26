@@ -1,11 +1,9 @@
 import React from "react";
 import OnBoardingNavbar from "../../components/shared/OnBoardingNavbar/OnBoardingNavbar";
 import { Outlet } from "react-router-dom";
-// import "./onboarding.css"
 
 const OnBoardingLayout = () => {
   return (
-    // <div className="relative min-h-screen blob1 blob2 blob3 color-onboading backdrop-blur-md">
     <div className="relative min-h-screen overflow-x-hidden" >
       <OnBoardingNavbar className="mx-auto"></OnBoardingNavbar>
       <div className="flex justify-center items-center h-screen">

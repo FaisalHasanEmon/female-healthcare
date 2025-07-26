@@ -38,7 +38,7 @@ const SmartSupport = () => {
         {/* What we Do logo Starts */}
         <div className="w-[168px] flex  justify-center items-center gap-2 mb-[83px] mx-auto  py-[7px] px-[14px] border-2 border-brandPrimary rounded-[6px]">
           <div className="h-2.5 w-2.5 rounded-full bg-brandSecondary"></div>
-          <p>What We Do</p>
+          <p className="text-[20px]">What We Do</p>
         </div>
         {/* What we Do logo Ends */}
         {/* Smart Support Text Starts */}

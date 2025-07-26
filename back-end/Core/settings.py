@@ -11,22 +11,33 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 from datetime import timedelta
 import os
+
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f^gd36@-dw11c%a^g6%bg(=c97m)0*pn*_94k5avs^9^(74$5z'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('SECRET_KEY')
+
 
 ALLOWED_HOSTS = [
     '*',
@@ -45,9 +56,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # Ensure Django REST Framework is included
     'rest_framework_simplejwt.token_blacklist',
-    'API',  # Ensure API app is included
-    'user',  # Ensure user app is included
     'corsheaders',
+    'API',
+    'user',
+    'onboarding',
 
 ]
 
@@ -105,18 +117,28 @@ WSGI_APPLICATION = 'Core.wsgi.application'
 LOGIN_REDIRECT_URL = '/admin/'
 
 
-
-
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='5432'),
     }
 }
+
 
 
 # Password validation
@@ -170,9 +192,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # For production 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'shagorrobidasjvai@gmail.com'
-EMAIL_HOST_PASSWORD = 'cbon yomy uynv bxoq'
-EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'shagorrobidasjvai@gmail.com'
+# EMAIL_HOST_PASSWORD = 'cbon yomy uynv bxoq'
+# EMAIL_USE_TLS = True
+
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')

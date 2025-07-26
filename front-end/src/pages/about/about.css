@@ -1,10 +1,5 @@
 
 .bar::after{
-    display: none;
-}
-
-@media (max-width: 600px){
-  .bar::after{
     content: "";
     height: 12px;
     width: 77px;
@@ -13,4 +8,9 @@
     bottom: -30px;
     left: 550px;
 }
+
+@media (max-width: 600px){
+  .bar::after{
+    display: none;
+  }
 }

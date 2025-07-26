@@ -1,22 +1,16 @@
 import React from "react";
+import BoxHeading from "./shared/BoxHeading";
 
 const ReclaimHowYouFeel = () => {
-  // const howItWorks = [
-  //   { id: 1, text: "Log Your Symptoms & Goals" },
-  //   { id: 2, text: "FENYX learns and guides you" },
-  //   { id: 3, text: "Adjust your routine and daily insights " },
-  // ];
-
   return (
     <section>
       <div className="container mx-auto px-5 py-14">
         <div>
-          <h2 className="text-[36px] font-bold text-center mb-6">
+          <h2 className="text-[36px] font-bold text-center mb-10">
             Smart Health Reads for Real-Life Bodies
           </h2>
-          <div className="flex w-[190px] justify-start  items-center gap-5 mb-[83px] mx-auto  py-[7px] px-[14px] border-2 border-brandPrimary rounded-[6px]">
-            <div className="h-2.5 w-2.5 rounded-full bg-brandSecondary"></div>
-            <p className="text-[20px]">How It Works</p>
+          <div className="mb-[83px] ">
+            <BoxHeading text="How It Works" />
           </div>
           {/* cards */}
           <div className="flex flex-col justify-center items-center md:flex-row md:justify-center md:items-center md:space-x-4 space-y-4 md:space-y-0 p-4 ">

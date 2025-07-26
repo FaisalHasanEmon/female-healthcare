@@ -1,4 +1,5 @@
 import PrimaryButton from "../shared/Buttons/PrimaryButton";
+import BoxHeading from "./shared/BoxHeading";
 
 const SmartSupport = () => {
   const supportItems = [
@@ -36,9 +37,8 @@ const SmartSupport = () => {
     <section className="py-20">
       <div className="container px-5 mx-auto">
         {/* What we Do logo Starts */}
-        <div className="w-[168px] flex  justify-center items-center gap-2 mb-[83px] mx-auto  py-[7px] px-[14px] border-2 border-brandPrimary rounded-[6px]">
-          <div className="h-2.5 w-2.5 rounded-full bg-brandSecondary"></div>
-          <p className="text-[20px]">What We Do</p>
+        <div className="mb-[83px] ">
+          <BoxHeading text="What We Do" />
         </div>
         {/* What we Do logo Ends */}
         {/* Smart Support Text Starts */}

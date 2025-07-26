@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const OnBoardingLayout = () => {
   return (
-    <div className="relative min-h-screen overflow-x-hidden" >
+    <div className="relative min-h-screen overflow-x-hidden overflow-y-hidden bg-[rgba(217, 233, 192, 0.2)] " >
       <OnBoardingNavbar className="mx-auto"></OnBoardingNavbar>
       <div className="flex justify-center items-center h-screen">
         <Outlet/>
@@ -33,12 +33,12 @@ const OnBoardingLayout = () => {
           className="h-[170px] md:h-[570px]"
         />
       </figure>
-      {/* blob1 */}
-      <div className="bg-[#D4E6C14D] h-[456px] w-[610px] absolute rounded-[68%_32%_65%_35%_/_64%_31%_69%_36%] -left-[194px] top-[136px] blur-[200px]"></div>
-      {/* blob2 */}
-      <div className="bg-[#D4E6C14D] h-[912px] w-[868px] absolute rounded-[50%_50%_32%_68%_/_52%_43%_57%_48%] -left-[356px] top-[427px] blur-[200px] rotate-[132deg] "></div>
-      {/* blob3 */}
-      <div className="bg-[#D4E6C14D] h-[913px] w-[868px] absolute rounded-[62%_38%_15%_85%_/_52%_49%_51%_48%]  -right-[200px] -top-[299px] blur-[200px]  rotate-[353deg] "></div>
+      {/* blob1   bottom left*/}
+      <div className="bg-[#D4E6C14D] md:h-[456px] md:w-[610px] absolute rounded-[68%_32%_65%_35%_/_64%_31%_69%_36%] md:-left-[194px] md:top-[136px] blur-[200px]"></div>
+      {/* blob2  bottom left*/}
+      <div className="bg-[#D4E6C14D] md:h-[912px] md:w-[868px] absolute rounded-[50%_50%_32%_68%_/_52%_43%_57%_48%] md:-left-[356px] md:top-[427px] blur-[200px] rotate-[132deg] "></div>
+      {/* blob3  top right*/}
+      <div className="bg-[#D4E6C14D] md:h-[913px] md:w-[868px] absolute rounded-[62%_38%_15%_85%_/_52%_49%_51%_48%] md:-right-[200px] md:-top-[299px] blur-[200px]  rotate-[353deg] "></div>
     </div>
   );
 };

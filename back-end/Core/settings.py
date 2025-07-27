@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'API',
     'user',
-    'onboarding',
 
 ]
 

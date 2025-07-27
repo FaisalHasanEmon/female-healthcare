@@ -7,6 +7,14 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin
 )
+from user.onboarding.onboarding_model import (
+    Symptom,
+    DietaryStyle,
+    ActivityLevel,
+    StressLevel,
+    Goal
+
+)
 
 
 class UserManager(BaseUserManager):
@@ -64,58 +72,6 @@ class Gender(BaseModel):
     class Meta:
         verbose_name = "Gender"
         verbose_name_plural = "Genders"
-
-
-class Lifestyle(BaseModel):
-    name = models.CharField(
-        max_length=100,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    valu = models.CharField(
-        max_length=10,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    discription = models.TextField(
-        null=True,
-        blank=True
-    )
-
-    def __str__(self):
-        return self.name or "unnamed Lifestyle"
-
-    class Meta:
-        verbose_name = "Lifestyle"
-        verbose_name_plural = "Lifestyles"
-
-
-class DietType(BaseModel):
-    name = models.CharField(
-        max_length=100,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    value = models.CharField(
-        max_length=10,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    discription = models.TextField(
-        null=True,
-        blank=True
-    )
-
-    def __str__(self):
-        return self.name or "unnamed Diet Type"
-
-    class Meta:
-        verbose_name = "Diet_Type"
-        verbose_name_plural = "Diet_Types"
 
 
 class Profile(BaseModel):
@@ -177,21 +133,50 @@ class Profile(BaseModel):
         blank=True,
         null=True
     )
-    lifestyle = models.ForeignKey(
-        Lifestyle,
-        on_delete=models.SET_NULL,
-        null=True, blank=True,
-        related_name="users"
-    )
-    diet_type = models.ForeignKey(
-        DietType,
-        on_delete=models.SET_NULL,
-        null=True, blank=True,
-        related_name="users"
-    )
+    
     discription = models.TextField(
         blank=True,
         null=True
+    )
+    symptoms = models.ManyToManyField(
+        Symptom,
+        blank=True,
+        related_name='profiles',
+        help_text="User's top health concerns"
+    )
+    dietary_styles = models.ManyToManyField(
+        DietaryStyle,
+        blank=True,
+        related_name='profiles',
+        help_text="User's dietary preferences"
+    )
+
+    activity_level = models.ForeignKey(
+        ActivityLevel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='profiles',
+        help_text="User's activity level"
+    )
+    stress_level = models.ForeignKey(
+        StressLevel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='profiles',
+        help_text="User's stress level"
+    )
+    supplements_medications = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Supplements or medications the user is taking"
+    )
+    goals = models.ManyToManyField(
+        Goal,
+        blank=True,
+        related_name='profiles',
+        help_text="User's health and wellness goals"
     )
 
     def __str__(self):
@@ -209,3 +194,8 @@ class Profile(BaseModel):
                 )
             )
         return None
+
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
+        ordering = ['-created_at']

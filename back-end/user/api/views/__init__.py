@@ -14,6 +14,15 @@ from .profile import (
     ProfileUpdateView,
     ProfileDeleteView
 )
+from .onboarding import (
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView
+)
 
 __all__ = [
     RegisterView,
@@ -26,5 +35,12 @@ __all__ = [
     ProfileCreateView,
     ProfileDetailView,
     ProfileUpdateView,
-    ProfileDeleteView
+    ProfileDeleteView,
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView
 ]

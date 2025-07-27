@@ -7,6 +7,12 @@ from .reset_password import (
 )
 from .change_password import ChangePasswordSerializer
 from .profile import ProfileSerializer
+from .onboarding import (
+    OnboardingSerializer,
+    SymptomSerializer,
+    DietaryStyleSerializer,
+    GoalSerializer
+)
 
 
 __all__ = [
@@ -15,6 +21,11 @@ __all__ = [
     PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer,
     ChangePasswordSerializer,
-    ProfileSerializer
+    ProfileSerializer,
+    OnboardingSerializer,
+    SymptomSerializer,
+    DietaryStyleSerializer,
+    GoalSerializer
+
 
 ]

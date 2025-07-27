@@ -118,10 +118,6 @@ class BasicQuestion(BaseModel):
         null=True,
         help_text="Optional description or context for the question"
     )
-    is_active = models.BooleanField(
-        default=True,
-        help_text="Indicates whether the question is active for use in onboarding"
-    )
 
     def __str__(self):
         return self.question_text
@@ -133,12 +129,12 @@ class BasicQuestion(BaseModel):
 
 
 class BasicAnswer(BaseModel):
-    profile = models.ForeignKey(
-        'Profile',
+    onboarding = models.ForeignKey(
+        'Onboarding',
+        blank=True,
         on_delete=models.CASCADE,
-        related_name='basic_answers',
-        help_text="Profile associated with this answer"
-    )
+        related_name='basic_answers'
+    )    
     question = models.ForeignKey(
         BasicQuestion,
         on_delete=models.CASCADE,
@@ -152,11 +148,11 @@ class BasicAnswer(BaseModel):
     )
 
     def __str__(self):
-        return f"{self.profile.user.email}'s answer to '{self.question.question_text}': {self.answer}"
+        return f"{self.question.key}'s answer to '{self.question.question_text}': {self.answer}"
 
     class Meta:
         verbose_name = "Basic Answer"
         verbose_name_plural = "Basic Answers"
-        unique_together = ('profile', 'question')  # Ensure one answer per profile per question
+        unique_together = ('onboarding', 'question')
         ordering = ["-created_at"]
 

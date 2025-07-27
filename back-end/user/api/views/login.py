@@ -17,9 +17,13 @@ class LoginView(APIView):
 
         if not user.email_verified:
             send_verification_email(user, request)
-            raise AuthenticationFailed("Please verify your email before logging in.")
+            raise AuthenticationFailed(
+                "Please verify your email before logging in."
+            )
         
         refresh = RefreshToken.for_user(user)
+        print(refresh, "=============================== Refresh token ")
+        print(refresh.access_token, "========================= Access token ")
 
         return Response({
             'refresh': str(refresh),

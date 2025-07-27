@@ -6,12 +6,12 @@ const Page1 = () => {
   const [period, setPeriod] = useState(false);
   const [cycle, setCycle] = useState({});
   const navigate = useNavigate();
-
+  
   // get cycle
   useEffect(() => {
     const getCycle = localStorage.getItem("cycle");
     if (getCycle && Object.keys(getCycle).length > 0) {
-      setCycle(getCycle);
+      setCycle(JSON.parse(getCycle));
     }
   }, []);
 
@@ -20,20 +20,24 @@ const Page1 = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const healthStatus = event.target.healthStatus.value;
-    console.log(healthStatus);
-    
+    let cycleData = {};
+
+    // check input value and set data field 
     if (healthStatus === "periods"){
       const date = event.target.date.value;
       const cycleDay = event.target.cycleDay.value;
       const periodDuration = event.target.periodDuration.value;
-      const cycleData = { date, cycleDay, periodDuration };
-      setCycle(cycleData);
-    } else {
-      const cycleData = { healthStatus: "yes" };
-      setCycle(cycleData);
+       cycleData = {isPeriod: true,isMenopause: false,ishormoneTherapy: false}
+       cycleData.period={date, cycleDay, periodDuration };
+    } else if(healthStatus === "menopause") {
+      cycleData = { isPeriod: false,isMenopause: true, ishormoneTherapy: false};
+    }else if(healthStatus === "hormoneTherapy"){
+      cycleData ={ isPeriod: false, isMenopause: false, ishormoneTherapy: true };
     }
-    if (Object.keys(cycle).length > 0) {
-      localStorage.setItem("cycle", JSON.stringify(cycle));
+    console.log(cycleData);
+    // set data in localStorage 
+    if (Object.keys(cycleData).length > 0) {
+      localStorage.setItem("cycle", JSON.stringify(cycleData));
       navigate("/onboarding/page2");
     }
   };
@@ -53,6 +57,7 @@ const Page1 = () => {
             className=""
             name="healthStatus"
             value="periods"
+            checked={cycle.isPeriod}
           />
         </label>
         <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
@@ -63,6 +68,7 @@ const Page1 = () => {
             className=""
             name="healthStatus"
             value="menopause"
+            checked={cycle.isMenopause}
           />
         </label>
         <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
@@ -73,6 +79,7 @@ const Page1 = () => {
             className=""
             name="healthStatus"
             value="hormoneTherapy"
+            checked={cycle.ishormoneTherapy}
           />
         </label>
         <div

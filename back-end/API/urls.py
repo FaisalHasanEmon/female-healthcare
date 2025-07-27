@@ -11,12 +11,20 @@ from user.api.views import (
     ProfileCreateView,
     ProfileDetailView,
     ProfileUpdateView,
-    ProfileDeleteView
+    ProfileDeleteView,
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView
     
 )
 
 
 urlpatterns = [
+    # Auth Api
     path(
         'register/',
         RegisterView.as_view(),
@@ -52,6 +60,7 @@ urlpatterns = [
         VerifyEmailView.as_view(),
         name='verify-email'
     ),
+    # Profile Api
     path(
         'profile/create/',
         ProfileCreateView.as_view(),
@@ -72,6 +81,43 @@ urlpatterns = [
         ProfileDeleteView.as_view(),
         name='profile-delete'
     ),
+    # Onboarding Api
+    path(
+        'onboarding/create/',
+        OnboardingCreateAPIView.as_view(),
+        name='onboarding-create'
+    ),
+    path(
+        'onboarding/<int:pk>/',
+        OnboardingDetailAPIView.as_view(),
+        name='onboarding-detail'
+    ),
+    path(
+        'onboarding/<int:pk>/update/',
+        OnboardingUpdateAPIView.as_view(),
+        name='onboarding-update'
+    ),
+    path(
+        'onboarding/<int:pk>/delete/',
+        OnboardingDeleteAPIView.as_view(),
+        name='onboarding-delete'
+    ),
+    path(
+        'symptoms/',
+        SymptomListCreateAPIView.as_view(),
+        name='symptom-list-create'
+    ),
+    path(
+        'dietary-styles/',
+        DietaryStyleListCreateAPIView.as_view(),
+        name='dietary-style-list-create'
+    ),
+    path(
+        'goals/',
+        GoalListCreateAPIView.as_view(),
+        name='goal-list-create'
+    ),
+
 
 
 ]

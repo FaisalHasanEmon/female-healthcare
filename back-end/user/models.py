@@ -12,8 +12,7 @@ from user.onboarding.onboarding_model import (
     DietaryStyle,
     ActivityLevel,
     StressLevel,
-    Goal
-
+    Goal,
 )
 
 
@@ -138,6 +137,33 @@ class Profile(BaseModel):
         blank=True,
         null=True
     )
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def calculated_age(self):
+        if self.date_of_birth:
+            today = date.today()
+            age = today.year - self.date_of_birth.year - (
+                (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day)
+            )
+            print("================", age)
+            return age
+        return None
+
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
+        ordering = ['-created_at']
+
+
+class Onboarding(BaseModel):
+    profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='onboarding'
+    )
     has_regular_cycle = models.BooleanField(
         null=True,
         blank=True,
@@ -165,7 +191,6 @@ class Profile(BaseModel):
         related_name='profiles',
         help_text="User's dietary preferences"
     )
-
     activity_level = models.ForeignKey(
         ActivityLevel,
         on_delete=models.SET_NULL,
@@ -193,25 +218,15 @@ class Profile(BaseModel):
         related_name='profiles',
         help_text="User's health and wellness goals"
     )
-    daily_reminder = models.BooleanField(default=False, help_text="Would you like a daily reminder?")
+    daily_reminder = models.BooleanField(
+        default=False,
+        help_text="Would you like a daily reminder?"
+    )
 
     def __str__(self):
-        return self.name
-
-    @property
-    def calculated_age(self):
-        if self.date_of_birth:
-            today = date.today()
-            return today.year - self.date_of_birth.year - (
-                (
-                    today.month, today.day
-                ) < (
-                    self.date_of_birth.month, self.date_of_birth.day
-                )
-            )
-        return None
+        return f"Onboarding for {self.profile.name}"
 
     class Meta:
-        verbose_name = "Profile"
-        verbose_name_plural = "Profiles"
-        ordering = ['-created_at']
+        verbose_name = "Onboarding"
+        verbose_name_plural = "Onboardings"
+        ordering = ['-id']

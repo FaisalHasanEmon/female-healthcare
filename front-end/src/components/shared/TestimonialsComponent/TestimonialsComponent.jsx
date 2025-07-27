@@ -1,7 +1,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-const Testimonials = () => {
+const TestimonialsComponent = () => {
   const commentsOfUsers = [
     {
       id: 1,
@@ -65,7 +65,7 @@ const Testimonials = () => {
     },
   ];
 
-  // Ratings
+  // Ratings Function
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
@@ -84,7 +84,7 @@ const Testimonials = () => {
       <div>
         {/* Header */}
         <div className="text-center mb-16 px-5">
-          <h2 className="text-3xl md:text-[64px] font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Trusted by women like you.
           </h2>
         </div>
@@ -122,4 +122,4 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+export default TestimonialsComponent;

@@ -4,7 +4,10 @@ import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
 
 const SmartHealth = () => {
+  // Show Image Use State
   const [showImage, setShowImage] = useState("");
+
+  // Card Contents Information
   const fenyxLibraryCardsContent = [
     {
       content_id: 1,
@@ -42,6 +45,7 @@ const SmartHealth = () => {
     },
   ];
 
+  // Show Modal Function
   const handleCardClick = (contentImage) => {
     setShowImage(contentImage);
     document.getElementById("my_modal_4").showModal();
@@ -60,7 +64,7 @@ const SmartHealth = () => {
             </div>
           </div>
           <div className="space-y-4 md:space-y-8">
-            <h2 className="text-3xl md:text-[64px] font-bold">
+            <h2 className="text-3xl md:text-4xl font-bold">
               Smarter Heath Starts Here Subheading
             </h2>
             <p className="text-xl lg:text-2xl font-semibold text-textGray">
@@ -79,7 +83,6 @@ const SmartHealth = () => {
                     src={cardContent?.card_image}
                     className="rounded-lg cursor-pointer"
                     alt="Card Content"
-                    // onAbort={() => handleCardClick(cardContent?.modal_image)}
                     onClick={() => handleCardClick(cardContent?.modal_image)}
                   />
                 </figure>

@@ -59,44 +59,51 @@ const SmartHealth = () => {
               <p className="text-[20px]">FENYX Library</p>
             </div>
           </div>
-          <h2 className="text-4xl font-bold">
-            Smarter Heath Starts Here Subheading
-          </h2>
-        </div>
-        {/* Box heading and Title Ends */}
-        <div>
-          {/* Cards Section Starts */}
-          <div className="mt-12">
-            <Marquee pauseOnClick={true} pauseOnHover={true} speed={30}>
-              {fenyxLibraryCardsContent?.map((cardContent) => (
-                <div className="w-[350px]  md:w-[570px] p-5 md:p-6 mr-5 rounded-2xl flex flex-col md:flex-row   justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary">
-                  <figure className="md:w-1/2 md:h-[225px] flex justify-center items-center  overflow-hidden ">
-                    <img
-                      src={cardContent?.card_image}
-                      className="rounded-lg cursor-pointer"
-                      alt="Card Content"
-                      // onAbort={() => handleCardClick(cardContent?.modal_image)}
-                      onClick={() => handleCardClick(cardContent?.modal_image)}
-                    />
-                  </figure>
-                  <div className="md:w-1/2 h-40">
-                    <h3 className="text-[12px] font-medium text-black">
-                      {cardContent?.title}
-                    </h3>
-                    <p className="font-normal text-[12px] text-[#666666] ml-[5px] mt-2.5">
-                      {cardContent?.blog}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </Marquee>
+          <div className="space-y-4 md:space-y-8">
+            <h2 className="text-3xl md:text-[64px] font-bold">
+              Smarter Heath Starts Here Subheading
+            </h2>
+            <p className="text-xl lg:text-2xl font-semibold text-textGray">
+              Expert-Backed Hormone & Cycle insights, <br /> All in One Place
+            </p>
           </div>
         </div>
+        {/* Box heading and Title Ends */}
+        {/* Marquee Section Starts */}
+        <div className="mt-10 md:mt-20">
+          <Marquee pauseOnClick={true} pauseOnHover={true} speed={30}>
+            {fenyxLibraryCardsContent?.map((cardContent) => (
+              <div className="w-[350px]  md:w-[570px] p-5 md:p-6 mr-5 rounded-2xl flex flex-col md:flex-row   justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary">
+                <figure className="md:w-1/2 md:h-[225px] flex justify-center items-center  overflow-hidden ">
+                  <img
+                    src={cardContent?.card_image}
+                    className="rounded-lg cursor-pointer"
+                    alt="Card Content"
+                    // onAbort={() => handleCardClick(cardContent?.modal_image)}
+                    onClick={() => handleCardClick(cardContent?.modal_image)}
+                  />
+                </figure>
+                <div className="md:w-1/2 h-40">
+                  <h3 className="text-[12px] font-medium text-black">
+                    {cardContent?.title}
+                  </h3>
+                  <p className="font-normal text-[12px] text-[#666666] ml-[5px] mt-2.5">
+                    {cardContent?.blog}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </Marquee>
+        </div>
+        {/* Marquee Section Ends */}
       </div>
-      {/* Modal */}
+      {/* Modal Of Selected Image*/}
       <dialog id="my_modal_4" className="modal ">
         <div className="modal-box w-11/12 max-h-[95%] max-w-5xl bg-brandPrimary overflow-x-hidden">
-          <img src={`${showImage}`} className="w-full h-full object-top" />
+          <img
+            src={`${showImage}`}
+            className="w-full h-full object-top rounded-lg"
+          />
           <div className="modal-action">
             <form method="dialog" className="w-full">
               <button className="btn w-full bg-brandSecondary">Close</button>

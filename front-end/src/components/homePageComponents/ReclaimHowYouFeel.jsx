@@ -6,7 +6,7 @@ const ReclaimHowYouFeel = () => {
     <section>
       <div className="container mx-auto px-5 py-14">
         <div>
-          <h2 className="text-[36px] font-bold text-center mb-10">
+          <h2 className="text-3xl md:text-[64px] font-bold text-center mb-10">
             Smart Health Reads for Real-Life Bodies
           </h2>
           <div className="mb-[83px] ">

@@ -134,7 +134,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="grid grid-cols-2 grid-row-2 md:grid-cols-4 md:grid-row-1  border-t  *:text-center py-[9px] mb-0 mt-20">
+        <div className="grid grid-cols-1 gap-1 md:grid-cols-4 md:grid-row-1  border-t  *:text-center py-[9px] mb-0 mt-20">
           {privacyAndLegal?.map((item, index) => (
             <div
               key={index}

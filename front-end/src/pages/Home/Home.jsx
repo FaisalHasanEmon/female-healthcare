@@ -3,6 +3,7 @@ import Banner from "../../components/homePageComponents/Banner";
 import SmartSupport from "../../components/homePageComponents/SmartSupport";
 import ReclaimHowYouFeel from "../../components/homePageComponents/ReclaimHowYouFeel";
 import SmartHealth from "../../components/homePageComponents/SmartHealth";
+import Testimonials from "../../components/shared/Testimonials/Testimonials";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <SmartSupport />
       <ReclaimHowYouFeel />
       <SmartHealth />
+      <Testimonials></Testimonials>
     </div>
   );
 };

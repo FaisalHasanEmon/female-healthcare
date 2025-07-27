@@ -1,5 +1,15 @@
 from django.contrib import admin
 from user.models import User, Gender, Profile
+from onboarding.onboarding_model import (
+    Symptom,
+    DietaryStyle,
+    Goal,
+    Reminder,
+    ActivityLevel,
+    StressLevel,
+    BasicQuestion,
+    BasicAnswer,
+)
 
 
 @admin.register(User)
@@ -31,6 +41,58 @@ class ProfileAdmin(admin.ModelAdmin):
         'discription',
     )
     search_fields = ('user__email', 'name', 'adderess')
-    # list_filter = ('gender')
     ordering = ('user__email',)
     readonly_fields = ('calculated_age',)
+
+
+@admin.register(Symptom)
+class SymptomAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(DietaryStyle)
+class DietaryStyleAdmin(admin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(Goal)
+class GoalAdmin(admin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(Reminder)
+class ReminderAdmin(admin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(ActivityLevel)
+class ActivityLevelAdmin(admin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+@admin.register(StressLevel)
+class StressLevelAdmin(admin)
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+@admin.register(BasicQuestion)
+class BasicQuestionAdmin(admin):
+    list_display = ('id', 'question')
+    search_fields = ('question',)
+    ordering = ('id',)
+
+@admin.register(BasicAnswer)
+class BasicAnswerAdmin(admin):
+    list_display = ('id', 'answer')
+    search_fields = ('answer',)
+    ordering = ('id',)

@@ -138,6 +138,21 @@ class Profile(BaseModel):
         blank=True,
         null=True
     )
+    has_regular_cycle = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Do you have a regular cycle?"
+    )
+    is_menopausal = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Are you in perimenopause, menopause, or post-menopause?"
+    )
+    on_hormonal_treatment = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Are you currently on hormonal birth control or HRT?"
+    )
     symptoms = models.ManyToManyField(
         Symptom,
         blank=True,
@@ -178,6 +193,7 @@ class Profile(BaseModel):
         related_name='profiles',
         help_text="User's health and wellness goals"
     )
+    daily_reminder = models.BooleanField(default=False, help_text="Would you like a daily reminder?")
 
     def __str__(self):
         return self.name

@@ -11,7 +11,9 @@ from .onboarding import (
     OnboardingSerializer,
     SymptomSerializer,
     DietaryStyleSerializer,
-    GoalSerializer
+    GoalSerializer,
+    ActivityLevelSerializer,
+    StressLevelSerializer
 )
 
 
@@ -25,7 +27,9 @@ __all__ = [
     OnboardingSerializer,
     SymptomSerializer,
     DietaryStyleSerializer,
-    GoalSerializer
+    GoalSerializer,
+    ActivityLevelSerializer,
+    StressLevelSerializer
 
 
 ]

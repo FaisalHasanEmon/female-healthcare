@@ -13,7 +13,9 @@ from user.api.serializers import (
     OnboardingSerializer,
     SymptomSerializer,
     DietaryStyleSerializer,
-    GoalSerializer
+    GoalSerializer,
+    ActivityLevelSerializer,
+    StressLevelSerializer
 )
 from user.models import (
     Profile,
@@ -23,6 +25,8 @@ from user.onboarding.onboarding_model import (
     Symptom,
     DietaryStyle,
     Goal,
+    ActivityLevel,
+    StressLevel
 )
 
 
@@ -74,3 +78,13 @@ class DietaryStyleListCreateAPIView(ListCreateAPIView):
 class GoalListCreateAPIView(ListCreateAPIView):
     serializer_class = GoalSerializer
     queryset = Goal.objects.all()
+
+
+class ActivityLevelListCreateAPIView(ListCreateAPIView):
+    serializer_class = ActivityLevelSerializer
+    queryset = ActivityLevel.objects.all()
+
+
+class StressLevelListCreateAPIView(ListCreateAPIView):
+    serializer_class = StressLevelSerializer
+    queryset = StressLevel.objects.all()

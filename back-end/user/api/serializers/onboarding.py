@@ -56,4 +56,16 @@ class GoalSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 
+class ActivityLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ActivityLevel
+        fields = ('id', 'name')
+
+
+class StressLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StressLevel
+        fields = ('id', 'name')
+
+
 

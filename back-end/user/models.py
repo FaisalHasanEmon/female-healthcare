@@ -2,6 +2,7 @@ from django.db import models
 from Core.models import BaseModel
 from django.conf import settings
 from datetime import date
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -185,8 +186,10 @@ class Onboarding(BaseModel):
         related_name='profiles',
         help_text="User's top health concerns"
     )
-    dietary_styles = models.ManyToManyField(
+    dietary_styles = models.ForeignKey(
         DietaryStyle,
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True,
         related_name='profiles',
         help_text="User's dietary preferences"
@@ -222,6 +225,28 @@ class Onboarding(BaseModel):
         default=False,
         help_text="Would you like a daily reminder?"
     )
+
+    def clean(self):
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        # Handle mutual exclusivity of boolean fields
+        if self.has_regular_cycle:
+            self.is_menopausal = False
+            self.on_hormonal_treatment = False
+        elif self.is_menopausal:
+            self.has_regular_cycle = False
+            self.on_hormonal_treatment = False
+        elif self.on_hormonal_treatment:
+            self.has_regular_cycle = False
+            self.is_menopausal = False
+
+        super().save(*args, **kwargs)
+
+        if self.pk and self.symptoms.count() >= 4:
+            raise ValidationError(
+                {'symptoms': 'You can select fewer than 4 symptoms.'}
+            )
 
     def __str__(self):
         return f"Onboarding for {self.profile.name}"

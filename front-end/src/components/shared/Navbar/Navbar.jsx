@@ -12,7 +12,7 @@ const Navbar = () => {
   // All tabs and links
   const tabs = [
     { tab: "Home", path: "/" },
-    { tab: "AI Chatbot", path: "/ai-chatbot" },
+    { tab: "AI Chatbot", path: "/login" },
     { tab: "Fenyx Library", path: "/fenyx-library" },
     { tab: "Testimonials", path: "/testimonials" },
     { tab: "About", path: "/about" },

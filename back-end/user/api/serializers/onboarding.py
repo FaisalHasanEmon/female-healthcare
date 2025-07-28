@@ -13,10 +13,28 @@ from user.onboarding.onboarding_model import (
     Reminder,
 )
 
+
 class OnboardingSerializer(serializers.ModelSerializer):
+    def validate_symptoms(self, value):
+        if len(value) >= 4:
+            raise serializers.ValidationError("You can select fewer than 4 symptoms.")
+        return value
+    
     class Meta:
         model = Onboarding
-        fields = '__all__'
+        fields = (
+            'id',
+            'has_regular_cycle',
+            'is_menopausal',
+            'on_hormonal_treatment',
+            'symptoms',
+            'dietary_styles',
+            'activity_level',
+            'stress_level',
+            'supplements_medications',
+            'goals',
+            'daily_reminder'
+        )
         read_only_fields = ['profile']
 
 

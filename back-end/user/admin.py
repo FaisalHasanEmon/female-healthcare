@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 from user.models import (
     User,
     Gender,
@@ -16,6 +17,18 @@ from user.onboarding.onboarding_model import (
     BasicAnswer,
     
 )
+
+
+class OnboardingAdminForm(forms.ModelForm):
+    class Meta:
+        model = Onboarding
+        fields = '__all__'
+
+    def clean_symptoms(self):
+        symptoms = self.cleaned_data.get('symptoms')
+        if symptoms and len(symptoms) >= 4:
+            raise forms.ValidationError("You can select fewer than 4 symptoms.")
+        return symptoms
 
 
 @admin.register(User)
@@ -58,6 +71,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Onboarding)
 class OnboardingAdmin(admin.ModelAdmin):
+    form = OnboardingAdminForm
     list_display = (
         'id',
         'profile_name',
@@ -65,7 +79,7 @@ class OnboardingAdmin(admin.ModelAdmin):
         'is_menopausal',
         'on_hormonal_treatment',
         'get_symptoms',
-        'get_dietary_styles',
+        'dietary_styles',
         'activity_level',
         'stress_level',
         'supplements_medications',
@@ -91,10 +105,6 @@ class OnboardingAdmin(admin.ModelAdmin):
     def get_symptoms(self, obj):
         return ", ".join([s.name for s in obj.symptoms.all()])
     get_symptoms.short_description = "Symptoms"
-
-    def get_dietary_styles(self, obj):
-        return ", ".join([d.name for d in obj.dietary_styles.all()])
-    get_dietary_styles.short_description = "Dietary Styles"
 
     def get_goals(self, obj):
         return ", ".join([g.name for g in obj.goals.all()])

@@ -95,7 +95,7 @@ const TestimonialsComponent = () => {
             {commentsOfUsers.map((user) => (
               <div
                 key={user?.id}
-                className="bg-white flex flex-col justify-center items-center h-[200px]  ml-10 backdrop-blur-3xl w-[350px] rounded-lg p-6  border-2 border-gray-100  "
+                className="bg-white  flex flex-col justify-center items-center h-[200px]  ml-10 backdrop-blur-3xl w-[350px] rounded-lg p-6 border border-brandSecondary "
               >
                 <div className="text-left space-y-3 w-full h-full">
                   {/* User Name */}

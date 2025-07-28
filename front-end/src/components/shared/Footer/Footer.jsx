@@ -76,9 +76,9 @@ export default function Footer() {
           <div className="col-span-6">
             <h2 className="text-xl font-bold mb-4">FENYX FEMME</h2>
             <p className="text-sm text-gray-700 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              ornare cursus sed nunc eget dictum Sed ornare cursus sed nunc eget
-              dictum nunc eget dictum Sed ornare cursus sed nunc eget dictum
+              Your AI-powered guide for hormone-aligned living — built to help
+              women rise from burnout, chaos, and confusion with science-backed,
+              soulful support.
             </p>
             <div className="flex space-x-3 mt-4 text-lg text-gray-600">
               {socialLinks?.map((link, index) => (

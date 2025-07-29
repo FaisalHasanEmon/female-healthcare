@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from user.forms import OnboardingAdminForm
 from user.models import (
     User,
     Gender,
@@ -19,16 +20,6 @@ from user.onboarding.onboarding_model import (
 )
 
 
-class OnboardingAdminForm(forms.ModelForm):
-    class Meta:
-        model = Onboarding
-        fields = '__all__'
-
-    def clean_symptoms(self):
-        symptoms = self.cleaned_data.get('symptoms')
-        if symptoms and len(symptoms) >= 4:
-            raise forms.ValidationError("You can select fewer than 4 symptoms.")
-        return symptoms
 
 
 @admin.register(User)
@@ -111,10 +102,9 @@ class OnboardingAdmin(admin.ModelAdmin):
     get_goals.short_description = "Goals"
 
 
-
 @admin.register(Symptom)
 class SymptomAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'created_at', 'updated_at')
     search_fields = ('name',)
     ordering = ('id',)
 

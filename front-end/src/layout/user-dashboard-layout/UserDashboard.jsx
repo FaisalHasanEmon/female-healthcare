@@ -8,35 +8,33 @@ const UserDashboard = () => {
   const [drawer, setDrawer] = useState(true);
 
   // Active Button Color State management
-  const [active, setActive] = useState(false);
+  const [activeBtn, setActiveBtn] = useState(1);
 
   //   Drawer handler function
   const handleDrawer = () => {
     setDrawer(!drawer);
   };
 
-  const handleActiveButton = () => {
-    setActive(!active);
+  const btnStyle = (btnId) => {
+    activeBtn === btnId ? "bg-brandSecondary" : "bg-brandPrimary";
   };
+
   const NavButtonsStyle = {
     display: "flex",
     justifyItems: "center",
     alignItems: "center",
     gap: "8px",
-    paddingTop: "8px",
-    paddingBottom: "8px",
-    paddingLeft: "8px",
+    padding: "8px 0px 8px 8px",
   };
   const navigateLinks = (
     <>
       {/* 1. Chatting Section */}
-      <li className="text-black " onClick={handleActiveButton}>
+      <li>
         <NavLink
           to="#"
           style={NavButtonsStyle}
-          className={({ isActive }) =>
-            isActive ? "bg-brandSecondary" : "bg-brandPrimary"
-          }
+          onClick={() => setActiveBtn(1)}
+          className={btnStyle(1)}
         >
           <figure>
             <img
@@ -49,13 +47,12 @@ const UserDashboard = () => {
       </li>
 
       {/* 2. Mode Tracker */}
-      <li className="text-black  ">
+      <li>
         <NavLink
           to="#"
           style={NavButtonsStyle}
-          className={({ isActive }) =>
-            isActive ? "bg-brandPrimary" : "bg-brandSecondary"
-          }
+          onClick={() => activeBtn(2)}
+          className={btnStyle(2)}
         >
           <figure>
             <img
@@ -72,9 +69,8 @@ const UserDashboard = () => {
             tabIndex={0}
             role="button"
             style={NavButtonsStyle}
-            className={({ isActive }) =>
-              isActive ? "bg-brandPrimary" : "bg-brandSecondary"
-            }
+            onClick={() => setActiveBtn(3)}
+            className={btnStyle(3)}
           >
             <figure>
               <img
@@ -128,7 +124,7 @@ const UserDashboard = () => {
               </div>
               {/* Logo and Collapse button Ends*/}
               {/* Links Sections Starts */}
-              <ul className="w-11/12 lg:w-8/12 h-[200px]  mx-auto space-y-2.5 mt-10">
+              <ul className="w-11/12 lg:w-10/12 h-[200px] border  mx-auto space-y-2.5 mt-10">
                 {navigateLinks}
               </ul>
               {/* Links Sections Ends */}

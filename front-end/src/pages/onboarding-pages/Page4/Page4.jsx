@@ -36,17 +36,6 @@ const Page4 = () => {
     }
   }, []);
 
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div className="flex flex-col gap-5 items-center md:gap-10">
       <h1 className="text-2xl md:text-3xl font-playfair-display font-bold text-center ">

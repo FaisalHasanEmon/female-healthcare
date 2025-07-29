@@ -17,6 +17,7 @@ import Page4 from "../pages/onboarding-pages/Page4/Page4";
 import Page5 from "../pages/onboarding-pages/Page5/Page5";
 import Page6 from "../pages/onboarding-pages/Page6/Page6";
 import ResetPassword from "../pages/authentication/reset-password/ResetPassword";
+import UserDashboard from "../layout/user-dashboard-layout/UserDashboard";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
         element: <Page6 />,
       },
     ],
+  },
+  {
+    path: "/user-dashboard",
+    element: <UserDashboard></UserDashboard>,
   },
 ]);
 

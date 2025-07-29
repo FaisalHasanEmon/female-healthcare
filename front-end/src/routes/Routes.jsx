@@ -18,6 +18,9 @@ import Page5 from "../pages/onboarding-pages/Page5/Page5";
 import Page6 from "../pages/onboarding-pages/Page6/Page6";
 import ResetPassword from "../pages/authentication/reset-password/ResetPassword";
 import UserDashboard from "../layout/user-dashboard-layout/UserDashboard";
+import StartNewSession from "../pages/user-dashboard-pages/StartNewSession/StartNewSession";
+import ModeTracker from "../pages/user-dashboard-pages/ModeTracker/ModeTracker";
+import Settings from "../pages/user-dashboard-pages/Settings/Settings";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -101,8 +104,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/user-dashboard",
+    path: "/dashboard",
     element: <UserDashboard></UserDashboard>,
+    children: [
+      {
+        path: "/dashboard/new-session",
+        element: <StartNewSession></StartNewSession>,
+      },
+      { path: "/dashboard/mode-tracker", element: <ModeTracker></ModeTracker> },
+      { path: "/dashboard/settings", element: <Settings></Settings> },
+    ],
   },
 ]);
 

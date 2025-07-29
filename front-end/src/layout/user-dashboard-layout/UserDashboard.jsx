@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import { LuPanelLeftClose, LuPanelLeftOpen } from "react-icons/lu";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const UserDashboard = () => {
   // Drawer state management
   const [drawer, setDrawer] = useState(true);
-
-  // Active Button Color State management
-  const [active, setActive] = useState(false);
 
   //   Drawer handler function
   const handleDrawer = () => {
     setDrawer(!drawer);
   };
 
-  const handleActiveButton = () => {
-    setActive(!active);
-  };
   const NavButtonsStyle = {
     display: "flex",
     justifyItems: "center",
@@ -30,13 +24,13 @@ const UserDashboard = () => {
   const navigateLinks = (
     <>
       {/* 1. Chatting Section */}
-      <li className="text-black " onClick={handleActiveButton}>
+      <li>
         <NavLink
-          to="#"
-          style={NavButtonsStyle}
+          to="/dashboard/new-session"
           className={({ isActive }) =>
             isActive ? "bg-brandSecondary" : "bg-brandPrimary"
           }
+          style={NavButtonsStyle}
         >
           <figure>
             <img
@@ -49,13 +43,13 @@ const UserDashboard = () => {
       </li>
 
       {/* 2. Mode Tracker */}
-      <li className="text-black  ">
+      <li>
         <NavLink
-          to="#"
-          style={NavButtonsStyle}
+          to="/dashboard/mode-tracker"
           className={({ isActive }) =>
-            isActive ? "bg-brandPrimary" : "bg-brandSecondary"
+            isActive ? "bg-brandSecondary" : "bg-brandPrimary"
           }
+          style={NavButtonsStyle}
         >
           <figure>
             <img
@@ -66,15 +60,15 @@ const UserDashboard = () => {
           <p>Mode Tracker</p>
         </NavLink>
       </li>
+      {/* 3. Settings */}
       <li>
-        <NavLink className="dropdown dropdown-hover w-full">
-          <div
-            tabIndex={0}
-            role="button"
-            style={NavButtonsStyle}
+        <div>
+          <NavLink
+            to="/dashboard/settings"
             className={({ isActive }) =>
-              isActive ? "bg-brandPrimary" : "bg-brandSecondary"
+              isActive ? "bg-brandSecondary" : "bg-brandPrimary"
             }
+            style={NavButtonsStyle}
           >
             <figure>
               <img
@@ -83,18 +77,8 @@ const UserDashboard = () => {
               />
             </figure>
             <p>Settings</p>
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-box z-1 w-36 p-0 shadow-sm"
-          >
-            <li>
-              <button className="flex justify-center items-center">
-                <FaPowerOff /> Logout
-              </button>
-            </li>
-          </ul>
-        </NavLink>
+          </NavLink>
+        </div>
       </li>
     </>
   );
@@ -159,7 +143,9 @@ const UserDashboard = () => {
         <div
           className={`transition-all duration-300 ease-in-out w-full bg-amber-300`}
         >
-          <div className="p-4">Main Content</div>
+          <div className="p-4">
+            <Outlet></Outlet>
+          </div>
         </div>
       </div>
     </section>

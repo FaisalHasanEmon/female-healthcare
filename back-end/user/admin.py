@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django import forms
 from user.forms import OnboardingAdminForm
 from user.models import (
     User,
@@ -16,10 +15,7 @@ from user.onboarding.onboarding_model import (
     StressLevel,
     BasicQuestion,
     BasicAnswer,
-    
 )
-
-
 
 
 @admin.register(User)
@@ -155,6 +151,11 @@ class BasicQuestionAdmin(admin.ModelAdmin):
 
 @admin.register(BasicAnswer)
 class BasicAnswerAdmin(admin.ModelAdmin):
-    list_display = ('id','onboarding', 'question', 'answer')
+    list_display = (
+        'id',
+        'onboarding',
+        'question',
+        'answer'
+    )
     search_fields = ('answer',)
     ordering = ('id',)

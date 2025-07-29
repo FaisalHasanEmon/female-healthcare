@@ -133,7 +133,6 @@ class Profile(BaseModel):
         blank=True,
         null=True
     )
-    
     discription = models.TextField(
         blank=True,
         null=True
@@ -147,7 +146,7 @@ class Profile(BaseModel):
         if self.date_of_birth:
             today = date.today()
             age = today.year - self.date_of_birth.year - (
-                (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day)
+                (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day) # noqa
             )
             print("================", age)
             return age

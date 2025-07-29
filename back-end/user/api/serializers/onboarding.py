@@ -8,18 +8,17 @@ from user.onboarding.onboarding_model import (
     Goal,
     ActivityLevel,
     StressLevel,
-    BasicQuestion,
-    BasicAnswer,
-    Reminder,
 )
 
 
 class OnboardingSerializer(serializers.ModelSerializer):
     def validate_symptoms(self, value):
         if len(value) >= 4:
-            raise serializers.ValidationError("You can select fewer than 4 symptoms.")
+            raise serializers.ValidationError(
+                "You can select fewer than 4 symptoms."
+            )
         return value
-    
+
     class Meta:
         model = Onboarding
         fields = (
@@ -46,7 +45,7 @@ class BasicQuestionSerializer(serializers.ModelSerializer):
             'has_regular_cycle',
             'is_menopausal',
             'on_hormonal_treatment',
-        ) 
+        )
 
 
 class SymptomSerializer(serializers.ModelSerializer):
@@ -77,6 +76,3 @@ class StressLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = StressLevel
         fields = ('id', 'name')
-
-
-

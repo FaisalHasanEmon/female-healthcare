@@ -49,7 +49,7 @@ class OnboardingDetailAPIView(RetrieveAPIView):
 
     def get_queryset(self):
         return Onboarding.objects.filter(profile__user=self.request.user)
-    
+
 
 class OnboardingUpdateAPIView(UpdateAPIView):
     serializer_class = OnboardingSerializer

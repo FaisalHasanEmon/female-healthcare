@@ -22,7 +22,6 @@ from user.api.views import (
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
     BasicQuestionListCreateAPIView
-    
 )
 
 
@@ -135,6 +134,4 @@ urlpatterns = [
         BasicQuestionListCreateAPIView.as_view(),
         name='basic-question-list-create'
     ),
-
-
 ]

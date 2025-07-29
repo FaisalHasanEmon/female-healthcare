@@ -6,7 +6,8 @@ from rest_framework.generics import (
     RetrieveAPIView,
     UpdateAPIView,
     DestroyAPIView,
-    ListCreateAPIView
+    ListCreateAPIView,
+    ListAPIView
 )
 from user.api.views.permissions import IsOwnerOfOnboarding
 from user.api.serializers import (
@@ -15,7 +16,8 @@ from user.api.serializers import (
     DietaryStyleSerializer,
     GoalSerializer,
     ActivityLevelSerializer,
-    StressLevelSerializer
+    StressLevelSerializer,
+    BasicQuestionSerializer
 )
 from user.models import (
     Profile,
@@ -88,3 +90,8 @@ class ActivityLevelListCreateAPIView(ListCreateAPIView):
 class StressLevelListCreateAPIView(ListCreateAPIView):
     serializer_class = StressLevelSerializer
     queryset = StressLevel.objects.all()
+
+
+class BasicQuestionListCreateAPIView(ListAPIView):
+    serializer_class = BasicQuestionSerializer
+    queryset = Onboarding.objects.all()

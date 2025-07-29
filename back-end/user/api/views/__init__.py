@@ -23,7 +23,8 @@ from .onboarding import (
     DietaryStyleListCreateAPIView,
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
-    StressLevelListCreateAPIView
+    StressLevelListCreateAPIView,
+    BasicQuestionListCreateAPIView
 )
 
 __all__ = [
@@ -46,5 +47,6 @@ __all__ = [
     DietaryStyleListCreateAPIView,
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
-    StressLevelListCreateAPIView
+    StressLevelListCreateAPIView,
+    BasicQuestionListCreateAPIView
 ]

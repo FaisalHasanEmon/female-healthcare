@@ -13,7 +13,8 @@ from .onboarding import (
     DietaryStyleSerializer,
     GoalSerializer,
     ActivityLevelSerializer,
-    StressLevelSerializer
+    StressLevelSerializer,
+    BasicQuestionSerializer
 )
 
 
@@ -29,7 +30,8 @@ __all__ = [
     DietaryStyleSerializer,
     GoalSerializer,
     ActivityLevelSerializer,
-    StressLevelSerializer
+    StressLevelSerializer,
+    BasicQuestionSerializer
 
 
 ]

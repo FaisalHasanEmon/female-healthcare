@@ -38,6 +38,17 @@ class OnboardingSerializer(serializers.ModelSerializer):
         read_only_fields = ['profile']
 
 
+class BasicQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Onboarding
+        fields = (
+            'id',
+            'has_regular_cycle',
+            'is_menopausal',
+            'on_hormonal_treatment',
+        ) 
+
+
 class SymptomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Symptom

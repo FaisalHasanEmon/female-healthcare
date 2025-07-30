@@ -67,7 +67,7 @@ const FenyxLibrary = () => {
   // ];
 
   return (
-    <section className="h-full ">
+    <section className="h-full">
       <SmartHealth></SmartHealth>
     </section>
     // <div className="container mx-auto px-5 mb-[100px]  mt-36">

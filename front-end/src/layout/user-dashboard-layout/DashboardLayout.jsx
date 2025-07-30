@@ -3,7 +3,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { LuPanelLeftClose, LuPanelLeftOpen } from "react-icons/lu";
 import { NavLink, Outlet } from "react-router-dom";
 
-const UserDashboard = () => {
+const DashboardLayout = () => {
   // Drawer state management
   const [drawer, setDrawer] = useState(true);
 
@@ -21,6 +21,8 @@ const UserDashboard = () => {
     paddingBottom: "8px",
     paddingLeft: "8px",
   };
+
+  // Navigate Links Buttons
   const navigateLinks = (
     <>
       {/* 1. Chatting Section */}
@@ -33,10 +35,7 @@ const UserDashboard = () => {
           style={NavButtonsStyle}
         >
           <figure>
-            <img
-              src="/userDashboard-Icons/chat-icon.png"
-              alt="Start New Session"
-            />
+            <img src="/dashboard-Icons/chat-icon.png" alt="Start New Session" />
           </figure>
           <p>Start New Session</p>
         </NavLink>
@@ -53,7 +52,7 @@ const UserDashboard = () => {
         >
           <figure>
             <img
-              src="/userDashboard-Icons/tracker-icon.png"
+              src="/dashboard-Icons/tracker-icon.png"
               alt="Start New Session"
             />
           </figure>
@@ -62,33 +61,52 @@ const UserDashboard = () => {
       </li>
       {/* 3. Settings */}
       <li>
-        <div>
+        <div className="w-full flex bg-gradient-to-tr from-brandSecondary/30 via-brandPrimary to-brandSecondary/30">
           <NavLink
             to="/dashboard/settings"
             className={({ isActive }) =>
-              isActive ? "bg-brandSecondary" : "bg-brandPrimary"
+              isActive ? "bg-brandSecondary grow-1" : "bg-brandPrimary grow-1"
             }
             style={NavButtonsStyle}
           >
             <figure>
               <img
-                src="/userDashboard-Icons/settings-icon.png"
+                src="/dashboard-Icons/settings-icon.png"
                 alt="Start New Session"
               />
             </figure>
             <p>Settings</p>
           </NavLink>
+          {/* Dropdown for logout */}
+          <div className="dropdown dropdown-bottom  h-full my-auto  ">
+            <div tabIndex={0} role="button">
+              <figure className="">
+                <img
+                  src="/dashboard-Icons/dropdownIcon.png"
+                  alt="dropdown icon"
+                />
+              </figure>
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu  rounded-box z-1 w-28  p-1 shadow-sm -left-16 mt-4 bg-gradient-to-tr from-brandSecondary to-brandPrimary "
+            >
+              <li>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </li>
     </>
   );
 
   return (
-    <section className="h-screen w-full relative">
-      <div className="h-full flex  relative overflow-hidden w-full">
+    <section className="w-full relative font-inter">
+      <div className="flex h-screen relative overflow-hidden w-full">
         {/* Opened Drawer */}
         <div
-          className={`transition-all duration-300 ease-in-out  
+          className={`transition-all duration-300 ease-in-out
           ${
             drawer
               ? "w-11/12 lg:w-2/12 opacity-100"
@@ -107,7 +125,7 @@ const UserDashboard = () => {
                   <img src="/logo3.png" alt="Logo" className="w-[80px]" />
                 </figure>
                 <div className="cursor-pointer" onClick={handleDrawer}>
-                  <LuPanelLeftClose size={24} color="gray" />
+                  <LuPanelLeftClose size={24} color="black" />
                 </div>
               </div>
               {/* Logo and Collapse button Ends*/}
@@ -128,28 +146,58 @@ const UserDashboard = () => {
 
         {/* Closed Drawer */}
         <div
-          className={`transition-all duration-300 ease-in-out bg-brandPrimary 
+          className={`transition-all duration-300 ease-in-out bg-brandPrimary pt-[30px]
           ${drawer ? "w-0 opacity-0 pointer-events-none" : "w-16 opacity-100"}`}
         >
-          <div className="flex flex-col justify-center items-center ">
+          <div className="flex flex-col gap-8 justify-center items-center ">
             <div className="cursor-pointer" onClick={handleDrawer}>
-              <LuPanelLeftOpen size={24} />
+              <LuPanelLeftOpen size={24} color="black" />
             </div>
-            <div>Logo</div>
+            <div className="cursor-pointer">
+              <NavLink to="/dashboard/new-session">
+                <img
+                  src="/dashboard-Icons/chat-icon.png"
+                  className="flex justify-center items-center w-6 "
+                  alt="Icon"
+                />
+              </NavLink>
+            </div>
+            <div className="cursor-pointer">
+              <NavLink to="/dashboard/mode-tracker">
+                <img
+                  src="/dashboard-Icons/tracker-icon.png"
+                  className="flex justify-center items-center w-6 "
+                  alt="Icon"
+                />
+              </NavLink>
+            </div>
+            <div className="cursor-pointer">
+              <NavLink to="/dashboard/settings">
+                <img
+                  src="/dashboard-Icons/settings-icon.png"
+                  className="flex justify-center items-center w-6 "
+                  alt="Icon"
+                />
+              </NavLink>
+            </div>
+
+            <div>
+              <p>
+                <FaPowerOff size={20}></FaPowerOff>
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Right Content */}
         <div
-          className={`transition-all duration-300 ease-in-out w-full bg-amber-300`}
+          className={`transition-all duration-300 ease-in-out w-full overflow-y-scroll`}
         >
-          <div className="p-4">
-            <Outlet></Outlet>
-          </div>
+          <Outlet></Outlet>
         </div>
       </div>
     </section>
   );
 };
 
-export default UserDashboard;
+export default DashboardLayout;

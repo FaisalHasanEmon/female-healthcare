@@ -17,7 +17,7 @@ import Page4 from "../pages/onboarding-pages/Page4/Page4";
 import Page5 from "../pages/onboarding-pages/Page5/Page5";
 import Page6 from "../pages/onboarding-pages/Page6/Page6";
 import ResetPassword from "../pages/authentication/reset-password/ResetPassword";
-import UserDashboard from "../layout/user-dashboard-layout/UserDashboard";
+import UserDashboard from "../layout/user-dashboard-layout/DashboardLayout";
 import StartNewSession from "../pages/user-dashboard-pages/StartNewSession/StartNewSession";
 import ModeTracker from "../pages/user-dashboard-pages/ModeTracker/ModeTracker";
 import Settings from "../pages/user-dashboard-pages/Settings/Settings";

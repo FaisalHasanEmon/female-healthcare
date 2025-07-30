@@ -17,9 +17,7 @@ const DashboardLayout = () => {
     justifyItems: "center",
     alignItems: "center",
     gap: "8px",
-    paddingTop: "8px",
-    paddingBottom: "8px",
-    paddingLeft: "8px",
+    padding: "8px 0px 8px 8px",
   };
 
   // Navigate Links Buttons
@@ -130,7 +128,7 @@ const DashboardLayout = () => {
               </div>
               {/* Logo and Collapse button Ends*/}
               {/* Links Sections Starts */}
-              <ul className="w-11/12 lg:w-8/12 h-[200px]  mx-auto space-y-2.5 mt-10">
+              <ul className="w-11/12 lg:w-10/12 h-[200px] border  mx-auto space-y-2.5 mt-10">
                 {navigateLinks}
               </ul>
               {/* Links Sections Ends */}

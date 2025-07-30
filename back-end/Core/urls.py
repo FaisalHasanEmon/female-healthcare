@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from calander.views import calendar_view
+
 
 
 urlpatterns = [
@@ -39,4 +41,10 @@ urlpatterns = [
         include('user.urls'),
         name='user'
     ),
+    path(
+        'calendar/',
+        calendar_view,
+        name='calendar'
+    ),
+    
 ]

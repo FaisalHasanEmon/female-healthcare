@@ -84,7 +84,6 @@ export default function ProfileForm() {
   };
 
   const handleExportData = (format) => {
-    console.log(`Exporting data as ${format}...`);
     showToast(`Data export (${format}) started. Download will begin shortly.`);
   };
 
@@ -94,7 +93,6 @@ export default function ProfileForm() {
         "Are you sure you want to clear all logged symptoms? This action cannot be undone."
       )
     ) {
-      console.log("Clearing symptoms...");
       showToast("Symptoms cleared and dashboard reset!");
     }
   };
@@ -105,7 +103,6 @@ export default function ProfileForm() {
         "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost."
       )
     ) {
-      console.log("Deleting account...");
       showToast(
         "Account deletion initiated. You will receive a confirmation email."
       );
@@ -113,7 +110,6 @@ export default function ProfileForm() {
   };
 
   const handleSaveAllChanges = () => {
-    console.log("Saving all changes:", formData);
     showToast("All changes saved successfully!");
   };
 

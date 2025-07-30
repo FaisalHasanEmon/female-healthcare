@@ -8,7 +8,7 @@ const ContactUs = () => {
     const email = e.target.email.value;
     const message = e.target.message.value;
     const contactMessage = { fullName, email, message };
-    console.log(contactMessage);
+
     // const res = fetch("")
   };
   return (

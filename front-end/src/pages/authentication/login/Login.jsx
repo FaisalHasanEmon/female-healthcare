@@ -10,9 +10,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   // Handle Goolge Sign Up
-  const handleGoogleLogin = async () => {
-    console.log("Google Sign Up");
-  };
+  const handleGoogleLogin = async () => {};
 
   // Handle Sign Up form
   const handleSubmitLogin = async (e) => {
@@ -21,10 +19,9 @@ const Login = () => {
     const password = e.target.password.value;
 
     const loginData = { email, password };
-    console.log(loginData);
+
     // const res = await userLogin(email, password);
-    // console.log(res.data);
-    // console.log(registrationData);
+
     navigate("/onboarding");
   };
   return (

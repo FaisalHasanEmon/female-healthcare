@@ -68,30 +68,22 @@ export default function ProfileForm() {
   };
 
   const handleUpdateInfo = () => {
-    console.log("Updating profile info:", formData);
     showToast("Profile information updated successfully!");
   };
 
   const handleChangePassword = () => {
-    console.log("Changing password...");
     showToast("Password change initiated. Check your email!");
   };
 
   const handleRecalculateCycle = () => {
-    console.log("Recalculating cycle...");
     showToast("Cycle recalculated based on recent data!");
   };
 
   const handleSaveReminderPreferences = () => {
-    console.log("Saving reminder preferences:", {
-      dailyReminder: formData.dailyReminder,
-      reminderTime: formData.reminderTime,
-    });
     showToast("Reminder preferences saved!");
   };
 
   const handleExportData = (format) => {
-    console.log(`Exporting data as ${format}...`);
     showToast(`Data export (${format}) started. Download will begin shortly.`);
   };
 
@@ -101,7 +93,6 @@ export default function ProfileForm() {
         "Are you sure you want to clear all logged symptoms? This action cannot be undone."
       )
     ) {
-      console.log("Clearing symptoms...");
       showToast("Symptoms cleared and dashboard reset!");
     }
   };
@@ -112,7 +103,6 @@ export default function ProfileForm() {
         "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost."
       )
     ) {
-      console.log("Deleting account...");
       showToast(
         "Account deletion initiated. You will receive a confirmation email."
       );
@@ -120,7 +110,6 @@ export default function ProfileForm() {
   };
 
   const handleSaveAllChanges = () => {
-    console.log("Saving all changes:", formData);
     showToast("All changes saved successfully!");
   };
 

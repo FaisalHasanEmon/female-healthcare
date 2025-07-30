@@ -6,7 +6,7 @@ const Page1 = () => {
   const [period, setPeriod] = useState(false);
   const [cycle, setCycle] = useState({});
   const navigate = useNavigate();
-  
+
   // get cycle
   useEffect(() => {
     const getCycle = localStorage.getItem("cycle");
@@ -15,27 +15,38 @@ const Page1 = () => {
     }
   }, []);
 
-  
   //set cycle in localstorage
   const handleSubmit = (event) => {
     event.preventDefault();
     const healthStatus = event.target.healthStatus.value;
     let cycleData = {};
 
-    // check input value and set data field 
-    if (healthStatus === "periods"){
+    // check input value and set data field
+    if (healthStatus === "periods") {
       const date = event.target.date.value;
       const cycleDay = event.target.cycleDay.value;
       const periodDuration = event.target.periodDuration.value;
-       cycleData = {isPeriod: true,isMenopause: false,ishormoneTherapy: false}
-       cycleData.period={date, cycleDay, periodDuration };
-    } else if(healthStatus === "menopause") {
-      cycleData = { isPeriod: false,isMenopause: true, ishormoneTherapy: false};
-    }else if(healthStatus === "hormoneTherapy"){
-      cycleData ={ isPeriod: false, isMenopause: false, ishormoneTherapy: true };
+      cycleData = {
+        isPeriod: true,
+        isMenopause: false,
+        ishormoneTherapy: false,
+      };
+      cycleData.period = { date, cycleDay, periodDuration };
+    } else if (healthStatus === "menopause") {
+      cycleData = {
+        isPeriod: false,
+        isMenopause: true,
+        ishormoneTherapy: false,
+      };
+    } else if (healthStatus === "hormoneTherapy") {
+      cycleData = {
+        isPeriod: false,
+        isMenopause: false,
+        ishormoneTherapy: true,
+      };
     }
-    console.log(cycleData);
-    // set data in localStorage 
+
+    // set data in localStorage
     if (Object.keys(cycleData).length > 0) {
       localStorage.setItem("cycle", JSON.stringify(cycleData));
       navigate("/onboarding/page2");
@@ -52,7 +63,7 @@ const Page1 = () => {
         <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
           <span className="font-montserrat ">Do you have periods?</span>
           <input
-            onChange={()=>setPeriod(true)}
+            onChange={() => setPeriod(true)}
             type="radio"
             className=""
             name="healthStatus"
@@ -63,7 +74,7 @@ const Page1 = () => {
         <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
           <span className="font-montserrat ">Are you in menopause?</span>
           <input
-          onChange={()=>setPeriod(false)}
+            onChange={() => setPeriod(false)}
             type="radio"
             className=""
             name="healthStatus"
@@ -74,7 +85,7 @@ const Page1 = () => {
         <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
           <span className="font-montserrat ">Are you on hormone therapy?</span>
           <input
-           onChange={()=>setPeriod(false)}
+            onChange={() => setPeriod(false)}
             type="radio"
             className=""
             name="healthStatus"
@@ -114,13 +125,13 @@ const Page1 = () => {
           </label>
         </div>
         <div>
-        <button
-          type="submit"
-          className=" btn bg-brandPrimary text-center px-5 md:px-40 hover:bg-[#7f9e90]"
-        >
-          Continue
-        </button>
-      </div>
+          <button
+            type="submit"
+            className=" btn bg-brandPrimary text-center px-5 md:px-40 hover:bg-[#7f9e90]"
+          >
+            Continue
+          </button>
+        </div>
       </form>
     </div>
   );

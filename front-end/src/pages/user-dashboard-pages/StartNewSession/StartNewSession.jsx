@@ -7,7 +7,6 @@ const StartNewSession = () => {
     e.preventDefault();
     const userPrompt = promptText;
     setUserPrompt(userPrompt);
-    console.log(promptText);
     setPromptText("");
   };
   return (

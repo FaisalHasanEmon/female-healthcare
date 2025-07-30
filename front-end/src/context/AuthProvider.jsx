@@ -19,29 +19,19 @@ const AuthProvider = ({ children }) => {
     try {
       return await axiosRequest.post("login/", loginData);
     } catch (err) {
-      console.error("Login failed:", err);
-      console.log("Login failed:", err);
       return { data: null, error: err.message };
     }
   };
 
   //   User Logout API
-  const userLogout = async () => {
-    console.log("userLogged Out");
-  };
+  const userLogout = async () => {};
 
   //   Password Reset API
   const resetUserPassword = async (email) => {
     try {
       return await axiosRequest.post("password-reset/", { email });
     } catch (error) {
-      console.log(error?.response?.data?.error);
-      console.log(error?.response?.data);
-
-      // console.log("Password reset failed:", error);
-      // console.log("Password reset failed2 :", error.message);
-      // console.log("Password reset failed3 :", error.status);
-      // return { data: null, error: error.message };
+      return { data: null, error: error.message };
     }
   };
   const value = {

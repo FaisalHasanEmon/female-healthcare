@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import useAxios from "../hooks/UseAxios";
+import useAxios from "../hooks/useAxios";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);

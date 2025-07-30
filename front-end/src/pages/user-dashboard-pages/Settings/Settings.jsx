@@ -68,25 +68,18 @@ export default function ProfileForm() {
   };
 
   const handleUpdateInfo = () => {
-    console.log("Updating profile info:", formData);
     showToast("Profile information updated successfully!");
   };
 
   const handleChangePassword = () => {
-    console.log("Changing password...");
     showToast("Password change initiated. Check your email!");
   };
 
   const handleRecalculateCycle = () => {
-    console.log("Recalculating cycle...");
     showToast("Cycle recalculated based on recent data!");
   };
 
   const handleSaveReminderPreferences = () => {
-    console.log("Saving reminder preferences:", {
-      dailyReminder: formData.dailyReminder,
-      reminderTime: formData.reminderTime,
-    });
     showToast("Reminder preferences saved!");
   };
 

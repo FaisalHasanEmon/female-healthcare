@@ -2,7 +2,6 @@ import PrimaryButton from "../../components/shared/Buttons/PrimaryButton";
 import SecondaryButton from "../../components/shared/Buttons/SecondaryButton";
 
 const Banner = () => {
-  console.log(window.innerWidth);
   return (
     <div className="bg-[#FDFAF5] relative">
       <div className="container px-5 mx-auto pt-[100px] md:pt-[154px] pb-[44px]">

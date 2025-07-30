@@ -8,11 +8,25 @@ from user.api.views import (
     PasswordResetRequestView,
     ChangePasswordView,
     VerifyEmailView,
-    
+    ProfileCreateView,
+    ProfileDetailView,
+    ProfileUpdateView,
+    ProfileDeleteView,
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView,
+    ActivityLevelListCreateAPIView,
+    StressLevelListCreateAPIView,
+    BasicQuestionListCreateAPIView
 )
 
 
 urlpatterns = [
+    # Auth Api
     path(
         'register/',
         RegisterView.as_view(),
@@ -48,6 +62,76 @@ urlpatterns = [
         VerifyEmailView.as_view(),
         name='verify-email'
     ),
-
-
+    # Profile Api
+    path(
+        'profile/create/',
+        ProfileCreateView.as_view(),
+        name='profile-create'
+    ),
+    path(
+        'profile/me/',
+        ProfileDetailView.as_view(),
+        name='profile-detail'
+    ),
+    path(
+        'profile/me/update/',
+        ProfileUpdateView.as_view(),
+        name='profile-update'
+    ),
+    path(
+        'profile/me/delete/',
+        ProfileDeleteView.as_view(),
+        name='profile-delete'
+    ),
+    # Onboarding Api
+    path(
+        'onboarding/create/',
+        OnboardingCreateAPIView.as_view(),
+        name='onboarding-create'
+    ),
+    path(
+        'onboarding/<int:pk>/',
+        OnboardingDetailAPIView.as_view(),
+        name='onboarding-detail'
+    ),
+    path(
+        'onboarding/<int:pk>/update/',
+        OnboardingUpdateAPIView.as_view(),
+        name='onboarding-update'
+    ),
+    path(
+        'onboarding/<int:pk>/delete/',
+        OnboardingDeleteAPIView.as_view(),
+        name='onboarding-delete'
+    ),
+    path(
+        'symptoms/',
+        SymptomListCreateAPIView.as_view(),
+        name='symptom-list-create'
+    ),
+    path(
+        'dietary-styles/',
+        DietaryStyleListCreateAPIView.as_view(),
+        name='dietary-style-list-create'
+    ),
+    path(
+        'goals/',
+        GoalListCreateAPIView.as_view(),
+        name='goal-list-create'
+    ),
+    path(
+        'activity-levels/',
+        ActivityLevelListCreateAPIView.as_view(),
+        name='activity-level-list-create'
+    ),
+    path(
+        'stress-levels/',
+        StressLevelListCreateAPIView.as_view(),
+        name='stress-level-list-create'
+    ),
+    path(
+        'basic-questions/',
+        BasicQuestionListCreateAPIView.as_view(),
+        name='basic-question-list-create'
+    ),
 ]

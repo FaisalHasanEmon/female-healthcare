@@ -2,10 +2,18 @@ from django.db import models
 from Core.models import BaseModel
 from django.conf import settings
 from datetime import date
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin
+)
+from user.onboarding.onboarding_model import (
+    Symptom,
+    DietaryStyle,
+    ActivityLevel,
+    StressLevel,
+    Goal,
 )
 
 
@@ -64,58 +72,6 @@ class Gender(BaseModel):
     class Meta:
         verbose_name = "Gender"
         verbose_name_plural = "Genders"
-
-
-class Lifestyle(BaseModel):
-    name = models.CharField(
-        max_length=100,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    valu = models.CharField(
-        max_length=10,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    discription = models.TextField(
-        null=True,
-        blank=True
-    )
-
-    def __str__(self):
-        return self.name or "unnamed Lifestyle"
-
-    class Meta:
-        verbose_name = "Lifestyle"
-        verbose_name_plural = "Lifestyles"
-
-
-class DietType(BaseModel):
-    name = models.CharField(
-        max_length=100,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    value = models.CharField(
-        max_length=10,
-        unique=True,
-        null=True,
-        blank=True
-    )
-    discription = models.TextField(
-        null=True,
-        blank=True
-    )
-
-    def __str__(self):
-        return self.name or "unnamed Diet Type"
-
-    class Meta:
-        verbose_name = "Diet_Type"
-        verbose_name_plural = "Diet_Types"
 
 
 class Profile(BaseModel):
@@ -177,18 +133,6 @@ class Profile(BaseModel):
         blank=True,
         null=True
     )
-    lifestyle = models.ForeignKey(
-        Lifestyle,
-        on_delete=models.SET_NULL,
-        null=True, blank=True,
-        related_name="users"
-    )
-    diet_type = models.ForeignKey(
-        DietType,
-        on_delete=models.SET_NULL,
-        null=True, blank=True,
-        related_name="users"
-    )
     discription = models.TextField(
         blank=True,
         null=True
@@ -201,11 +145,112 @@ class Profile(BaseModel):
     def calculated_age(self):
         if self.date_of_birth:
             today = date.today()
-            return today.year - self.date_of_birth.year - (
-                (
-                    today.month, today.day
-                ) < (
-                    self.date_of_birth.month, self.date_of_birth.day
-                )
+            age = today.year - self.date_of_birth.year - (
+                (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day) # noqa
             )
+            print("================", age)
+            return age
         return None
+
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
+        ordering = ['-created_at']
+
+
+class Onboarding(BaseModel):
+    profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='onboarding'
+    )
+    has_regular_cycle = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Do you have a regular cycle?"
+    )
+    is_menopausal = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Are you in perimenopause, menopause, or post-menopause?"
+    )
+    on_hormonal_treatment = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Are you currently on hormonal birth control or HRT?"
+    )
+    symptoms = models.ManyToManyField(
+        Symptom,
+        blank=True,
+        related_name='profiles',
+        help_text="User's top health concerns"
+    )
+    dietary_styles = models.ForeignKey(
+        DietaryStyle,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='profiles',
+        help_text="User's dietary preferences"
+    )
+    activity_level = models.ForeignKey(
+        ActivityLevel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='profiles',
+        help_text="User's activity level"
+    )
+    stress_level = models.ForeignKey(
+        StressLevel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='profiles',
+        help_text="User's stress level"
+    )
+    supplements_medications = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Supplements or medications the user is taking"
+    )
+    goals = models.ManyToManyField(
+        Goal,
+        blank=True,
+        related_name='profiles',
+        help_text="User's health and wellness goals"
+    )
+    daily_reminder = models.BooleanField(
+        default=False,
+        help_text="Would you like a daily reminder?"
+    )
+
+    def clean(self):
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        # Handle mutual exclusivity of boolean fields
+        if self.has_regular_cycle:
+            self.is_menopausal = False
+            self.on_hormonal_treatment = False
+        elif self.is_menopausal:
+            self.has_regular_cycle = False
+            self.on_hormonal_treatment = False
+        elif self.on_hormonal_treatment:
+            self.has_regular_cycle = False
+            self.is_menopausal = False
+
+        super().save(*args, **kwargs)
+
+        if self.pk and self.symptoms.count() >= 4:
+            raise ValidationError(
+                {'symptoms': 'You can select fewer than 4 symptoms.'}
+            )
+
+    def __str__(self):
+        return f"Onboarding for {self.profile.name}"
+
+    class Meta:
+        verbose_name = "Onboarding"
+        verbose_name_plural = "Onboardings"
+        ordering = ['-id']

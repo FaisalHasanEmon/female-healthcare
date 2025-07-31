@@ -15,7 +15,7 @@ const Banner = () => {
             </h2>
 
             {/* Solid Top Text */}
-            <h2 className=" md:ml-5  lg:-ml-5 absolute  top-0  uppercase  text-2xl font-extrabold  md:text-5xl lg:text-[60px] font-playfair-display text-base-100 whitespace-nowrap overflow-hidden">
+            <h2 className=" md:ml-5  lg:-ml-5 absolute  top-0  uppercase  text-2xl font-extrabold  md:text-5xl lg:text-[60px] font-playfair-display text-[#FDFAF5] whitespace-nowrap overflow-hidden">
               your body's been talking
             </h2>
 

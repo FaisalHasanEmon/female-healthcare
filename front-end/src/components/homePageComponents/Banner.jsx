@@ -10,12 +10,12 @@ const Banner = () => {
           <div className="w-full lg:w-7/12 relative  ">
             {/* Outlined Background Text */}
 
-            <h2 className=" md:ml-5  lg:-ml-5 uppercase font-extrabold  text-2xl md:text-5xl lg:text-[60px] text-transparent font-playfair-display -z-10 [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#a6c2b3] whitespace-nowrap overflow-hidden">
+            <h2 className=" md:ml-5  lg:-ml-5 uppercase font-extrabold  text-2xl md:text-5xl lg:text-[60px] text-[white] font-playfair-display -z-10  [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#a6c2b3] whitespace-nowrap overflow-hidden">
               your body's been talking
             </h2>
 
             {/* Solid Top Text */}
-            <h2 className=" md:ml-5  lg:-ml-5 absolute  top-0  uppercase  text-2xl font-extrabold  md:text-5xl lg:text-[60px] font-playfair-display text-white whitespace-nowrap overflow-hidden">
+            <h2 className=" md:ml-5  lg:-ml-5 absolute  top-0  uppercase  text-2xl font-extrabold  md:text-5xl lg:text-[60px] font-playfair-display text-transparent whitespace-nowrap overflow-hidden">
               your body's been talking
             </h2>
 

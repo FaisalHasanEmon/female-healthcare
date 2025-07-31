@@ -128,7 +128,7 @@ const DashboardLayout = () => {
               </div>
               {/* Logo and Collapse button Ends*/}
               {/* Links Sections Starts */}
-              <ul className="w-11/12 lg:w-10/12 h-[200px] border  mx-auto space-y-2.5 mt-10">
+              <ul className="w-11/12 lg:w-10/12 h-[200px]  mx-auto space-y-2.5 mt-10">
                 {navigateLinks}
               </ul>
               {/* Links Sections Ends */}

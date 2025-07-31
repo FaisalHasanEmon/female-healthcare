@@ -1,13 +1,15 @@
 import React from "react";
 import OnBoardingNavbar from "../../components/shared/OnBoardingNavbar/OnBoardingNavbar";
 import { Outlet } from "react-router-dom";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const OnBoardingLayout = () => {
   return (
-    <div className="relative min-h-screen overflow-x-hidden overflow-y-hidden bg-[rgba(217, 233, 192, 0.2)] " >
+    <div className="relative min-h-screen overflow-x-hidden overflow-y-hidden bg-[rgba(217, 233, 192, 0.2)] ">
+      <ScrollToTop />
       <OnBoardingNavbar className="mx-auto"></OnBoardingNavbar>
       <div className="flex justify-center items-center h-screen">
-        <Outlet/>
+        <Outlet />
       </div>
       {/* Image top */}
       <figure className="absolute right-0 top-0 -z-10  mr-5">

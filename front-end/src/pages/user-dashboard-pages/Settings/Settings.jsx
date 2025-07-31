@@ -68,6 +68,12 @@ export default function ProfileForm() {
   };
 
   const handleUpdateInfo = () => {
+    const name = formData.name;
+    const email = formData.email;
+    const password = formData.password;
+    const location = formData.location;
+    const user_info = { name, email, password, location };
+    console.log(user_info);
     showToast("Profile information updated successfully!");
   };
 
@@ -128,7 +134,7 @@ export default function ProfileForm() {
       {/* Toast Notification */}
       {toast && (
         <div className="toast toast-top toast-end">
-          <div className="alert alert-success">
+          <div className="alert alert-success text-white">
             <span>{toast}</span>
           </div>
         </div>
@@ -139,8 +145,8 @@ export default function ProfileForm() {
           {/* Left Column */}
           <div className="space-y-6">
             {/* Section 1: Profile Info */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-semibold mb-6">Profile Info</h2>
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Profile Info</h2>
 
               {/* Profile Picture */}
               <div className="flex justify-center mb-6">
@@ -221,13 +227,13 @@ export default function ProfileForm() {
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     onClick={handleUpdateInfo}
-                    className="btn btn-success text-white"
+                    className="btn bg-brandPrimary text-white"
                   >
                     Update Info
                   </button>
                   <button
                     onClick={handleChangePassword}
-                    className="btn btn-outline btn-success"
+                    className="btn btn-outline hover:text-white hover:bg-brandPrimary btn-success"
                   >
                     Change Password
                   </button>
@@ -236,8 +242,8 @@ export default function ProfileForm() {
             </div>
 
             {/* Section 2: Hormonal Info & Cycle Settings */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-semibold mb-6">
+            <div className=" rounded-lg ">
+              <h2 className="text-2xl font-semibold mb-6">
                 Hormonal Info & Cycle Settings
               </h2>
 
@@ -340,8 +346,8 @@ export default function ProfileForm() {
             </div>
 
             {/* Section 4: Daily Reminders */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-semibold mb-6">Daily Reminders</h2>
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Daily Reminders</h2>
 
               <div className="space-y-4">
                 <p className="font-medium">
@@ -406,7 +412,7 @@ export default function ProfileForm() {
 
                 <button
                   onClick={handleSaveReminderPreferences}
-                  className="btn btn-success text-white"
+                  className="btn btn-success bg-brandPrimary text-white"
                 >
                   Save Reminder Preferences
                 </button>
@@ -414,8 +420,8 @@ export default function ProfileForm() {
             </div>
 
             {/* Section 5: AI Insights Settings */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-semibold mb-6">
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">
                 AI Insights Settings
               </h2>
 
@@ -469,8 +475,8 @@ export default function ProfileForm() {
           {/* Right Column */}
           <div className="space-y-6">
             {/* Section 3: Lifestyle & Preferences */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-semibold mb-6">
+            <div className="">
+              <h2 className="text-2xl font-semibold mb-6">
                 Lifestyle & Preferences
               </h2>
 
@@ -605,7 +611,7 @@ export default function ProfileForm() {
 
             {/* Section 6: Data Control & Privacy */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-semibold mb-6">
+              <h2 className="text-2xl font-semibold mb-6">
                 Data Control & Privacy
               </h2>
 
@@ -656,7 +662,7 @@ export default function ProfileForm() {
         <div className="mt-8 text-center">
           <button
             onClick={handleSaveAllChanges}
-            className="btn btn-success btn-lg text-white px-12"
+            className="btn bg-brandPrimary btn-lg text-white px-12"
           >
             Save All Changes
           </button>

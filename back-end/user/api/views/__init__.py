@@ -26,6 +26,9 @@ from .onboarding import (
     StressLevelListCreateAPIView,
     BasicQuestionListCreateAPIView
 )
+from .profile_update import UserProfileUpdateView
+
+
 
 __all__ = [
     RegisterView,
@@ -48,5 +51,6 @@ __all__ = [
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
-    BasicQuestionListCreateAPIView
+    BasicQuestionListCreateAPIView,
+    UserProfileUpdateView
 ]

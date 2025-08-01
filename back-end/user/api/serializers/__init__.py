@@ -16,6 +16,7 @@ from .onboarding import (
     StressLevelSerializer,
     BasicQuestionSerializer
 )
+from .profile_update import UserProfileUpdateSerializer
 
 
 __all__ = [
@@ -31,7 +32,6 @@ __all__ = [
     GoalSerializer,
     ActivityLevelSerializer,
     StressLevelSerializer,
+    UserProfileUpdateSerializer,
     BasicQuestionSerializer
-
-
 ]

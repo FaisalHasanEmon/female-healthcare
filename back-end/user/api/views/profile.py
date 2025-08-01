@@ -17,10 +17,15 @@ class ProfileCreateView(ListCreateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        if Profile.objects.filter(user=self.request.user).exists():
-            raise serializers.ValidationError("You already have a profile.")
-        serializer.save(user=self.request.user)
+    def create(self, request, *args, **kwargs):
+        if hasattr(request.user, 'profile'):
+            return Response({"detail": "You have already created a profile."},
+                            status=status.HTTP_400_BAD_REQUEST)
+        
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class ProfileDetailView(RetrieveAPIView):

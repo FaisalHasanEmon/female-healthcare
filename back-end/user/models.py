@@ -44,6 +44,20 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     is_staff = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
 
+    new_email = models.EmailField(
+        blank=True,
+        null=True
+    )
+    email_change_token = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+    email_change_requested_at = models.DateTimeField(
+        blank=True,
+        null=True
+    )
+
     objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -96,6 +110,11 @@ class Profile(BaseModel):
         blank=True,
         null=True
     )
+    age = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        help_text="Calculated age based on date of birth"
+    )
     date_of_birth = models.DateField(
         blank=True,
         null=True
@@ -129,13 +148,15 @@ class Profile(BaseModel):
         null=True,
         help_text="Select your blood group"
     )
-    adderess = models.TextField(
+    address = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        help_text="Your current address"
     )
     discription = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        help_text="A brief description about yourself"
     )
 
     def __str__(self):

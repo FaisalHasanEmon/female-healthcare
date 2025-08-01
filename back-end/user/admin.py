@@ -43,11 +43,11 @@ class ProfileAdmin(admin.ModelAdmin):
         'gender',
         'height',
         'weight',
-        'adderess',
+        'address',
         'discription',
         'calculated_age_display',
     )
-    search_fields = ('user__email', 'name', 'adderess')
+    search_fields = ('user__email', 'name', 'address')
     ordering = ('user__email',)
     readonly_fields = ('calculated_age_display',)
 

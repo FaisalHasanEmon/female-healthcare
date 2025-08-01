@@ -84,7 +84,7 @@ const Login = () => {
               />
             </div>
             {/* Password */}
-            <div className="h-16 mb-[18px] relative">
+            <div className="h-16 mb-2.5 relative">
               <span className="flex justify-start items-center gap-4 *:text-[24px]  *:text-white  ml-5 top-3 absolute w-[50px] z-50 ">
                 <IoLockClosedOutline />
                 <p>|</p>
@@ -102,6 +102,12 @@ const Login = () => {
               >
                 {showPassword ? <FiEyeOff size={24} /> : <FiEye size={24} />}
               </button>
+            </div>
+            {/* Forget Password Section */}
+            <div className="flex justify-end items-center mb-[30px]">
+              <Link to="/reset-password" className=" text-[16px] font-medium ">
+                Forget Password?
+              </Link>
             </div>
             {/* Login Button */}
             <div className="w-full ">

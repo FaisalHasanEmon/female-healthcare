@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const SmartHealth = () => {
   // Show Image Use State
   const [showImage, setShowImage] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   // Card Contents Information
   const fenyxLibraryCardsContent = [
@@ -74,8 +75,18 @@ const SmartHealth = () => {
         </div>
         {/* Box heading and Title Ends */}
         {/* Marquee Section Starts */}
-        <div className="mt-10 md:mt-20">
-          <Marquee pauseOnClick={true} pauseOnHover={true} speed={30}>
+        <div
+          className="mt-10 md:mt-20"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <Marquee
+            // pauseOnClick={true}
+            // pauseOnHover={true}
+            speed={30}
+            loop={1}
+            play={isHovered}
+          >
             {fenyxLibraryCardsContent?.map((cardContent) => (
               <div className="w-[350px]  md:w-[570px] p-5 md:p-6 mr-5 rounded-2xl flex flex-col md:flex-row   justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary">
                 <figure className="md:w-1/2 md:h-[225px] flex justify-center items-center  overflow-hidden ">

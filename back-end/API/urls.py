@@ -21,7 +21,9 @@ from user.api.views import (
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
-    BasicQuestionListCreateAPIView
+    BasicQuestionListCreateAPIView,
+    UserProfileUpdateView,
+    VerifyEmailChangeView
 )
 
 
@@ -62,6 +64,11 @@ urlpatterns = [
         VerifyEmailView.as_view(),
         name='verify-email'
     ),
+    path(
+        'verify-email-change/<uidb64>/<token>/',
+        VerifyEmailChangeView.as_view(),
+        name='verify_email_change'
+    ),
     # Profile Api
     path(
         'profile/create/',
@@ -83,6 +90,12 @@ urlpatterns = [
         ProfileDeleteView.as_view(),
         name='profile-delete'
     ),
+    path(
+        'profile/update/',
+        UserProfileUpdateView.as_view(),
+        name='user-profile-update'
+    ),
+
     # Onboarding Api
     path(
         'onboarding/create/',

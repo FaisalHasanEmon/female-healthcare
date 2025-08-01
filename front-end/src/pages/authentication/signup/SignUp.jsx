@@ -10,9 +10,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   // Handle Goolge Sign Up
-  const handleGoogleSignUp = async () => {
-    console.log("Google Sign Up");
-  };
+  const handleGoogleSignUp = async () => {};
 
   // Handle Sign Up form
   const handleSubmitSignUp = async (e) => {
@@ -22,9 +20,8 @@ const SignUp = () => {
     const confirm_password = e.target.confirmPassword.value;
 
     const registrationData = { email, password, confirm_password };
-    console.log(registrationData);
+
     const res = await userRegistration(email, password, confirm_password);
-    console.log(res.data);
   };
   return (
     <div className="min-h-screen flex justify-center items-center font-inter ">

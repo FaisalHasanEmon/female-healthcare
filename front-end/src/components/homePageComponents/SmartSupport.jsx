@@ -1,4 +1,5 @@
 import PrimaryButton from "../shared/Buttons/PrimaryButton";
+import BoxHeading from "./shared/BoxHeading";
 
 const SmartSupport = () => {
   const supportItems = [
@@ -36,9 +37,8 @@ const SmartSupport = () => {
     <section className="py-20">
       <div className="container px-5 mx-auto">
         {/* What we Do logo Starts */}
-        <div className="w-[168px] flex  justify-center items-center gap-2 mb-[83px] mx-auto  py-[7px] px-[14px] border-2 border-brandPrimary rounded-[6px]">
-          <div className="h-2.5 w-2.5 rounded-full bg-brandSecondary"></div>
-          <p>What We Do</p>
+        <div className="mb-[83px] ">
+          <BoxHeading text="What We Do" />
         </div>
         {/* What we Do logo Ends */}
         {/* Smart Support Text Starts */}
@@ -54,9 +54,9 @@ const SmartSupport = () => {
             your body's been talking
           </h2>
           {/* Your Body's been talking section ends */}
-          <h2 className="text-3xl lg:text-[64px] font-bold text-gray-900 -mt-5 lg:-mt-13 z-45 relative">
+          <h2 className="text-3xl md:text-4xl lg:text-[64px] font-bold text-gray-900 -mt-5 md:-mt-8 lg:-mt-13 z-45 relative">
             YOU DESERVE SM
-            <span className="after:content-[''] after:absolute after:left-27  lg:after:left-[58%] after:bottom-2 after:h-[12.5px] lg:after:h-[23px] lg:after:w-[414px] after:w-[150px]    after:bg-brandSecondary after:rounded-0 after:-z-50">
+            <span className="after:content-[''] after:absolute  after:left-0 after:w-1/2  after:translate-1/2 lg:after:left-[58%] after:bottom-2 after:h-[12.5px] lg:after:h-[23px] lg:after:translate-0 lg:after:w-[414px]  after:bg-brandSecondary after:rounded-0 after:-z-50">
               ART SUPPORT
             </span>{" "}
             <br />
@@ -71,7 +71,7 @@ const SmartSupport = () => {
         </div>
         {/* Smart Support Text Ends */}
         {/* Card Items Starts */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {/* Item 1 */}
           {supportItems.map((item) => (
             <div key={item?.id}>

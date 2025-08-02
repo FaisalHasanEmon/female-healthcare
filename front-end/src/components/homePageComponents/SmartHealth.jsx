@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import BoxHeading from "./shared/BoxHeading";
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
+import MyCarousel from "./MyCarousel";
 
 const SmartHealth = () => {
   // Show Image Use State
   const [showImage, setShowImage] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
 
   // Card Contents Information
   const fenyxLibraryCardsContent = [
@@ -74,42 +75,11 @@ const SmartHealth = () => {
           </div>
         </div>
         {/* Box heading and Title Ends */}
-        {/* Marquee Section Starts */}
-        <div
-          className="mt-10 md:mt-20"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <Marquee
-            // pauseOnClick={true}
-            // pauseOnHover={true}
-            speed={30}
-            loop={1}
-            play={isHovered}
-          >
-            {fenyxLibraryCardsContent?.map((cardContent) => (
-              <div className="w-[350px]  md:w-[570px] p-5 md:p-6 mr-5 rounded-2xl flex flex-col md:flex-row   justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary">
-                <figure className="md:w-1/2 md:h-[225px] flex justify-center items-center  overflow-hidden ">
-                  <img
-                    src={cardContent?.card_image}
-                    className="rounded-lg cursor-pointer"
-                    alt="Card Content"
-                    onClick={() => handleCardClick(cardContent?.modal_image)}
-                  />
-                </figure>
-                <div className="md:w-1/2 h-40">
-                  <h3 className="text-[12px] font-medium text-black">
-                    {cardContent?.title}
-                  </h3>
-                  <p className="font-normal text-[12px] text-[#666666] ml-[5px] mt-2.5">
-                    {cardContent?.blog}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </Marquee>
+        {/* Carousels Section Starts */}
+        <div className="mt-10 md:mt-20">
+          <MyCarousel data={fenyxLibraryCardsContent} from={"smartHealth"} />
         </div>
-        {/* Marquee Section Ends */}
+        {/* Carousels Section Ends */}
       </div>
       {/* Modal Of Selected Image*/}
       <dialog id="my_modal_4" className="modal ">

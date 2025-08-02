@@ -169,7 +169,7 @@ class Profile(BaseModel):
             age = today.year - self.date_of_birth.year - (
                 (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day) # noqa
             )
-            print("================", age)
+            
             return age
         return None
 

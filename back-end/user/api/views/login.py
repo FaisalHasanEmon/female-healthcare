@@ -22,9 +22,7 @@ class LoginView(APIView):
             )
         
         refresh = RefreshToken.for_user(user)
-        print(refresh, "=============================== Refresh token ")
-        print(refresh.access_token, "========================= Access token ")
-
+        
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),

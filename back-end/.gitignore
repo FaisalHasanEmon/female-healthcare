@@ -5,6 +5,13 @@ __pycache__/
 *.pyd
 *.pyc
 
+# Django migrations (optional: ignore if auto-generated)
+*/migrations/*.pyc
+*/migrations/__pycache__/
+*/migrations/0000_initial.py
+*/migrations/0001_initial.py
+
+
 # Django migrations
 */migrations/
 !*/migrations/__init__.py

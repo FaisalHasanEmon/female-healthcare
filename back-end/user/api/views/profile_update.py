@@ -25,19 +25,26 @@ class UserProfileUpdateView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         # Return the user object for the authenticated user
         return self.request.user
-    
+
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-    
+
     def patch(self, request, *args, **kwargs):
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer = self.get_serializer(
+            instance,
+            data=request.data,
+            partial=True
+        )
         try:
             serializer.is_valid(raise_exception=True)
             if 'email' in serializer.validated_data:
-                return Response({"detail": "Use 'new_email' to change email."}, status=400)
+                return Response(
+                    {"detail": "Use 'new_email' to change email."},
+                    status=400
+                )
             serializer.save()
         except Exception as e:
             import traceback
@@ -45,7 +52,9 @@ class UserProfileUpdateView(generics.RetrieveUpdateAPIView):
             return Response({"error": str(e)}, status=500)
 
         if instance.new_email:
-            return Response({"detail": "Update successful. Confirm the change from your current email."})
+            return Response(
+                {"detail": "Update successful. Confirm the change from your current email."}  # noqa
+            )
         return Response({"detail": "Profile updated."})
 
 
@@ -77,8 +86,8 @@ class VerifyEmailChangeView(APIView):
 
         self._notify_old_email(old_email, new_email)
         self._send_new_email_verification(user, request)
-        # return reverse('email_change_success', kwargs={'uidb64': uidb64, 'token': token})
-        # return Response({"message": "Email changed. Verification sent to new email."})
+        # return Response(
+        # {"message": "Email changed. Verification sent to new email."})
         context = {"message": "Email verified successfully."}
         return render(request, "email_verification_result.html", context)
 
@@ -109,4 +118,3 @@ class VerifyEmailChangeView(APIView):
         user.email_verified = False
         user.save()
         send_verification_email(user, request)
-

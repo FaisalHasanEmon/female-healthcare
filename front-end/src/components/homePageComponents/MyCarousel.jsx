@@ -96,9 +96,9 @@ const MyCarousel = ({ data, reverse = false, from = "none" }) => {
           {(reverse ? [...data].reverse() : data).map((item) => (
             <div
               key={item?.content_id}
-              className="w-[350px]  md:w-[570px] p-5 md:p-6 mx-auto rounded-2xl flex flex-col md:flex-row   justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary "
+              className="w-[350px]  md:w-[470px] p-5  mx-auto rounded-2xl flex flex-col md:flex-row   justify-center items-center gap-2.5 bg-gradient-to-l from-brandPrimary to-brandSecondary "
             >
-              <figure className="md:w-1/2 md:h-[225px] flex justify-center items-center  overflow-hidden ">
+              <figure className="md:w-5/12 flex justify-center items-center  overflow-hidden ">
                 <img
                   src={item?.card_image}
                   className="rounded-lg cursor-pointer"
@@ -106,7 +106,7 @@ const MyCarousel = ({ data, reverse = false, from = "none" }) => {
                   onClick={() => handleCardClick(item?.modal_image)}
                 />
               </figure>
-              <div className="md:w-1/2 h-40">
+              <div className="md:w-7/12 h-40">
                 <h3 className="text-[12px] font-medium text-black">
                   {item?.title}
                 </h3>

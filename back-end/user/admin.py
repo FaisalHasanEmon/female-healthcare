@@ -4,7 +4,8 @@ from user.models import (
     User,
     Gender,
     Profile,
-    Onboarding
+    Onboarding,
+    CycleInfo
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -140,3 +141,21 @@ class StressLevelAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
 
+@admin.register(CycleInfo)
+class CycleInfoAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'profile',
+        'cycle_length',
+        'start_date',
+        'end_date',
+        'period_length',
+        'current_phase'
+    )
+    search_fields = ('profile__user__email', 'profile__name')
+    ordering = ('-id',)
+    autocomplete_fields = ['profile']
+    
+    def profile(self, obj):
+        return obj.profile.name
+    profile.short_description = "Profile"

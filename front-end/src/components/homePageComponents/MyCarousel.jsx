@@ -60,6 +60,19 @@ const MyCarousel = ({ data, reverse = false, from = "none" }) => {
     tablet: { breakpoint: { max: 1024, min: 640 }, items: 2 },
     mobile: { breakpoint: { max: 640, min: 0 }, items: 1 },
   };
+  // Render stars based on rating
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, index) => (
+      <span
+        key={index}
+        className={`text-2xl ${
+          index < rating ? "text-yellow-400" : "text-gray-300"
+        }`}
+      >
+        ★
+      </span>
+    ));
+  };
 
   // Manually move the carousel left every X seconds if reverse is true
   useEffect(() => {
@@ -78,7 +91,7 @@ const MyCarousel = ({ data, reverse = false, from = "none" }) => {
 
   return (
     <div className={`${reverse ? "direction-rtl" : ""} py-5`}>
-      {from !== "none" && (
+      {from === "smartHealth" && (
         <Carousel
           ref={carouselRef}
           responsive={responsive}
@@ -113,6 +126,46 @@ const MyCarousel = ({ data, reverse = false, from = "none" }) => {
                 <p className="font-normal text-[12px] text-[#666666] ml-[5px] mt-2.5">
                   {item?.blog}
                 </p>
+              </div>
+            </div>
+          ))}
+        </Carousel>
+      )}
+      {from === "testimonials" && (
+        <Carousel
+          ref={carouselRef}
+          responsive={responsive}
+          infinite
+          autoPlay={!reverse} // disable default autoplay for reversed one
+          autoPlaySpeed={2500}
+          draggable
+          swipeable
+          arrows={false}
+          pauseOnHover
+          containerClass="carousel-container"
+          itemClass="px-2"
+          keyBoardControl={true}
+        >
+          {(reverse ? [...data].reverse() : data).map((item) => (
+            <div
+              key={item?.id}
+              className="bg-white  flex flex-col justify-center items-center h-[200px]  ml-10 backdrop-blur-3xl w-[350px] rounded-lg p-6 border border-brandSecondary "
+            >
+              <div className="text-left space-y-3 w-full h-full">
+                {/* item Name */}
+                <h3 className="font-semibold text-gray-900 text-lg mb-3">
+                  {item?.name}
+                </h3>
+
+                {/* Comment */}
+                <p className="text-gray-700 text-base leading-relaxed mb-4">
+                  {item?.comment}
+                </p>
+              </div>
+
+              {/* Star Rating */}
+              <div className="flex space-x-1 w-full">
+                {renderStars(item?.rating)}
               </div>
             </div>
           ))}

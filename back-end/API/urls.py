@@ -22,7 +22,8 @@ from user.api.views import (
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
     UserProfileUpdateView,
-    VerifyEmailChangeView
+    VerifyEmailChangeView,
+    LifeStyleListAPIView,
 )
 
 
@@ -140,5 +141,10 @@ urlpatterns = [
         'stress-levels/',
         StressLevelListCreateAPIView.as_view(),
         name='stress-level-list-create'
+    ),
+    path(
+        'lifestyle/',
+        LifeStyleListAPIView.as_view(),
+        name='lifestyle-list'
     ),
 ]

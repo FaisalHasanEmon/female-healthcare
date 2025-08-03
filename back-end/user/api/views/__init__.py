@@ -24,10 +24,11 @@ from .onboarding import (
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
+    LifeStyleListAPIView,
 )
 from .profile_update import (
     UserProfileUpdateView,
-    VerifyEmailChangeView
+    VerifyEmailChangeView,
 )
 
 __all__ = [
@@ -52,5 +53,6 @@ __all__ = [
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
     UserProfileUpdateView,
-    VerifyEmailChangeView
+    VerifyEmailChangeView,
+    LifeStyleListAPIView
 ]

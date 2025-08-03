@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework import permissions
 from datetime import date
+from rest_framework.views import APIView
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
@@ -29,6 +30,7 @@ from user.onboarding.onboarding_model import (
     ActivityLevel,
     StressLevel
 )
+from rest_framework.response import Response
 
 
 class OnboardingCreateAPIView(CreateAPIView):
@@ -103,3 +105,16 @@ class StressLevelListCreateAPIView(ListCreateAPIView):
     queryset = StressLevel.objects.all()
 
 
+class LifeStyleListAPIView(APIView):
+
+    def get(self, request):
+        dietary_styles = DietaryStyleSerializer(DietaryStyle.objects.all(), many=True).data
+        activity_levels = ActivityLevelSerializer(ActivityLevel.objects.all(), many=True).data
+        stress_levels = StressLevelSerializer(StressLevel.objects.all(), many=True).data
+        return Response([
+            {
+                "dietary_style": dietary_styles,
+                "activity_level": activity_levels,
+                "stress_level": stress_levels
+            },
+        ])

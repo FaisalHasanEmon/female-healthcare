@@ -76,3 +76,5 @@ class StressLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = StressLevel
         fields = ('id', 'name')
+
+

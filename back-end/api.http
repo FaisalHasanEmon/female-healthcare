@@ -1,6 +1,6 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MTU2OTAwLCJpYXQiOjE3NTQxNTMzMDAsImp0aSI6IjYxMDM0Yzg2YzM5ZDQxN2ZhMTIzNjZjYjhhYjA4MDZlIiwidXNlcl9pZCI6OH0.PmqNG-iFp6g-BOVjKTFJvPfE7L5N83kAbHfE93GmMnw
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MjYyNjQzLCJpYXQiOjE3NTQyNTkwNDMsImp0aSI6IjA2MDAxNGFkYzBiZTRlY2ZiNWE3NDMwNGEzZDZjZTkyIiwidXNlcl9pZCI6MX0.shir2COsrYz2UHpU1dHIVxWRE5YpL1Nce4okvut9Z9E
 
-@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDc1ODEwMCwiaWF0IjoxNzU0MTUzMzAwLCJqdGkiOiIxYTgwN2Y5YjBiOWI0MTk0YTgyNTBmYWVjZTU2OTZjZCIsInVzZXJfaWQiOjh9.9vK1_wNIqk6N2T195pDfmiZGbeTpRStPEpK-4s_kD6Q
+@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDg2Mzg0MywiaWF0IjoxNzU0MjU5MDQzLCJqdGkiOiI4NGQwMTgxZDA2ODU0MzAyOTFhNmQ3NWRjNTg0ZTkwNCIsInVzZXJfaWQiOjF9.4duMTALdSmLT2G7rS2MMyn8Hq6aUGWpQLHFfV-UgyZg
 ### Register
 
 POST http://127.0.0.1:8000/api/v1/register/
@@ -18,8 +18,8 @@ POST http://127.0.0.1:8000/api/v1/login/
 Content-Type: application/json
 
 {
-  "email": "cijoxaj176@foboxs.com",
-  "password": "Sagor1234#"
+  "email": "admin@gmail.com",
+  "password": "admin"
 }
 
 
@@ -146,7 +146,6 @@ Content-Type: application/json
   "daily_reminder": true
 }
 
-###
 
 ### Get Onboarding Details (GET)
 GET http://localhost:8000/api/v1/onboarding/2/

@@ -9,6 +9,18 @@ __pycache__/
 */migrations/
 !*/migrations/__init__.py
 
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Optional: Ignore virtual environments
+venv/
+.env/
+*.env
+
+# Ignore migrations if you want (optional)
+**/migrations/*.pyc
+
 # Django cache and database
 *.sqlite3
 *.db

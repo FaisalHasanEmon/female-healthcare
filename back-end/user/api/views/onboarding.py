@@ -1,13 +1,12 @@
 from rest_framework import serializers
 from rest_framework import permissions
-
+from datetime import date
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
     UpdateAPIView,
     DestroyAPIView,
     ListCreateAPIView,
-    ListAPIView
 )
 from user.api.views.permissions import IsOwnerOfOnboarding
 from user.api.serializers import (
@@ -17,11 +16,11 @@ from user.api.serializers import (
     GoalSerializer,
     ActivityLevelSerializer,
     StressLevelSerializer,
-    BasicQuestionSerializer
 )
 from user.models import (
     Profile,
-    Onboarding
+    Onboarding,
+    CycleInfo
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -40,7 +39,19 @@ class OnboardingCreateAPIView(CreateAPIView):
         profile = Profile.objects.get(user=self.request.user)
         if Onboarding.objects.filter(profile=profile).exists():
             raise serializers.ValidationError("Onboarding already exists.")
-        serializer.save(profile=profile)
+        onboarding = serializer.save(profile=profile)
+
+        if onboarding.has_regular_cycle:
+            CycleInfo.objects.get_or_create(
+                profile=profile,
+                defaults={
+                    "start_date": date.today(),        # You can customize this
+                    "end_date": date.today(),          # or leave as None
+                    "cycle_length": 28,                # default or user input
+                    "period_length": 5,                # default or user input
+                    "current_phase": "Menstrual",      # or leave blank
+                }
+            )
 
 
 class OnboardingDetailAPIView(RetrieveAPIView):
@@ -92,6 +103,3 @@ class StressLevelListCreateAPIView(ListCreateAPIView):
     queryset = StressLevel.objects.all()
 
 
-class BasicQuestionListCreateAPIView(ListAPIView):
-    serializer_class = BasicQuestionSerializer
-    queryset = Onboarding.objects.all()

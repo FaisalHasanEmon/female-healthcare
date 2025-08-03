@@ -14,7 +14,9 @@ from pathlib import Path
 import environ
 from datetime import timedelta
 import os
+from .jazzmin_settings import JAZZMIN_SETTINGS
 
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 env = environ.Env(
     # set casting, default value
@@ -48,6 +50,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

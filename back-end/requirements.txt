@@ -16,7 +16,9 @@ django-allauth==65.10.0
 django-browser-reload==1.18.0
 django-cleanup==9.0.0
 django-cors-headers==4.7.0
+django-environ==0.12.0
 django-htmx==1.23.2
+django-jazzmin==3.0.1
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 faiss-cpu==1.11.0.post1
@@ -71,6 +73,8 @@ pdfminer.six==20250506
 pdfplumber==0.11.7
 pillow==11.3.0
 propcache==0.3.2
+psycopg==3.2.9
+psycopg-binary==3.2.9
 pycparser==2.22
 pydantic==2.11.7
 pydantic-settings==2.10.1

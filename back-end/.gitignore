@@ -5,9 +5,28 @@ __pycache__/
 *.pyd
 *.pyc
 
+# Django migrations (optional: ignore if auto-generated)
+*/migrations/*.pyc
+*/migrations/__pycache__/
+*/migrations/0000_initial.py
+*/migrations/0001_initial.py
+
+
 # Django migrations
 */migrations/
 !*/migrations/__init__.py
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Optional: Ignore virtual environments
+venv/
+.env/
+*.env
+
+# Ignore migrations if you want (optional)
+**/migrations/*.pyc
 
 # Django cache and database
 *.sqlite3
@@ -86,5 +105,4 @@ dist/
 *.egg-info/
 .eggs/
 
-# Ignore .http files (e.g. Postman, REST Client)
-*.http
+

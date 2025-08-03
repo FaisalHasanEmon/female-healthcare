@@ -4,7 +4,8 @@ from user.models import (
     User,
     Gender,
     Profile,
-    Onboarding
+    Onboarding,
+    CycleInfo
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -13,8 +14,6 @@ from user.onboarding.onboarding_model import (
     Reminder,
     ActivityLevel,
     StressLevel,
-    BasicQuestion,
-    BasicAnswer,
 )
 
 
@@ -43,11 +42,11 @@ class ProfileAdmin(admin.ModelAdmin):
         'gender',
         'height',
         'weight',
-        'adderess',
+        'address',
         'discription',
         'calculated_age_display',
     )
-    search_fields = ('user__email', 'name', 'adderess')
+    search_fields = ('user__email', 'name', 'address')
     ordering = ('user__email',)
     readonly_fields = ('calculated_age_display',)
 
@@ -142,20 +141,21 @@ class StressLevelAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
 
-@admin.register(BasicQuestion)
-class BasicQuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'key', 'question_text')
-    search_fields = ('question',)
-    ordering = ('id',)
-
-
-@admin.register(BasicAnswer)
-class BasicAnswerAdmin(admin.ModelAdmin):
+@admin.register(CycleInfo)
+class CycleInfoAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'onboarding',
-        'question',
-        'answer'
+        'profile',
+        'cycle_length',
+        'start_date',
+        'end_date',
+        'period_length',
+        'current_phase'
     )
-    search_fields = ('answer',)
-    ordering = ('id',)
+    search_fields = ('profile__user__email', 'profile__name')
+    ordering = ('-id',)
+    autocomplete_fields = ['profile']
+    
+    def profile(self, obj):
+        return obj.profile.name
+    profile.short_description = "Profile"

@@ -1,0 +1,203 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MTU2OTAwLCJpYXQiOjE3NTQxNTMzMDAsImp0aSI6IjYxMDM0Yzg2YzM5ZDQxN2ZhMTIzNjZjYjhhYjA4MDZlIiwidXNlcl9pZCI6OH0.PmqNG-iFp6g-BOVjKTFJvPfE7L5N83kAbHfE93GmMnw
+
+@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDc1ODEwMCwiaWF0IjoxNzU0MTUzMzAwLCJqdGkiOiIxYTgwN2Y5YjBiOWI0MTk0YTgyNTBmYWVjZTU2OTZjZCIsInVzZXJfaWQiOjh9.9vK1_wNIqk6N2T195pDfmiZGbeTpRStPEpK-4s_kD6Q
+### Register
+
+POST http://127.0.0.1:8000/api/v1/register/
+Content-Type: application/json
+
+{
+  "email": "cijoxaj176@foboxs.com",
+  "password": "Sagor1234#",
+  "confirm_password": "Sagor1234#"
+}
+
+### Login
+
+POST http://127.0.0.1:8000/api/v1/login/
+Content-Type: application/json
+
+{
+  "email": "cijoxaj176@foboxs.com",
+  "password": "Sagor1234#"
+}
+
+
+### Change Password
+POST http://127.0.0.1:8000/api/v1/change-password/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "old_password": "Sagor1234#",
+  "new_password": "newStrongPassword4567",
+  "confirm_password": "newStrongPassword4567"
+}
+
+### Logout
+
+POST http://127.0.0.1:8000/api/v1/logout/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "refresh": "{{refresh_token}}"
+}
+
+
+### Request password reset
+POST http://127.0.0.1:8000/api/v1/password-reset/
+Content-Type: application/json
+
+{
+  "email": "shagorrobidasjvai@gmail.com"
+}
+
+
+### Confirm reset (after getting token and uid from console/email)
+POST http://127.0.0.1:8000//api/v1/password-reset-confirm/MjE/ctidyi-f247f75192bd6bc0e28b5131189014bd/
+Content-Type: application/json
+
+{
+  "password": "NewPassword123",
+  "confirm_password": "NewPassword123"
+}
+
+### Create Profile
+
+POST http://127.0.0.1:8000/api/v1/profile/create/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "damo",
+  "date_of_birth": "1998-06-10",
+  "gender": 1,
+  "height": 175,
+  "weight": 65,
+  "blood_group": "A+",
+  "address": "Dhaka, Bangladesh",
+  "discription": "Software engineer and full-stack developer."
+}
+###
+
+PATCH http://127.0.0.1:8000/api/v1/profile/update/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "new_email": "jiyece8926@foboxs.com",
+  "profile": {
+    "name": "new_name",
+    "age": 27,
+    "address": "Dhaka, Bangladesh"
+  }
+}
+
+
+
+### Get Own Profile
+GET http://127.0.0.1:8000/api/v1/profile/me/
+Authorization:  Bearer {{token}}
+
+
+###
+
+### Update Own Profile
+PUT http://127.0.0.1:8000/api/v1/profile/me/update/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Shagor_jvai",
+  "date_of_birth": "2001-06-11",
+  "gender": 1,
+  "height": 170,
+  "weight": 62,
+  "blood_group": "O+",
+  "adderess": "Dhaka",
+  "discription": "This is my health profile"
+}
+
+###
+
+### Delete Own Profile
+DELETE http://127.0.0.1:8000/api/v1/profile/me/delete/
+Authorization: Bearer {{token}}
+
+
+
+
+### Create Onboarding (POST)
+POST http://localhost:8000/api/v1/onboarding/create/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "has_regular_cycle": true,
+  "is_menopausal": false,
+  "on_hormonal_treatment": false,
+  "symptoms": [1, 2, 3],
+  "dietary_styles": 1,
+  "activity_level": 2,
+  "stress_level": 3,
+  "supplements_medications": "Magnesium, Iron",
+  "goals": [1, 2],
+  "daily_reminder": true
+}
+
+###
+
+### Get Onboarding Details (GET)
+GET http://localhost:8000/api/v1/onboarding/2/
+Authorization: Bearer {{token}}
+
+###
+
+### Update Onboarding (PATCH)
+PATCH http://localhost:8000/api/v1/onboarding/2/update/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "is_menopausal": true,
+  "daily_reminder": true,
+  "supplements_medications": "Magnesium, Irono"
+}
+
+###
+
+### Delete Onboarding (DELETE)
+DELETE http://localhost:8000/api/v1/onboarding/17/delete/
+Authorization: Bearer {{token}}
+
+### symptoms
+
+GET http://localhost:8000/api/v1/symptoms/
+Authorization: Bearer {{token}}
+
+
+### dietary-styles
+
+GET http://localhost:8000/api/v1/dietary-styles/
+Authorization: Bearer {{token}}
+
+### goals
+
+GET http://localhost:8000/api/v1/goals/
+Authorization: Bearer {{token}}
+
+
+### Activity Levels
+GET http://localhost:8000/api/v1/activity-levels/
+Authorization: Bearer {{token}}
+
+
+### Stress Levels/
+GET http://localhost:8000/api/v1/stress-levels/
+Authorization: Bearer {{token}}
+
+
+### Stress Levels/
+GET http://localhost:8000/api/v1/basic-questions/
+Authorization: Bearer {{token}}

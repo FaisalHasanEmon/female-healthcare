@@ -105,5 +105,4 @@ dist/
 *.egg-info/
 .eggs/
 
-# Ignore .http files (e.g. Postman, REST Client)
-*.http
+

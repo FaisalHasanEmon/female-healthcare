@@ -99,4 +99,4 @@ dist/
 .eggs/
 
 # Ignore .http files (e.g. Postman, REST Client)
-*.http
+# *.http

@@ -37,16 +37,16 @@ const Page4 = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 items-center md:gap-10">
-      <h1 className="text-2xl md:text-3xl font-playfair-display font-bold text-center ">
+    <div className="flex flex-col gap-5 items-center lg:gap-10">
+      <h1 className="text-2xl lg:text-3xl font-playfair-display font-bold text-center ">
         What are your goals?
       </h1>
-      <div className="flex flex-col gap-1 md:gap-3 text-left  md:w-[600px]">
+      <div className="flex flex-col gap-1 lg:gap-3 text-left  lg:w-[600px]">
         {/* maped option  */}
         {options.map((data) => (
           <label
             key={data.id}
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center gap-1.5 lg:gap-2 cursor-pointer"
           >
             <input
               onChange={handleOptions}

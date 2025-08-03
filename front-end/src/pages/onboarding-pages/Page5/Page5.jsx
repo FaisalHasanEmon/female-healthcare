@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Page5 = () => {
   const [showtime, setShowtime] = useState(false);
-  const [time, setTime] = useState("9:00 A.M.");
 
   const navigate = useNavigate();
 
@@ -11,7 +10,6 @@ const Page5 = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const time = event.target.time.value;
-    setTime(time)
     if(showtime){
       localStorage.setItem("time",time);
     }
@@ -22,7 +20,6 @@ const Page5 = () => {
   useEffect(()=>{
     const time = localStorage.getItem("time");
     if(time){
-      setTime(time);
       setShowtime(true);
     }
   },[])
@@ -47,19 +44,7 @@ const Page5 = () => {
           <span className="font-montserrat text-sm md:text-base">No</span>
           <input type="radio" onChange={() => setShowtime(false)} className="" name="healthStatus" value="no" />
         </label>
-        <div className={`text-left ${showtime?"block":"hidden"}`}>
-          {/* select time  */}
-          <p className="font-semibold">Select time</p>
-          <select
-            name="time"
-            defaultValue={time}
-            className="select select-sm md:select-md bg-brandPrimary"
-          >
-            <option>9:00 A.M.</option>
-            <option>12:00 P.M.</option>
-            <option>4:00 P.M.</option>
-          </select>
-        </div>
+        
         {/* navigation  */}
         <div className="mr-auto">
           <button

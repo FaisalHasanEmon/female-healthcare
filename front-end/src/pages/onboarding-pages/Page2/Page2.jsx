@@ -96,12 +96,12 @@ const Page2 = () => {
 
   // rander ui
   return (
-    <div className="flex flex-col gap-5 mx-10 md:mx-0 md:gap-10">
+    <div className="flex flex-col gap-5 mx-10  md:mx-0 lg:gap-10">
       {/* page2 title  */}
-      <h1 className="text-2xl md:text-3xl font-playfair-display font-bold text-center md:mx-20">
+      <h1 className="text-2xl lg:text-3xl font-playfair-display font-bold text-center md:mx-20">
         What are your top 3 concerns right now?
       </h1>
-      <div className="flex flex-col gap-1 md:gap-3">
+      <div className="flex flex-col md:grid md:grid-cols-3 lg:flex lg:flex-col gap-1 lg:gap-3">
         {/* mapped form option  */}
         {options?.map((data, index) => (
           <label

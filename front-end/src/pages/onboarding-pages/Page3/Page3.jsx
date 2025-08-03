@@ -22,7 +22,7 @@ const Page3 = () => {
   const [stress, setStress] = useState("");
   const [details, setDetails] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // manage input value and set in local storage
   const handleSubmit = (event) => {
@@ -55,7 +55,7 @@ const Page3 = () => {
       </h1>
       <form onSubmit={handleSubmit} className="">
         <div className="">
-          <h3 className="font-semibold my-2 md:my-3">Dietary Style</h3>
+          <h3 className="font-semibold  lg:my-3">Dietary Style</h3>
           <div className="grid grid-cols-3 md:flex gap-3">
             {/* maped options dietary  */}
             {options.dietary.map((data) => (
@@ -80,56 +80,60 @@ const Page3 = () => {
             ))}
           </div>
         </div>
-        <div>
-          <h3 className="font-semibold my-3">Activity Level</h3>
-          <div className="flex gap-3">
-            {/* maped option activity  */}
-            {options.activity.map((data) => (
-              <label
-                key={data.id}
-                className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${
-                  activity === data.value ? "bg-brandPrimary" : "bg-transparent"
-                }`}
-              >
-                <span className="font-montserrat text-sm md:text-base">
-                  {data?.title}
-                </span>
-                <input
-                  // set activity in state
-                  onClick={(e) => setActivity(e.target.value)}
-                  type="radio"
-                  className="hidden"
-                  name="healthStatus"
-                  value={data?.value}
-                />
-              </label>
-            ))}
+        <div className="flex flex-col md:flex-row md:gap-20 lg:gap-0 lg:flex-col">
+          <div>
+            <h3 className="font-semibold my-2 lg:my-3">Activity Level</h3>
+            <div className="flex gap-3">
+              {/* maped option activity  */}
+              {options.activity.map((data) => (
+                <label
+                  key={data.id}
+                  className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${
+                    activity === data.value
+                      ? "bg-brandPrimary"
+                      : "bg-transparent"
+                  }`}
+                >
+                  <span className="font-montserrat text-sm lg:text-base">
+                    {data?.title}
+                  </span>
+                  <input
+                    // set activity in state
+                    onClick={(e) => setActivity(e.target.value)}
+                    type="radio"
+                    className="hidden"
+                    name="healthStatus"
+                    value={data?.value}
+                  />
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <h3 className="font-semibold my-3">Stress Level</h3>
-          <div className="flex gap-3">
-            {/* maped stress option */}
-            {options.stress.map((data) => (
-              <label
-                key={data.id}
-                className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${
-                  stress === data.value ? "bg-brandPrimary" : "bg-transparent"
-                }`}
-              >
-                <span className="font-montserrat text-sm md:text-base">
-                  {data?.title}
-                </span>
-                <input
-                  // set value in state
-                  onClick={(e) => setStress(e.target.value)}
-                  type="radio"
-                  className="hidden"
-                  name="healthStatus"
-                  value={data?.value}
-                />
-              </label>
-            ))}
+          <div>
+            <h3 className="font-semibold my-2 lg:my-3">Stress Level</h3>
+            <div className="flex gap-3">
+              {/* maped stress option */}
+              {options.stress.map((data) => (
+                <label
+                  key={data.id}
+                  className={`border border-brandPrimary rounded flex justify-between px-3 py-2 items-center ${
+                    stress === data.value ? "bg-brandPrimary" : "bg-transparent"
+                  }`}
+                >
+                  <span className="font-montserrat text-sm lg:text-base">
+                    {data?.title}
+                  </span>
+                  <input
+                    // set value in state
+                    onClick={(e) => setStress(e.target.value)}
+                    type="radio"
+                    className="hidden"
+                    name="healthStatus"
+                    value={data?.value}
+                  />
+                </label>
+              ))}
+            </div>
           </div>
         </div>
         {/* textarea  */}
@@ -139,7 +143,7 @@ const Page3 = () => {
           defaultValue={details}
           className="textarea bg-brandPrimary mt-5"
         ></textarea>
-        <div className="flex flex-col gap-8 mt-8">
+        <div className=" mt-5 lg:mt-8">
           {/* navigation button  */}
 
           <button

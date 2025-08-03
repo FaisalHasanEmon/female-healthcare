@@ -16,6 +16,7 @@ from datetime import timedelta
 import os
 from .jazzmin_settings import JAZZMIN_SETTINGS
 
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 env = environ.Env(
     # set casting, default value

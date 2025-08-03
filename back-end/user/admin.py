@@ -13,8 +13,6 @@ from user.onboarding.onboarding_model import (
     Reminder,
     ActivityLevel,
     StressLevel,
-    BasicQuestion,
-    BasicAnswer,
 )
 
 
@@ -142,20 +140,3 @@ class StressLevelAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
 
-@admin.register(BasicQuestion)
-class BasicQuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'key', 'question_text')
-    search_fields = ('question',)
-    ordering = ('id',)
-
-
-@admin.register(BasicAnswer)
-class BasicAnswerAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'onboarding',
-        'question',
-        'answer'
-    )
-    search_fields = ('answer',)
-    ordering = ('id',)

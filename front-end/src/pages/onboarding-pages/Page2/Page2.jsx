@@ -60,6 +60,7 @@ const options = [
 //onboarding second form
 const Page2 = () => {
   const [selectedValues, setSelectedValues] = useState([]);
+  const [error, setError] = useState(false)
   const navigate = useNavigate();
 
   // get selected values
@@ -70,11 +71,16 @@ const Page2 = () => {
     setSelectedValues((prev) => {
       if (checked) {
         if (prev?.length >= 3) {
+          setError(true);
           return prev;
         }
+        setError(false);
         return [...prev, value];
       } else {
-        return prev?.filter((item) => item !== value);
+        return prev?.filter((item) =>{
+          setError(false);
+          return item !== value
+        });
       }
     });
   };
@@ -119,6 +125,7 @@ const Page2 = () => {
             <span className="font-montserrat">{data?.title}</span>
           </label>
         ))}
+        {error && <p className="text-red-700 font-semibold">You can select max 3 option</p>}
       </div>
       <div className="text-right">
         <button className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90]" onClick={setToLocalStorage}>Continue</button>

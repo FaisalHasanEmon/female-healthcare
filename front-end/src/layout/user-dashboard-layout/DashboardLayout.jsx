@@ -134,11 +134,11 @@ const DashboardLayout = () => {
               {/* Links Sections Ends */}
             </div>
             {/* First Section for Logo and collapse and for options ends*/}
-            {/* First Section for Logo and collapse and for options starts*/}
+            {/* First section bottom part starts*/}
             <div className="h-1/2 w-full px-10">
-              <div className="border"></div>
+              {/* <div className="border"></div> */}
             </div>
-            {/* First Section for Logo and collapse and for options ends*/}
+            {/* First section bottom part ends*/}
           </div>
         </div>
 

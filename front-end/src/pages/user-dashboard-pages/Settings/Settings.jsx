@@ -8,6 +8,7 @@ export default function ProfileForm() {
     email: "",
     password: "",
     location: "",
+    profilePhoto: null, // Add profile photo to state
 
     // Hormonal Info & Cycle Settings
     regularCycle: true,
@@ -27,15 +28,16 @@ export default function ProfileForm() {
     dailyReminder: false,
     reminderTime: "09:00",
 
-    // AI Insights Settings
-    showFENYXInsights: true,
-    symptomTrackingDepth: "Basic",
+    // AI Insights Settings - Updated defaults
+    showFENYXInsights: true, // Default to true
+    symptomTrackingDepth: "Basic", // Default to "Basic"
 
     // Auto-save enabled
     autoSave: true,
   });
 
   const [toast, setToast] = useState("");
+  const [profileImagePreview, setProfileImagePreview] = useState(null);
 
   const showToast = (message) => {
     setToast(message);
@@ -44,14 +46,70 @@ export default function ProfileForm() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    // Special handling for showFENYXInsights toggle
+    if (name === "showFENYXInsights") {
+      const newDepth = checked ? "Basic" : "";
+      setFormData((prev) => ({
+        ...prev,
+        [name]: checked,
+        // Set symptomTrackingDepth to empty string when toggle is off, "Basic" when on
+        symptomTrackingDepth: newDepth,
+      }));
+      console.log("symptomTrackingDepth:", newDepth);
+    } else {
+      const newValue = type === "checkbox" ? checked : value;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: newValue,
+      }));
+
+      // Log the correct value for symptomTrackingDepth
+      if (name === "symptomTrackingDepth") {
+        console.log("symptomTrackingDepth:", newValue);
+      }
+    }
+  };
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith("image/")) {
+        showToast("Please select a valid image file!");
+        return;
+      }
+
+      // Validate file size (5MB limit)
+      if (file.size > 5 * 1024 * 1024) {
+        showToast("Image size should be less than 5MB!");
+        return;
+      }
+
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setProfileImagePreview(event.target.result);
+      };
+      reader.readAsDataURL(file);
+
+      // Update form data
+      setFormData((prev) => ({
+        ...prev,
+        profilePhoto: file,
+      }));
+
+      showToast("Profile photo uploaded successfully!");
+    }
+  };
+
+  const handleRemovePhoto = () => {
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      profilePhoto: null,
     }));
-
-    if (formData.autoSave) {
-      showToast("Settings updated successfully!");
-    }
+    setProfileImagePreview(null);
+    showToast("Profile photo removed!");
   };
 
   const handleDietaryStyleChange = (style) => {
@@ -61,6 +119,7 @@ export default function ProfileForm() {
         ? prev.dietaryStyles.filter((s) => s !== style)
         : [...prev.dietaryStyles, style],
     }));
+    console.log("Updated dietary styles:", formData.dietaryStyles);
 
     if (formData.autoSave) {
       showToast("Dietary preferences updated!");
@@ -73,7 +132,7 @@ export default function ProfileForm() {
     const password = formData.password;
     const location = formData.location;
     const user_info = { name, email, password, location };
-    console.log(user_info);
+    console.log("Update Profile Api ", user_info);
     showToast("Profile information updated successfully!");
   };
 
@@ -150,31 +209,82 @@ export default function ProfileForm() {
 
               {/* Profile Picture */}
               <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors">
-                  <svg
-                    className="w-8 h-8 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="relative">
+                  <label
+                    htmlFor="profilePhoto"
+                    className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors overflow-hidden block"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
+                    {profileImagePreview ? (
+                      <img
+                        src={profileImagePreview}
+                        alt="Profile preview"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <svg
+                        className="w-8 h-8 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    )}
+                  </label>
+
+                  {/* Remove photo button - only show if there's a photo */}
+                  {profileImagePreview && (
+                    <button
+                      type="button"
+                      onClick={handleRemovePhoto}
+                      className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors z-10"
+                      title="Remove photo"
+                    >
+                      <svg
+                        className="w-3 h-3"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  )}
+
+                  {/* Hidden file input */}
+                  <input
+                    type="file"
+                    id="profilePhoto"
+                    accept="image/*"
+                    onChange={handlePhotoUpload}
+                    className="hidden"
+                  />
                 </div>
               </div>
-              <p className="text-center text-sm text-gray-500 mb-6">
-                Upload Photo
-              </p>
+
+              <div className="text-center mb-6">
+                <p className="text-sm text-gray-500">
+                  {profileImagePreview
+                    ? "Click image to change photo"
+                    : "Click to upload photo"}
+                </p>
+              </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -233,7 +343,7 @@ export default function ProfileForm() {
                   </button>
                   <button
                     onClick={handleChangePassword}
-                    className="btn btn-outline hover:text-white hover:bg-brandPrimary btn-success"
+                    className="btn btn-outline hover:text-white hover:bg-brandPrimary text-brandPrimary border-brandSecondary"
                   >
                     Change Password
                   </button>
@@ -438,36 +548,37 @@ export default function ProfileForm() {
                     className="toggle toggle-success"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Adjust symptom tracking depth
-                  </label>
-                  <div className="flex space-x-4">
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        name="symptomTrackingDepth"
-                        value="Basic"
-                        checked={formData.symptomTrackingDepth === "Basic"}
-                        onChange={handleInputChange}
-                        className="radio radio-success"
-                      />
-                      <span>Basic</span>
+                {formData.showFENYXInsights && (
+                  <div>
+                    <label className="block text-sm font-medium mb-3">
+                      Adjust symptom tracking depth
                     </label>
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        name="symptomTrackingDepth"
-                        value="Advanced"
-                        checked={formData.symptomTrackingDepth === "Advanced"}
-                        onChange={handleInputChange}
-                        className="radio radio-success"
-                      />
-                      <span>Advanced</span>
-                    </label>
+                    <div className="flex space-x-4">
+                      <label className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          name="symptomTrackingDepth"
+                          value="Basic"
+                          checked={formData.symptomTrackingDepth === "Basic"}
+                          onChange={handleInputChange}
+                          className="radio radio-success"
+                        />
+                        <span>Basic</span>
+                      </label>
+                      <label className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          name="symptomTrackingDepth"
+                          value="Advanced"
+                          checked={formData.symptomTrackingDepth === "Advanced"}
+                          onChange={handleInputChange}
+                          className="radio radio-success"
+                        />
+                        <span>Advanced</span>
+                      </label>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -633,7 +744,7 @@ export default function ProfileForm() {
 
                 <button
                   onClick={handleClearSymptoms}
-                  className="btn btn-warning w-full"
+                  className="btn bg-brandSecondary w-full"
                 >
                   Clear logged symptoms and reset dashboard
                 </button>

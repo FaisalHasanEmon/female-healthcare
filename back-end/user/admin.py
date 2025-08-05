@@ -38,22 +38,16 @@ class ProfileAdmin(admin.ModelAdmin):
         'id',
         'user',
         'name',
+        'age',
         'date_of_birth',
         'gender',
         'height',
         'weight',
         'address',
         'discription',
-        'calculated_age_display',
     )
     search_fields = ('user__email', 'name', 'address')
     ordering = ('user__email',)
-    readonly_fields = ('calculated_age_display',)
-
-    @admin.display(ordering='date_of_birth', description='Age')
-    def calculated_age_display(self, obj):
-        return obj.calculated_age
-
 
 @admin.register(Onboarding)
 class OnboardingAdmin(admin.ModelAdmin):

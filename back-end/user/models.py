@@ -229,20 +229,29 @@ class Onboarding(BaseModel):
         related_name='profiles',
         help_text="User's stress level"
     )
-    supplements_medications = models.TextField(
-        blank=True,
-        null=True,
-        help_text="Supplements or medications the user is taking"
-    )
     goals = models.ManyToManyField(
         Goal,
         blank=True,
         related_name='profiles',
         help_text="User's health and wellness goals"
     )
+    supplements_medications = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Supplements or medications the user is taking"
+    )
     daily_reminder = models.BooleanField(
         default=False,
         help_text="Would you like a daily reminder?"
+    )
+    reminder_time = models.TimeField(
+        null=True,
+        blank=True,
+        help_text="Time for the daily reminder"
+    )
+    show_fenyx_insights = models.BooleanField(
+        default=True,
+        help_text="Show Fenyx insights in the app"
     )
 
     def clean(self):
@@ -312,5 +321,5 @@ class CycleInfo(BaseModel):
     class Meta:
         verbose_name = "Cycle Info"
         verbose_name_plural = "Cycle Infos"
-        ordering = ['-created_at']
+        ordering = ['-id']
 

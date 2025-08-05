@@ -1,13 +1,13 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MjYyNjQzLCJpYXQiOjE3NTQyNTkwNDMsImp0aSI6IjA2MDAxNGFkYzBiZTRlY2ZiNWE3NDMwNGEzZDZjZTkyIiwidXNlcl9pZCI6MX0.shir2COsrYz2UHpU1dHIVxWRE5YpL1Nce4okvut9Z9E
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MzQ1MzI3LCJpYXQiOjE3NTQzNDE3MjcsImp0aSI6IjIwYzNhN2RjNjI1NjQ2YjE4ZDQwMjg1Y2Y5ZDVmZTVjIiwidXNlcl9pZCI6Mn0.Tbo3pt7ACxMwgK8Smp6ujdFcoPU3ipJKLwd35bQ3rpc
 
-@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDg2Mzg0MywiaWF0IjoxNzU0MjU5MDQzLCJqdGkiOiI4NGQwMTgxZDA2ODU0MzAyOTFhNmQ3NWRjNTg0ZTkwNCIsInVzZXJfaWQiOjF9.4duMTALdSmLT2G7rS2MMyn8Hq6aUGWpQLHFfV-UgyZg
+@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDk0NjUyNywiaWF0IjoxNzU0MzQxNzI3LCJqdGkiOiJhZmIxNGRjNWE2MDg0OWI4YTc5MmQ4YWViNTgyOWVjZSIsInVzZXJfaWQiOjJ9._eQjyJWmRDbLSR2OEahp00F8Li6_tozMjlVXtxGWWp4
 ### Register
 
 POST http://127.0.0.1:8000/api/v1/register/
 Content-Type: application/json
 
 {
-  "email": "cijoxaj176@foboxs.com",
+  "email": "shagorrobidasjvai@gmail.com",
   "password": "Sagor1234#",
   "confirm_password": "Sagor1234#"
 }
@@ -18,8 +18,8 @@ POST http://127.0.0.1:8000/api/v1/login/
 Content-Type: application/json
 
 {
-  "email": "admin@gmail.com",
-  "password": "admin"
+  "email": "shagorrobidasjvai@gmail.com",
+  "password": "Sagor1234#"
 }
 
 
@@ -86,11 +86,10 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "new_email": "jiyece8926@foboxs.com",
+  "new_email": "shagorrobidasjvai@gmail.com",
   "profile": {
     "name": "new_name",
-    "age": 27,
-    "address": "Dhaka, Bangladesh"
+    "age": 27
   }
 }
 
@@ -199,4 +198,10 @@ Authorization: Bearer {{token}}
 
 ### Stress Levels/
 GET http://localhost:8000/api/v1/basic-questions/
+Authorization: Bearer {{token}}
+
+
+### Lifestyle
+
+GET http://localhost:8000/api/v1/lifestyle/
 Authorization: Bearer {{token}}

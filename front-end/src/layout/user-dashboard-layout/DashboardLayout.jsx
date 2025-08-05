@@ -107,7 +107,7 @@ const DashboardLayout = () => {
           className={`transition-all duration-300 ease-in-out
           ${
             drawer
-              ? "w-11/12 lg:w-2/12 opacity-100"
+              ? "w-11/12 md:w-4/12 lg:w-2/12 opacity-100"
               : "w-0 opacity-0 pointer-events-none"
           }`}
         >

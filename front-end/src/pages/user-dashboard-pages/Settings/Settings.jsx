@@ -7,8 +7,7 @@ export default function ProfileForm() {
     age: "",
     email: "",
     password: "",
-    location: "",
-    profilePhoto: null, // Add profile photo to state
+    // location: "",
 
     // Hormonal Info & Cycle Settings
     regularCycle: true,
@@ -31,13 +30,9 @@ export default function ProfileForm() {
     // AI Insights Settings - Updated defaults
     showFENYXInsights: true, // Default to true
     symptomTrackingDepth: "Basic", // Default to "Basic"
-
-    // Auto-save enabled
-    autoSave: true,
   });
 
   const [toast, setToast] = useState("");
-  const [profileImagePreview, setProfileImagePreview] = useState(null);
 
   const showToast = (message) => {
     setToast(message);
@@ -49,67 +44,17 @@ export default function ProfileForm() {
 
     // Special handling for showFENYXInsights toggle
     if (name === "showFENYXInsights") {
-      const newDepth = checked ? "Basic" : "";
       setFormData((prev) => ({
         ...prev,
         [name]: checked,
-        // Set symptomTrackingDepth to empty string when toggle is off, "Basic" when on
-        symptomTrackingDepth: newDepth,
       }));
-      console.log("symptomTrackingDepth:", newDepth);
     } else {
       const newValue = type === "checkbox" ? checked : value;
       setFormData((prev) => ({
         ...prev,
         [name]: newValue,
       }));
-
-      // Log the correct value for symptomTrackingDepth
-      if (name === "symptomTrackingDepth") {
-        console.log("symptomTrackingDepth:", newValue);
-      }
     }
-  };
-
-  const handlePhotoUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Validate file type
-      if (!file.type.startsWith("image/")) {
-        showToast("Please select a valid image file!");
-        return;
-      }
-
-      // Validate file size (5MB limit)
-      if (file.size > 5 * 1024 * 1024) {
-        showToast("Image size should be less than 5MB!");
-        return;
-      }
-
-      // Create preview URL
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setProfileImagePreview(event.target.result);
-      };
-      reader.readAsDataURL(file);
-
-      // Update form data
-      setFormData((prev) => ({
-        ...prev,
-        profilePhoto: file,
-      }));
-
-      showToast("Profile photo uploaded successfully!");
-    }
-  };
-
-  const handleRemovePhoto = () => {
-    setFormData((prev) => ({
-      ...prev,
-      profilePhoto: null,
-    }));
-    setProfileImagePreview(null);
-    showToast("Profile photo removed!");
   };
 
   const handleDietaryStyleChange = (style) => {
@@ -120,18 +65,14 @@ export default function ProfileForm() {
         : [...prev.dietaryStyles, style],
     }));
     console.log("Updated dietary styles:", formData.dietaryStyles);
-
-    if (formData.autoSave) {
-      showToast("Dietary preferences updated!");
-    }
   };
 
   const handleUpdateInfo = () => {
     const name = formData.name;
     const email = formData.email;
     const password = formData.password;
-    const location = formData.location;
-    const user_info = { name, email, password, location };
+    // const location = formData.location;
+    const user_info = { name, email, password };
     console.log("Update Profile Api ", user_info);
     showToast("Profile information updated successfully!");
   };
@@ -140,13 +81,13 @@ export default function ProfileForm() {
     showToast("Password change initiated. Check your email!");
   };
 
-  const handleRecalculateCycle = () => {
-    showToast("Cycle recalculated based on recent data!");
-  };
+  // const handleRecalculateCycle = () => {
+  //   showToast("Cycle recalculated based on recent data!");
+  // };
 
-  const handleSaveReminderPreferences = () => {
-    showToast("Reminder preferences saved!");
-  };
+  // const handleSaveReminderPreferences = () => {
+  //   showToast("Reminder preferences saved!");
+  // };
 
   const handleExportData = (format) => {
     showToast(`Data export (${format}) started. Download will begin shortly.`);
@@ -175,7 +116,51 @@ export default function ProfileForm() {
   };
 
   const handleSaveAllChanges = () => {
+    // Collect data from Hormonal Info & Cycle Settings to Lifestyle & Preferences sections
+    const allSectionsData = {
+      // Hormonal Info & Cycle Settings
+      hormonalInfo: {
+        regularCycle: formData.regularCycle,
+        currentPhase: formData.currentPhase,
+        cycleLength: formData.cycleLength,
+        periodLength: formData.periodLength,
+        birthControlHRT: formData.birthControlHRT,
+        hasUterus: formData.hasUterus,
+      },
+
+      // Daily Reminders
+      dailyReminders: {
+        dailyReminder: formData.dailyReminder,
+        reminderTime: formData.reminderTime,
+      },
+
+      // AI Insights Settings
+      aiInsights: {
+        showFENYXInsights: formData.showFENYXInsights,
+      },
+
+      // Lifestyle & Preferences
+      lifestylePreferences: {
+        dietaryStyles: formData.dietaryStyles,
+        activityLevel: formData.activityLevel,
+        stressLevel: formData.stressLevel,
+        medications: formData.medications,
+      },
+    };
+
+    console.log("All Sections Data for API:", allSectionsData);
     showToast("All changes saved successfully!");
+  };
+
+  const handleSaveLifestylePreferences = () => {
+    const lifestyleData = {
+      dietaryStyles: formData.dietaryStyles,
+      activityLevel: formData.activityLevel,
+      stressLevel: formData.stressLevel,
+      medications: formData.medications,
+    };
+    console.log("Lifestyle & Preferences API data:", lifestyleData);
+    showToast("Lifestyle preferences saved successfully!");
   };
 
   const timeOptions = [];
@@ -189,7 +174,7 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 overflow-y-scroll">
+    <div className=" bg-gray-50 p-6 ">
       {/* Toast Notification */}
       {toast && (
         <div className="toast toast-top toast-end">
@@ -206,85 +191,6 @@ export default function ProfileForm() {
             {/* Section 1: Profile Info */}
             <div>
               <h2 className="text-2xl font-semibold mb-6">Profile Info</h2>
-
-              {/* Profile Picture */}
-              <div className="flex justify-center mb-6">
-                <div className="relative">
-                  <label
-                    htmlFor="profilePhoto"
-                    className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors overflow-hidden block"
-                  >
-                    {profileImagePreview ? (
-                      <img
-                        src={profileImagePreview}
-                        alt="Profile preview"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <svg
-                        className="w-8 h-8 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                    )}
-                  </label>
-
-                  {/* Remove photo button - only show if there's a photo */}
-                  {profileImagePreview && (
-                    <button
-                      type="button"
-                      onClick={handleRemovePhoto}
-                      className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors z-10"
-                      title="Remove photo"
-                    >
-                      <svg
-                        className="w-3 h-3"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  )}
-
-                  {/* Hidden file input */}
-                  <input
-                    type="file"
-                    id="profilePhoto"
-                    accept="image/*"
-                    onChange={handlePhotoUpload}
-                    className="hidden"
-                  />
-                </div>
-              </div>
-
-              <div className="text-center mb-6">
-                <p className="text-sm text-gray-500">
-                  {profileImagePreview
-                    ? "Click image to change photo"
-                    : "Click to upload photo"}
-                </p>
-              </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -325,14 +231,14 @@ export default function ProfileForm() {
                   />
                 </div>
 
-                <input
+                {/* <input
                   type="text"
                   name="location"
                   placeholder="Location (optional)..."
                   value={formData.location}
                   onChange={handleInputChange}
                   className="input input-bordered w-full"
-                />
+                /> */}
 
                 <div className="grid grid-cols-2 gap-4">
                   <button
@@ -445,13 +351,6 @@ export default function ProfileForm() {
                     className="toggle toggle-success"
                   />
                 </div>
-
-                <button
-                  onClick={handleRecalculateCycle}
-                  className="btn btn-outline w-full"
-                >
-                  Recalculate My Cycle
-                </button>
               </div>
             </div>
 
@@ -519,13 +418,6 @@ export default function ProfileForm() {
                     </select>
                   </div>
                 )}
-
-                <button
-                  onClick={handleSaveReminderPreferences}
-                  className="btn btn-success bg-brandPrimary text-white"
-                >
-                  Save Reminder Preferences
-                </button>
               </div>
             </div>
 
@@ -548,37 +440,6 @@ export default function ProfileForm() {
                     className="toggle toggle-success"
                   />
                 </div>
-                {formData.showFENYXInsights && (
-                  <div>
-                    <label className="block text-sm font-medium mb-3">
-                      Adjust symptom tracking depth
-                    </label>
-                    <div className="flex space-x-4">
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="radio"
-                          name="symptomTrackingDepth"
-                          value="Basic"
-                          checked={formData.symptomTrackingDepth === "Basic"}
-                          onChange={handleInputChange}
-                          className="radio radio-success"
-                        />
-                        <span>Basic</span>
-                      </label>
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="radio"
-                          name="symptomTrackingDepth"
-                          value="Advanced"
-                          checked={formData.symptomTrackingDepth === "Advanced"}
-                          onChange={handleInputChange}
-                          className="radio radio-success"
-                        />
-                        <span>Advanced</span>
-                      </label>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -777,21 +638,6 @@ export default function ProfileForm() {
           >
             Save All Changes
           </button>
-
-          <div className="mt-4">
-            <label className="flex items-center justify-center space-x-3">
-              <input
-                type="checkbox"
-                name="autoSave"
-                checked={formData.autoSave}
-                onChange={handleInputChange}
-                className="checkbox checkbox-success"
-              />
-              <span className="text-sm text-gray-600">
-                Enable auto-save with toast notifications
-              </span>
-            </label>
-          </div>
         </div>
       </div>
     </div>

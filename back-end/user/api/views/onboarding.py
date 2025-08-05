@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from rest_framework import permissions
+from rest_framework import serializers
 from datetime import date
 from rest_framework.views import APIView
 from rest_framework.generics import (
@@ -17,7 +17,7 @@ from user.api.serializers import (
     GoalSerializer,
     ActivityLevelSerializer,
     StressLevelSerializer,
-    CycleInfoSerializer
+    # CycleInfoSerializer
 )
 
 from user.models import (

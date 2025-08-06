@@ -174,7 +174,7 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className=" bg-gray-50 p-6 ">
+    <div className="min-h-screen bg-gray-50 p-6 ">
       {/* Toast Notification */}
       {toast && (
         <div className="toast toast-top toast-end">

@@ -1,0 +1,78 @@
+# onboarding_api_tests.http
+# Test Onboarding APIs: Create, Update, Details
+# Base URL: http://localhost:8000
+# Requires: Bearer token for authentication
+
+@baseUrl = http://localhost:8000/api/v1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NDQzNzMxLCJpYXQiOjE3NTQ0NDAxMzEsImp0aSI6IjMwYjE4ZGU4ZjYwNDQ4NjVhYjdmYmZmYjQzZmRkYzc2IiwidXNlcl9pZCI6MX0._ThpofuwfdBcGUPbFgiOBdXt5QOBKahiH7nwP7wDafM
+### Login
+
+POST {{baseUrl}}/login/
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin"
+}
+
+
+### Create Onboarding Data
+POST {{baseUrl}}/settings/onboarding/create/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "hormonalInfo": {
+        "regularCycle": true,
+        "currentPhase": "Luteal",
+        "cycleLength": 28,
+        "periodLength": 5,
+        "birthControlHRT": false,
+        "hasUterus": true
+    },
+    "dailyReminders": {
+        "dailyReminder": false,
+        "reminderTime": "09:00"
+    },
+    "aiInsights": {
+        "showFENYXInsights": true
+    },
+    "lifestylePreferences": {
+        "dietaryStyles": 1,
+        "activityLevel": 1,
+        "stressLevel": 1,
+        "medications": "Vitamin D"
+    }
+}
+### Update Onboarding Data
+PUT {{baseUrl}}/settings/onboarding/update/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "hormonalInfo": {
+        "regularCycle": false,
+        "currentPhase": "Follicular",
+        "cycleLength": 30,
+        "periodLength": 4,
+        "birthControlHRT": true,
+        "hasUterus": true
+    },
+    "dailyReminders": {
+        "dailyReminder": true,
+        "reminderTime": "10:00"
+    },
+    "aiInsights": {
+        "showFENYXInsights": false
+    },
+    "lifestylePreferences": {
+        "dietaryStyles": "Paleo",
+        "activityLevel": "Moderate",
+        "stressLevel": "Low",
+        "medications": "Multivitamin"
+    }
+}
+
+### Retrieve Onboarding Data
+GET {{baseUrl}}/settings/onboarding/details/ HTTP/1.1
+Authorization: Bearer {{token}}

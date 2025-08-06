@@ -253,6 +253,11 @@ class Onboarding(BaseModel):
         default=True,
         help_text="Show Fenyx insights in the app"
     )
+    has_uterus = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Does the user have a uterus?"
+    )
 
     def clean(self):
         super().clean()

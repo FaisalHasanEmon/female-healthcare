@@ -24,6 +24,9 @@ from user.api.views import (
     UserProfileUpdateView,
     VerifyEmailChangeView,
     LifeStyleListAPIView,
+    OnboardingSettingsCreateAPIView,
+    OnboardingSettingsUpdateAPIView,
+    OnboardingSettingsDetailsAPIView
 )
 
 
@@ -146,5 +149,21 @@ urlpatterns = [
         'lifestyle/',
         LifeStyleListAPIView.as_view(),
         name='lifestyle-list'
+    ),
+    # Settings Page Api
+    path(
+        'settings/onboarding/create/',
+        OnboardingSettingsCreateAPIView.as_view(),
+        name='onboarding-settings-create'
+    ),
+    path(
+        'settings/onboarding/update/',
+        OnboardingSettingsUpdateAPIView.as_view(),
+        name='onboarding-settings-update'
+    ),
+    path(
+        'settings/onboarding/details/',
+        OnboardingSettingsDetailsAPIView.as_view(),
+        name='onboarding-settings-details'
     ),
 ]

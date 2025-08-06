@@ -65,6 +65,9 @@ class OnboardingAdmin(admin.ModelAdmin):
         'supplements_medications',
         'get_goals',
         'daily_reminder',
+        'reminder_time',
+        'show_fenyx_insights',
+        'has_uterus'
     )
     search_fields = ('profile__user__email', 'profile__name')
     list_filter = (

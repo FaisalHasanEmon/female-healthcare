@@ -205,10 +205,8 @@ class Onboarding(BaseModel):
         related_name='profiles',
         help_text="User's top health concerns"
     )
-    dietary_styles = models.ForeignKey(
+    dietary_styles = models.ManyToManyField(
         DietaryStyle,
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         related_name='profiles',
         help_text="User's dietary preferences"

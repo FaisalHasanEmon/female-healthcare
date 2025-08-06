@@ -26,7 +26,8 @@ from user.api.views import (
     LifeStyleListAPIView,
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
-    OnboardingSettingsDetailsAPIView
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
 )
 
 
@@ -157,13 +158,18 @@ urlpatterns = [
         name='onboarding-settings-create'
     ),
     path(
-        'settings/onboarding/update/',
+        'settings/onboarding/update/<int:pk>/',
         OnboardingSettingsUpdateAPIView.as_view(),
         name='onboarding-settings-update'
     ),
     path(
-        'settings/onboarding/details/',
+        'settings/onboarding/details/<int:pk>/',
         OnboardingSettingsDetailsAPIView.as_view(),
         name='onboarding-settings-details'
+    ),
+    path(
+        'settings/onboarding/details/',
+        OnboardingSettingsListAPIView.as_view(),
+        name='onboarding-settings-list'
     ),
 ]

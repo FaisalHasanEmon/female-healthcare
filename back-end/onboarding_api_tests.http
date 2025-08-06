@@ -4,7 +4,7 @@
 # Requires: Bearer token for authentication
 
 @baseUrl = http://localhost:8000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NDQzNzMxLCJpYXQiOjE3NTQ0NDAxMzEsImp0aSI6IjMwYjE4ZGU4ZjYwNDQ4NjVhYjdmYmZmYjQzZmRkYzc2IiwidXNlcl9pZCI6MX0._ThpofuwfdBcGUPbFgiOBdXt5QOBKahiH7nwP7wDafM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTE4NDE0LCJpYXQiOjE3NTQ1MTQ4MTQsImp0aSI6IjNiN2Q3M2YzYzQ2NDQzMDVhYjUxZWRjYThjM2U3MzgxIiwidXNlcl9pZCI6MX0.S5amAAWKPSnRvlBlyW9V9pOTqyrOw2-xnrylDqthBV4
 ### Login
 
 POST {{baseUrl}}/login/
@@ -38,25 +38,26 @@ Authorization: Bearer {{token}}
         "showFENYXInsights": true
     },
     "lifestylePreferences": {
-        "dietaryStyles": 1,
+        "dietaryStyles": [1, 2, 3],
         "activityLevel": 1,
         "stressLevel": 1,
         "medications": "Vitamin D"
     }
 }
 ### Update Onboarding Data
-PUT {{baseUrl}}/settings/onboarding/update/ HTTP/1.1
+
+PATCH {{baseUrl}}/settings/onboarding/update/9/
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
     "hormonalInfo": {
-        "regularCycle": false,
+        "regularCycle": true,
         "currentPhase": "Follicular",
         "cycleLength": 30,
         "periodLength": 4,
-        "birthControlHRT": true,
-        "hasUterus": true
+        "birthControlHRT": false,
+        "hasUterus": false
     },
     "dailyReminders": {
         "dailyReminder": true,
@@ -66,13 +67,18 @@ Authorization: Bearer {{token}}
         "showFENYXInsights": false
     },
     "lifestylePreferences": {
-        "dietaryStyles": "Paleo",
-        "activityLevel": "Moderate",
-        "stressLevel": "Low",
+        "dietaryStyles": [1, 2, 3],
+        "activityLevel": 2,
+        "stressLevel": 2,
         "medications": "Multivitamin"
     }
 }
 
 ### Retrieve Onboarding Data
-GET {{baseUrl}}/settings/onboarding/details/ HTTP/1.1
+GET {{baseUrl}}/settings/onboarding/details/9/ HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+### List Onboarding Data
+GET {{baseUrl}}/settings/onboarding/details/ 
 Authorization: Bearer {{token}}

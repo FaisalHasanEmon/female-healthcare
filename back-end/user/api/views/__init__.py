@@ -33,7 +33,8 @@ from .profile_update import (
 from .settings_page import (
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
-    OnboardingSettingsDetailsAPIView
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
 )
 
 
@@ -63,5 +64,6 @@ __all__ = [
     LifeStyleListAPIView,
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
-    OnboardingSettingsDetailsAPIView
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
 ]

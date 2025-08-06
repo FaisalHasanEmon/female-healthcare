@@ -59,7 +59,7 @@ class OnboardingAdmin(admin.ModelAdmin):
         'is_menopausal',
         'on_hormonal_treatment',
         'get_symptoms',
-        'dietary_styles',
+        # 'get_dietary_styles',
         'activity_level',
         'stress_level',
         'supplements_medications',

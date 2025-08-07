@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'API',
     'user',
     'calander',
+    'ai',
 
 ]
 

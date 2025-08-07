@@ -64,7 +64,8 @@ export default function ProfileForm() {
         ? prev.dietaryStyles.filter((s) => s !== style)
         : [...prev.dietaryStyles, style],
     }));
-    console.log("Updated dietary styles:", formData.dietaryStyles);
+    console.log("Selected dietary style:", style);
+    // console.log("Updated dietary styles:", formData.dietaryStyles);
   };
 
   const handleUpdateInfo = () => {
@@ -172,7 +173,17 @@ export default function ProfileForm() {
       timeOptions.push(time);
     }
   }
-
+  // Dietary styles options
+  const dietaryStyle = [
+    { id: 1, text: "Vegan" },
+    { id: 2, text: "Vegetarian" },
+    { id: 3, text: "Pescatarian" },
+    { id: 4, text: "Paleo" },
+    { id: 5, text: "Keto" },
+    { id: 6, text: "Mediterranean" },
+    { id: 7, text: "Gluten-Free" },
+    { id: 8, text: "None" },
+  ];
   return (
     <div className="min-h-screen bg-gray-50 p-6 ">
       {/* Toast Notification */}
@@ -458,24 +469,18 @@ export default function ProfileForm() {
                   Dietary Style (Multi-select)
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  {[
-                    "Vegan",
-                    "Vegetarian",
-                    "Pescatarian",
-                    "Paleo",
-                    "Keto",
-                    "Mediterranean",
-                    "Gluten-Free",
-                    "None",
-                  ].map((diet) => (
-                    <label key={diet} className="flex items-center space-x-3">
+                  {dietaryStyle?.map((diet) => (
+                    <label
+                      key={diet?.id}
+                      className="flex items-center space-x-3"
+                    >
                       <input
                         type="checkbox"
-                        checked={formData.dietaryStyles.includes(diet)}
-                        onChange={() => handleDietaryStyleChange(diet)}
+                        checked={formData.dietaryStyles.includes(diet?.id)}
+                        onChange={() => handleDietaryStyleChange(diet?.id)}
                         className="checkbox checkbox-success"
                       />
-                      <span>{diet}</span>
+                      <span>{diet?.text}</span>
                     </label>
                   ))}
                 </div>

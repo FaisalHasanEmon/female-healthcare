@@ -22,17 +22,23 @@ const DashboardSideBar = () => {
   // Navigation links configuration
   const navLinks = [
     {
-      id: 1,
-      name: "Start New Session",
-      path: "/dashboard/new-session",
+      id: 0,
+      name: "Dashboard",
+      path: "/dashboard",
       icon: "/dashboard-Icons/chat-icon.png",
     },
-    {
-      id: 2,
-      name: "Mode Tracker",
-      path: "/dashboard/mode-tracker",
-      icon: "/dashboard-Icons/tracker-icon.png",
-    },
+    // {
+    //   id: 1,
+    //   name: "Start New Session",
+    //   path: "/dashboard/new-session",
+    //   icon: "/dashboard-Icons/chat-icon.png",
+    // },
+    // {
+    //   id: 2,
+    //   name: "Mode Tracker",
+    //   path: "/dashboard/mode-tracker",
+    //   icon: "/dashboard-Icons/tracker-icon.png",
+    // },
     {
       id: 3,
       name: "Settings",
@@ -54,6 +60,7 @@ const DashboardSideBar = () => {
                 isActive ? "bg-brandSecondary grow-1" : "bg-brandPrimary grow-1"
               }
               style={NavButtonsStyle}
+              end={true}
             >
               <figure>
                 <img src={link?.icon} alt="Start New Session" />
@@ -132,7 +139,7 @@ const DashboardSideBar = () => {
 
       {/* Closed Drawer */}
       <div
-        className={`transition-all duration-300 ease-in-out bg-brandPrimary pt-[30px]
+        className={`transition-all duration-300 ease-in-out bg-brandPrimary pt-[30px]  h-screen
           ${drawer ? "w-0 opacity-0 pointer-events-none" : "w-16 opacity-100"}`}
       >
         <div className="flex flex-col gap-8 justify-center items-center ">

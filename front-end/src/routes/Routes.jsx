@@ -21,6 +21,7 @@ import UserDashboard from "../layout/user-dashboard-layout/DashboardLayout";
 import StartNewSession from "../pages/user-dashboard-pages/StartNewSession/StartNewSession";
 import ModeTracker from "../pages/user-dashboard-pages/ModeTracker/ModeTracker";
 import Settings from "../pages/user-dashboard-pages/Settings/Settings";
+import Dashboard from "../pages/user-dashboard-pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <UserDashboard></UserDashboard>,
     children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+      },
       {
         path: "/dashboard/new-session",
         element: <StartNewSession></StartNewSession>,

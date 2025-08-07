@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MzQ1MzI3LCJpYXQiOjE3NTQzNDE3MjcsImp0aSI6IjIwYzNhN2RjNjI1NjQ2YjE4ZDQwMjg1Y2Y5ZDVmZTVjIiwidXNlcl9pZCI6Mn0.Tbo3pt7ACxMwgK8Smp6ujdFcoPU3ipJKLwd35bQ3rpc
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTIxMDIwLCJpYXQiOjE3NTQ1MTc0MjAsImp0aSI6IjQzNTYyYTMyODI2MDQ4MWE4NWZkMWY3MTMwZDc4Mjg1IiwidXNlcl9pZCI6MX0.DM-fboYBBKZfwImnLCMPPisg-E_IIypU069rgkpnNuo
 
 @refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDk0NjUyNywiaWF0IjoxNzU0MzQxNzI3LCJqdGkiOiJhZmIxNGRjNWE2MDg0OWI4YTc5MmQ4YWViNTgyOWVjZSIsInVzZXJfaWQiOjJ9._eQjyJWmRDbLSR2OEahp00F8Li6_tozMjlVXtxGWWp4
 ### Register
@@ -18,8 +18,8 @@ POST http://127.0.0.1:8000/api/v1/login/
 Content-Type: application/json
 
 {
-  "email": "shagorrobidasjvai@gmail.com",
-  "password": "Sagor1234#"
+  "email": "admin@gmail.com",
+  "password": "admin"
 }
 
 
@@ -137,9 +137,9 @@ Content-Type: application/json
   "is_menopausal": false,
   "on_hormonal_treatment": false,
   "symptoms": [1, 2, 3],
-  "dietary_styles": 1,
-  "activity_level": 2,
-  "stress_level": 3,
+  "dietary_styles": [1, 2, 3],
+  "activity_level": 1,
+  "stress_level": 1,
   "supplements_medications": "Magnesium, Iron",
   "goals": [1, 2],
   "daily_reminder": true

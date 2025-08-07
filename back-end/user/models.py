@@ -289,6 +289,14 @@ class Onboarding(BaseModel):
 
 
 class CycleInfo(BaseModel):
+    CYCLE_CHOICES = [
+        ('Menstrual', 'menstrual'),
+        ('Early Follicular', 'early_follicular'),
+        ('Late Follicular', 'late_follicular'),
+        ('Ovulatory', 'ovulatory'),
+        ('Early Luteal', 'early_luteal'),
+        ('Late Luteal', 'late_luteal'),
+    ]
     profile = models.OneToOneField(
         Profile,
         on_delete=models.CASCADE,
@@ -308,19 +316,15 @@ class CycleInfo(BaseModel):
     period_length = models.PositiveIntegerField(default=5)
     current_phase = models.CharField(
         max_length=50,
-        choices=[
-            ('Menstrual', 'Menstrual'),
-            ('Follicular', 'Follicular'),
-            ('Ovulatory', 'Ovulatory'),
-            ('Luteal', 'Luteal'),
-        ],
+        choices=CYCLE_CHOICES,
         blank=True,
-        null=True
+        null=True,
+        help_text="Current menstrual cycle phase",
     )
 
     def __str__(self):
         return f"CycleInfo for {self.profile.name}"
-    
+
     class Meta:
         verbose_name = "Cycle Info"
         verbose_name_plural = "Cycle Infos"

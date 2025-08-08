@@ -22,6 +22,8 @@ import StartNewSession from "../pages/user-dashboard-pages/StartNewSession/Start
 import ModeTracker from "../pages/user-dashboard-pages/ModeTracker/ModeTracker";
 import Settings from "../pages/user-dashboard-pages/Settings/Settings";
 import Dashboard from "../pages/user-dashboard-pages/Dashboard/Dashboard";
+import Analytics from "../pages/user-dashboard-pages/Dashboard/Analytics/Analytics";
+import Overview from "../pages/user-dashboard-pages/Dashboard/Overview/Overview";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -111,6 +113,16 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
+        children: [
+          {
+            path: "/dashboard/analytics",
+            element: <Analytics></Analytics>,
+          },
+          {
+            path: "/dashboard/overview",
+            element: <Overview></Overview>,
+          },
+        ],
       },
       {
         path: "/dashboard/new-session",

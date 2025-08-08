@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import { LuPanelLeftClose, LuPanelLeftOpen } from "react-icons/lu";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const DashboardSideBar = () => {
   // Drawer state management
   const [drawer, setDrawer] = useState(true);
+  const location = useLocation();
+  console.log(location.pathname);
 
   //   Drawer handler function
   const handleDrawer = () => {
@@ -60,7 +62,12 @@ const DashboardSideBar = () => {
                 isActive ? "bg-brandSecondary grow-1" : "bg-brandPrimary grow-1"
               }
               style={NavButtonsStyle}
-              end={true}
+              end={
+                location.pathname === `/dashboard/analytics` ||
+                location.pathname === `/dashboard/overview`
+                  ? false
+                  : true
+              }
             >
               <figure>
                 <img src={link?.icon} alt="Start New Session" />

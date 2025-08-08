@@ -3,7 +3,7 @@ import { FaRegBell } from "react-icons/fa";
 
 const DashBoardNavbar = () => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="absolute top-0 left-0 w-full z-50 flex justify-between items-center py-5 px-5">
       <div></div>
       <div className="flex items-center gap-5">
         <div>
@@ -28,7 +28,9 @@ const DashBoardNavbar = () => {
             </ul>
           </div>
         </div>
-        <FaRegBell size={34} />
+        <div className="text-brandPrimary">
+          <FaRegBell size={34} />
+        </div>
       </div>
     </div>
   );

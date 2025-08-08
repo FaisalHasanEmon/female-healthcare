@@ -47,32 +47,6 @@ class Goal(BaseModel):
         verbose_name = "Goal"
         verbose_name_plural = "Goals"
 
-
-class Reminder(BaseModel):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='reminders',
-        help_text="User associated with this reminder"
-    )
-    is_active = models.BooleanField(
-        default=False,
-        help_text="Indicates whether the daily reminder is active"
-    )
-    reminder_time = models.TimeField(
-        blank=True,
-        null=True,
-        help_text="Time for the daily reminder"
-    )
-
-    def __str__(self):
-        return f"Reminder for {self.user.email} at {self.reminder_time or 'N/A'}"
-
-    class Meta:
-        verbose_name = "Reminder"
-        verbose_name_plural = "Reminders"
-
-
 class ActivityLevel(BaseModel):
     name = models.CharField(
         max_length=20,
@@ -101,5 +75,32 @@ class StressLevel(BaseModel):
     class Meta:
         verbose_name = "Stress Level"
         verbose_name_plural = "Stress Levels"
+
+
+class Reminder(BaseModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='reminders',
+        help_text="User associated with this reminder"
+    )
+    is_active = models.BooleanField(
+        default=False,
+        help_text="Indicates whether the daily reminder is active"
+    )
+    reminder_time = models.TimeField(
+        blank=True,
+        null=True,
+        help_text="Time for the daily reminder"
+    )
+
+    def __str__(self):
+        return f"Reminder for {self.user.email} at {self.reminder_time or 'N/A'}"
+
+    class Meta:
+        verbose_name = "Reminder"
+        verbose_name_plural = "Reminders"
+
+
 
 

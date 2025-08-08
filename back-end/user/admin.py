@@ -39,6 +39,7 @@ class ProfileAdmin(admin.ModelAdmin):
         'user',
         'name',
         'age',
+        'blood_group',
         'date_of_birth',
         'gender',
         'height',
@@ -147,7 +148,7 @@ class CycleInfoAdmin(admin.ModelAdmin):
         'start_date',
         'end_date',
         'period_length',
-        'current_phase'
+        'get_current_phase'
     )
     search_fields = ('profile__user__email', 'profile__name')
     ordering = ('-id',)
@@ -156,3 +157,6 @@ class CycleInfoAdmin(admin.ModelAdmin):
     def profile(self, obj):
         return obj.profile.name
     profile.short_description = "Profile"
+
+    def get_current_phase(self, obj):
+        return obj.current_phase.capitalize() if obj.current_phase else "-"

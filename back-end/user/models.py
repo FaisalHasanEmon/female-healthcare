@@ -2,6 +2,9 @@ from django.db import models
 from Core.models import BaseModel
 from django.conf import settings
 from datetime import date
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from datetime import date
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -313,14 +316,89 @@ class CycleInfo(BaseModel):
         help_text="End date of the last menstrual cycle"
     )
     cycle_length = models.PositiveIntegerField(default=28)
-    period_length = models.PositiveIntegerField(default=5)
+    period_length = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        help_text="Length of the menstrual period in days"
+    )
     current_phase = models.CharField(
         max_length=50,
         choices=CYCLE_CHOICES,
-        blank=True,
-        null=True,
+        default='menstrual',
         help_text="Current menstrual cycle phase",
     )
+
+    def calculate_period_length(self):
+        """Calculate the period length based on start_date and today."""
+        if self.start_date:
+            today = date.today()
+            days = (today - self.start_date).days
+            # Ensure period_length is non-negative
+            self.period_length = max(days, 0)
+            print(f"Period length calculated: {self.period_length}")
+        else:
+            self.period_length = None
+            print("Period length not calculated: start_date is missing")
+
+    def calculate_current_phase(self, target_date=None):
+        """Determine the current phase based on cycle length and start date."""
+        if not self.start_date:
+            print("Cannot calculate phase: start_date is missing")
+            return 'menstrual'  # Fallback to default choice
+
+        today = target_date or date.today()
+        days_since_start = (today - self.start_date).days
+        print(f"Days since start: {days_since_start}, Cycle length: {self.cycle_length}")
+
+        if days_since_start < 0:
+            print("Start date is in the future, using default phase")
+            return 'menstrual'  # Fallback to default choice
+
+        # Ensure cycle_length is positive to avoid division by zero
+        if self.cycle_length <= 0:
+            print("Invalid cycle length, using default phase")
+            return 'menstrual'
+
+        cycle_day = (days_since_start % self.cycle_length) + 1
+        print(f"Cycle day: {cycle_day}")
+
+        if 1 <= cycle_day <= 5:
+            return 'menstrual'
+        elif 6 <= cycle_day <= 9:
+            return 'early_follicular'
+        elif 10 <= cycle_day <= 13:
+            return 'late_follicular'
+        elif cycle_day == 14:
+            return 'ovulatory'
+        elif 15 <= cycle_day <= 21:
+            return 'early_luteal'
+        elif 22 <= cycle_day <= self.cycle_length:
+            return 'late_luteal'
+        else:
+            print("Unexpected cycle day, using default phase")
+            return 'menstrual'
+
+    def update_current_phase(self, save=False):
+        """Update the current phase if the user has a regular cycle."""
+        if hasattr(self.profile, 'onboarding'):
+            onboarding = self.profile.onboarding.first()
+            if onboarding and onboarding.has_regular_cycle:
+                phase = self.calculate_current_phase()
+                self.current_phase = phase
+                print(f"Current phase updated to: {self.current_phase}")
+                if save:
+                    super(CycleInfo, self).save()  # Avoid recursion
+            else:
+                print("No regular cycle, current phase not updated")
+        else:
+            print("No onboarding data, current phase not updated")
+
+    def save(self, *args, **kwargs):
+        """Override save to calculate period length and current phase."""
+        self.calculate_period_length()  # Calculate period_length
+        self.update_current_phase(save=False)  # Update current_phase
+        print(f"Saving CycleInfo - Period length: {self.period_length}, Current phase: {self.current_phase}")
+        super().save(*args, **kwargs)  # Save the model
 
     def __str__(self):
         return f"CycleInfo for {self.profile.name}"
@@ -330,3 +408,19 @@ class CycleInfo(BaseModel):
         verbose_name_plural = "Cycle Infos"
         ordering = ['-id']
 
+@receiver(post_save, sender=Onboarding)
+def create_cycle_info_if_regular(sender, instance, created, **kwargs):
+    if instance.has_regular_cycle:
+        cycle_info, created = CycleInfo.objects.get_or_create(profile=instance.profile)
+        print(f"CycleInfo created: {created} for profile: {instance.profile.name}")
+
+        if created and not cycle_info.start_date:
+            cycle_info.start_date = date.today()
+            print(f"Start date set to today: {cycle_info.start_date}")
+
+        # Calculate and set period_length and current_phase
+        cycle_info.calculate_period_length()
+        cycle_info.update_current_phase(save=False)
+        print(f"Period length: {cycle_info.period_length}, Current phase: {cycle_info.current_phase}")
+        cycle_info.save()
+        print(f"CycleInfo saved: {cycle_info}")

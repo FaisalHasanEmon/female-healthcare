@@ -185,7 +185,7 @@ export default function ProfileForm() {
     { id: 8, text: "None" },
   ];
   return (
-    <div className="min-h-screen bg-gray-50 p-6 ">
+    <div className="min-h-screen bg-gray-50 p-6 pt-22">
       {/* Toast Notification */}
       {toast && (
         <div className="toast toast-top toast-end">
@@ -587,7 +587,7 @@ export default function ProfileForm() {
             </div>
 
             {/* Section 6: Data Control & Privacy */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white rounded-lg p-5 md:p-6 shadow-sm">
               <h2 className="text-2xl font-semibold mb-6">
                 Data Control & Privacy
               </h2>
@@ -596,13 +596,13 @@ export default function ProfileForm() {
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     onClick={() => handleExportData("CSV")}
-                    className="btn btn-outline"
+                    className="btn btn-outline text-[12px] md:text-sm"
                   >
                     Export data (CSV)
                   </button>
                   <button
                     onClick={() => handleExportData("PDF")}
-                    className="btn btn-outline"
+                    className="btn btn-outline text-[12px] md:text-sm"
                   >
                     Export data (PDF)
                   </button>
@@ -610,7 +610,7 @@ export default function ProfileForm() {
 
                 <button
                   onClick={handleClearSymptoms}
-                  className="btn bg-brandSecondary w-full"
+                  className="btn bg-brandSecondary w-full text-[12px] md:text-sm"
                 >
                   Clear logged symptoms and reset dashboard
                 </button>
@@ -626,7 +626,7 @@ export default function ProfileForm() {
 
                 <button
                   onClick={handleDeleteAccount}
-                  className="btn btn-error w-full text-white"
+                  className="btn btn-error w-full text-white text-[12px] md:text-sm"
                 >
                   Delete My Account
                 </button>

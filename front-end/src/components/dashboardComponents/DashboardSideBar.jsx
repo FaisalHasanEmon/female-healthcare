@@ -104,9 +104,9 @@ const DashboardSideBar = () => {
   );
   return (
     <>
-      {/* Opened Drawer */}
+      {/* Opened Drawer For Tab and Desktop devices */}
       <div
-        className={`transition-all duration-300 ease-in-out
+        className={`hidden md:block md:transition-all md:duration-300 md:ease-in-out z-50
           ${
             drawer
               ? "w-11/12 md:w-4/12 lg:w-2/12 opacity-100"
@@ -144,10 +144,12 @@ const DashboardSideBar = () => {
         </div>
       </div>
 
-      {/* Closed Drawer */}
+      {/* Closed Drawer For Tab and Desktop devices */}
       <div
-        className={`transition-all duration-300 ease-in-out bg-brandPrimary pt-[30px]  h-screen
-          ${drawer ? "w-0 opacity-0 pointer-events-none" : "w-16 opacity-100"}`}
+        className={`hidden z-50 md:block md:transition-all md:duration-300 md:ease-in-out md:bg-brandPrimary md:pt-[30px] md:h-screen 
+          ${
+            drawer ? "w-0 opacity-0 pointer-events-none" : "w-16 md:opacity-100"
+          }`}
       >
         <div className="flex flex-col gap-8 justify-center items-center ">
           <div className="cursor-pointer" onClick={handleDrawer}>

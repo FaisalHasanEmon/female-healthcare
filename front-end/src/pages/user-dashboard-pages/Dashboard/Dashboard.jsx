@@ -1,12 +1,9 @@
-import React from "react";
-import DashBoardNavbar from "../../../components/dashboardComponents/DashBoardNavbar";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <section className="container mx-auto px-5 min-h-screen relative">
-      <div className="border">
-        <DashBoardNavbar></DashBoardNavbar>
+      <div className="">
         <div className="flex justify-between items-center mt-24 lg:w-10/12 w-full">
           <h1 className="text-[32px] font-bold">Dashboard</h1>
 
@@ -14,9 +11,22 @@ const Dashboard = () => {
             Last 7 days
           </p>
         </div>
+        <div className="flex gap-2.5 mt-7.5 text-[16px] font-medium">
+          <NavLink
+            className={({ isActive }) => (isActive ? "underline" : "")}
+            to="/dashboard/overview"
+          >
+            Overview
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "underline" : "")}
+            to="/dashboard/analytics"
+          >
+            Analytics
+          </NavLink>
+        </div>
         <div>
-          <NavLink to="/dashboard/analytics">Analytics</NavLink>
-          <NavLink to="/dashboard/overview">Overview</NavLink>
+          <Outlet />
         </div>
       </div>
     </section>

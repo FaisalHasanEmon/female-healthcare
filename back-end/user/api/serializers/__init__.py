@@ -1,11 +1,23 @@
 
-from user.api.serializers.register import RegisterSerializer
-from user.api.serializers.login import LoginSerializer
-from user.api.serializers.reset_password import (
+from .register import RegisterSerializer
+from .login import LoginSerializer
+from .reset_password import (
     PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer,
 )
-from user.api.serializers.change_password import ChangePasswordSerializer
+from .change_password import ChangePasswordSerializer
+from .profile import ProfileSerializer
+from .onboarding import (
+    OnboardingSerializer,
+    SymptomSerializer,
+    DietaryStyleSerializer,
+    GoalSerializer,
+    ActivityLevelSerializer,
+    StressLevelSerializer,
+    BasicQuestionSerializer
+)
+from .profile_update import UserProfileUpdateSerializer
+
 
 __all__ = [
     RegisterSerializer,
@@ -13,5 +25,13 @@ __all__ = [
     PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer,
     ChangePasswordSerializer,
-
+    ProfileSerializer,
+    OnboardingSerializer,
+    SymptomSerializer,
+    DietaryStyleSerializer,
+    GoalSerializer,
+    ActivityLevelSerializer,
+    StressLevelSerializer,
+    UserProfileUpdateSerializer,
+    BasicQuestionSerializer
 ]

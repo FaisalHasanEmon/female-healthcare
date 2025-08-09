@@ -2,17 +2,15 @@ import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockClosedOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../../hooks/useAuth";
 
 const Login = () => {
   const { userLogin } = UseAuth();
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   // Handle Goolge Sign Up
-  const handleGoogleLogin = async () => {
-    console.log("Google Sign Up");
-  };
+  const handleGoogleLogin = async () => {};
 
   // Handle Sign Up form
   const handleSubmitLogin = async (e) => {
@@ -20,10 +18,11 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // const loginData = { email, password };
-    const res = await userLogin(email, password);
-    console.log(res.data);
-    // console.log(registrationData);
+    const loginData = { email, password };
+
+    // const res = await userLogin(email, password);
+
+    navigate("/onboarding");
   };
   return (
     <div className="min-h-screen flex justify-center items-center font-inter ">
@@ -84,7 +83,7 @@ const Login = () => {
               />
             </div>
             {/* Password */}
-            <div className="h-16 mb-[18px] relative">
+            <div className="h-16 mb-2.5 relative">
               <span className="flex justify-start items-center gap-4 *:text-[24px]  *:text-white  ml-5 top-3 absolute w-[50px] z-50 ">
                 <IoLockClosedOutline />
                 <p>|</p>
@@ -102,6 +101,12 @@ const Login = () => {
               >
                 {showPassword ? <FiEyeOff size={24} /> : <FiEye size={24} />}
               </button>
+            </div>
+            {/* Forget Password Section */}
+            <div className="flex justify-end items-center mb-[30px]">
+              <Link to="/reset-password" className=" text-[16px] font-medium ">
+                Forget Password?
+              </Link>
             </div>
             {/* Login Button */}
             <div className="w-full ">

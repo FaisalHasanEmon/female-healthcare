@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import useAxios from "../hooks/UseAxios";
+import useAxios from "../hooks/useAxios";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
@@ -16,17 +16,23 @@ const AuthProvider = ({ children }) => {
   //   User Login API
   const userLogin = async (email, password) => {
     const loginData = { email, password };
-    return await axiosRequest.post("login/", loginData);
+    try {
+      return await axiosRequest.post("login/", loginData);
+    } catch (err) {
+      return { data: null, error: err.message };
+    }
   };
 
   //   User Logout API
-  const userLogout = async () => {
-    console.log("userLogged Out");
-  };
+  const userLogout = async () => {};
 
   //   Password Reset API
   const resetUserPassword = async (email) => {
-    return await axiosRequest.post("password-reset/", { email });
+    try {
+      return await axiosRequest.post("password-reset/", { email });
+    } catch (error) {
+      return { data: null, error: error.message };
+    }
   };
   const value = {
     userRegistration,

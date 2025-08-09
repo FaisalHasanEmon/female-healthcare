@@ -1,0 +1,16 @@
+
+.bar::after{
+    content: "";
+    height: 12px;
+    width: 77px;
+    position: absolute;
+    background-color: #D7E7BF;
+    bottom: -30px;
+    left: 550px;
+}
+
+@media (max-width: 600px){
+  .bar::after{
+    display: none;
+  }
+}

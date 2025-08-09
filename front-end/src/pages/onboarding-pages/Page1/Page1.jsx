@@ -55,12 +55,12 @@ const Page1 = () => {
 
   // rander ui
   return (
-    <div className="text-center flex flex-col gap-10 w-9/12 md:w-6/12">
-      <h1 className="text-2xl md:text-3xl font-bold font-playfair-display">
+    <div className="text-center flex flex-col gap-10 w-9/12 lg:w-6/12">
+      <h1 className="text-2xl lg:text-3xl font-bold font-playfair-display">
         Tell us about your cycle
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:gap-5">
-        <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 lg:gap-5">
+        <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center cursor-pointer">
           <span className="font-montserrat ">Do you have periods?</span>
           <input
             onChange={() => setPeriod(true)}
@@ -71,7 +71,7 @@ const Page1 = () => {
             checked={cycle.isPeriod}
           />
         </label>
-        <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
+        <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center cursor-pointer">
           <span className="font-montserrat ">Are you in menopause?</span>
           <input
             onChange={() => setPeriod(false)}
@@ -82,7 +82,7 @@ const Page1 = () => {
             checked={cycle.isMenopause}
           />
         </label>
-        <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center cursor-pointer">
+        <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center cursor-pointer">
           <span className="font-montserrat ">Are you on hormone therapy?</span>
           <input
             onChange={() => setPeriod(false)}
@@ -94,18 +94,18 @@ const Page1 = () => {
           />
         </label>
         <div
-          className={`flex flex-col gap-3 md:gap-5 ${
+          className={`flex flex-col gap-3 lg:gap-5 ${
             period ? "block" : "hidden"
           }`}
         >
-          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center">
+          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
             <span className="font-montserrat ">Last period start date</span>
             <input
               type="date"
               className="input input-sm outline-1 cursor-pointer px-1 outline-brandPrimary rounded-sm"
             />
           </label>
-          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center">
+          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
             <span className="font-montserrat ">Cycle length (Days)</span>
             <input
               type="number"
@@ -114,7 +114,7 @@ const Page1 = () => {
               name="cycleDay"
             />
           </label>
-          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 md:p-3 items-center">
+          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
             <span className="font-montserrat ">Period duration (Days)</span>
             <input
               type="number"
@@ -127,7 +127,7 @@ const Page1 = () => {
         <div>
           <button
             type="submit"
-            className=" btn bg-brandPrimary text-center px-5 md:px-40 hover:bg-[#7f9e90]"
+            className=" btn bg-brandPrimary text-center px-5 lg:px-40 hover:bg-[#7f9e90]"
           >
             Continue
           </button>

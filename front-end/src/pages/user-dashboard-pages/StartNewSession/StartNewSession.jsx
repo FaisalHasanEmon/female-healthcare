@@ -10,7 +10,7 @@ const StartNewSession = () => {
     setPromptText("");
   };
   return (
-    <section className="container   px-5 mx-auto border border-red-400 h-full relative">
+    <section className="container  px-5 mx-auto border border-red-400 h-full relative">
       <div className="overflow-y-scroll ">
         {/* user text */}
         <div className="w-6/12 flex justify-end items-center">{userPrompt}</div>

@@ -21,7 +21,6 @@ from user.api.views import (
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
-    BasicQuestionListCreateAPIView,
     UserProfileUpdateView,
     VerifyEmailChangeView
 )
@@ -141,10 +140,5 @@ urlpatterns = [
         'stress-levels/',
         StressLevelListCreateAPIView.as_view(),
         name='stress-level-list-create'
-    ),
-    path(
-        'basic-questions/',
-        BasicQuestionListCreateAPIView.as_view(),
-        name='basic-question-list-create'
     ),
 ]

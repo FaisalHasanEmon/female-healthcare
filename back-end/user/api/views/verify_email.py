@@ -1,6 +1,4 @@
 from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from user.models import User
@@ -33,5 +31,3 @@ class VerifyEmailView(APIView):
 
         context = {"message": "Email verified successfully."}
         return render(request, "email_verification_result.html", context)
-
-    

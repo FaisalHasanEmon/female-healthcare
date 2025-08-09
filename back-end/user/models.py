@@ -169,7 +169,6 @@ class Profile(BaseModel):
             age = today.year - self.date_of_birth.year - (
                 (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day) # noqa
             )
-            print("================", age)
             return age
         return None
 
@@ -275,3 +274,43 @@ class Onboarding(BaseModel):
         verbose_name = "Onboarding"
         verbose_name_plural = "Onboardings"
         ordering = ['-id']
+
+
+class CycleInfo(BaseModel):
+    profile = models.OneToOneField(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='cycle_info'
+    )
+    start_date = models.DateField(
+        blank=True,
+        null=True,
+        help_text="Start date of the last menstrual cycle"
+    )
+    end_date = models.DateField(
+        blank=True,
+        null=True,
+        help_text="End date of the last menstrual cycle"
+    )
+    cycle_length = models.PositiveIntegerField(default=28)
+    period_length = models.PositiveIntegerField(default=5)
+    current_phase = models.CharField(
+        max_length=50,
+        choices=[
+            ('Menstrual', 'Menstrual'),
+            ('Follicular', 'Follicular'),
+            ('Ovulatory', 'Ovulatory'),
+            ('Luteal', 'Luteal'),
+        ],
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return f"CycleInfo for {self.profile.name}"
+    
+    class Meta:
+        verbose_name = "Cycle Info"
+        verbose_name_plural = "Cycle Infos"
+        ordering = ['-created_at']
+

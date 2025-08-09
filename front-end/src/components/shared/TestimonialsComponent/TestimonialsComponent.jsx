@@ -1,5 +1,6 @@
 import React from "react";
-import Marquee from "react-fast-marquee";
+import MyCarousel from "../../homePageComponents/MyCarousel";
+// import Marquee from "react-fast-marquee";
 
 const TestimonialsComponent = () => {
   const commentsOfUsers = [
@@ -91,31 +92,13 @@ const TestimonialsComponent = () => {
 
         {/* Testimonials */}
         <div className="mt-2">
-          <Marquee direction={"right"} speed={30}>
-            {commentsOfUsers.map((user) => (
-              <div
-                key={user?.id}
-                className="bg-white  flex flex-col justify-center items-center h-[200px]  ml-10 backdrop-blur-3xl w-[350px] rounded-lg p-6 border border-brandSecondary "
-              >
-                <div className="text-left space-y-3 w-full h-full">
-                  {/* User Name */}
-                  <h3 className="font-semibold text-gray-900 text-lg mb-3">
-                    {user?.name}
-                  </h3>
-
-                  {/* Comment */}
-                  <p className="text-gray-700 text-base leading-relaxed mb-4">
-                    {user?.comment}
-                  </p>
-                </div>
-
-                {/* Star Rating */}
-                <div className="flex space-x-1 w-full">
-                  {renderStars(user?.rating)}
-                </div>
-              </div>
-            ))}
-          </Marquee>
+          {/* <Marquee direction={"right"} speed={30}> */}
+          <MyCarousel
+            from="testimonials"
+            data={commentsOfUsers}
+            reverse
+          ></MyCarousel>
+          {/* </Marquee> */}
         </div>
       </div>
     </section>

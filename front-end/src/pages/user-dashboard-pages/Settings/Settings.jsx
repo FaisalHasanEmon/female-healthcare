@@ -7,7 +7,7 @@ export default function ProfileForm() {
     age: "",
     email: "",
     password: "",
-    location: "",
+    // location: "",
 
     // Hormonal Info & Cycle Settings
     regularCycle: true,
@@ -27,12 +27,9 @@ export default function ProfileForm() {
     dailyReminder: false,
     reminderTime: "09:00",
 
-    // AI Insights Settings
-    showFENYXInsights: true,
-    symptomTrackingDepth: "Basic",
-
-    // Auto-save enabled
-    autoSave: true,
+    // AI Insights Settings - Updated defaults
+    showFENYXInsights: true, // Default to true
+    symptomTrackingDepth: "Basic", // Default to "Basic"
   });
 
   const [toast, setToast] = useState("");
@@ -44,13 +41,19 @@ export default function ProfileForm() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
 
-    if (formData.autoSave) {
-      showToast("Settings updated successfully!");
+    // Special handling for showFENYXInsights toggle
+    if (name === "showFENYXInsights") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: checked,
+      }));
+    } else {
+      const newValue = type === "checkbox" ? checked : value;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: newValue,
+      }));
     }
   };
 
@@ -61,19 +64,17 @@ export default function ProfileForm() {
         ? prev.dietaryStyles.filter((s) => s !== style)
         : [...prev.dietaryStyles, style],
     }));
-
-    if (formData.autoSave) {
-      showToast("Dietary preferences updated!");
-    }
+    console.log("Selected dietary style:", style);
+    // console.log("Updated dietary styles:", formData.dietaryStyles);
   };
 
   const handleUpdateInfo = () => {
     const name = formData.name;
     const email = formData.email;
     const password = formData.password;
-    const location = formData.location;
-    const user_info = { name, email, password, location };
-    console.log(user_info);
+    // const location = formData.location;
+    const user_info = { name, email, password };
+    console.log("Update Profile Api ", user_info);
     showToast("Profile information updated successfully!");
   };
 
@@ -81,13 +82,13 @@ export default function ProfileForm() {
     showToast("Password change initiated. Check your email!");
   };
 
-  const handleRecalculateCycle = () => {
-    showToast("Cycle recalculated based on recent data!");
-  };
+  // const handleRecalculateCycle = () => {
+  //   showToast("Cycle recalculated based on recent data!");
+  // };
 
-  const handleSaveReminderPreferences = () => {
-    showToast("Reminder preferences saved!");
-  };
+  // const handleSaveReminderPreferences = () => {
+  //   showToast("Reminder preferences saved!");
+  // };
 
   const handleExportData = (format) => {
     showToast(`Data export (${format}) started. Download will begin shortly.`);
@@ -116,7 +117,51 @@ export default function ProfileForm() {
   };
 
   const handleSaveAllChanges = () => {
+    // Collect data from Hormonal Info & Cycle Settings to Lifestyle & Preferences sections
+    const allSectionsData = {
+      // Hormonal Info & Cycle Settings
+      hormonalInfo: {
+        regularCycle: formData.regularCycle,
+        currentPhase: formData.currentPhase,
+        cycleLength: formData.cycleLength,
+        periodLength: formData.periodLength,
+        birthControlHRT: formData.birthControlHRT,
+        hasUterus: formData.hasUterus,
+      },
+
+      // Daily Reminders
+      dailyReminders: {
+        dailyReminder: formData.dailyReminder,
+        reminderTime: formData.reminderTime,
+      },
+
+      // AI Insights Settings
+      aiInsights: {
+        showFENYXInsights: formData.showFENYXInsights,
+      },
+
+      // Lifestyle & Preferences
+      lifestylePreferences: {
+        dietaryStyles: formData.dietaryStyles,
+        activityLevel: formData.activityLevel,
+        stressLevel: formData.stressLevel,
+        medications: formData.medications,
+      },
+    };
+
+    console.log("All Sections Data for API:", allSectionsData);
     showToast("All changes saved successfully!");
+  };
+
+  const handleSaveLifestylePreferences = () => {
+    const lifestyleData = {
+      dietaryStyles: formData.dietaryStyles,
+      activityLevel: formData.activityLevel,
+      stressLevel: formData.stressLevel,
+      medications: formData.medications,
+    };
+    console.log("Lifestyle & Preferences API data:", lifestyleData);
+    showToast("Lifestyle preferences saved successfully!");
   };
 
   const timeOptions = [];
@@ -128,9 +173,19 @@ export default function ProfileForm() {
       timeOptions.push(time);
     }
   }
-
+  // Dietary styles options
+  const dietaryStyle = [
+    { id: 1, text: "Vegan" },
+    { id: 2, text: "Vegetarian" },
+    { id: 3, text: "Pescatarian" },
+    { id: 4, text: "Paleo" },
+    { id: 5, text: "Keto" },
+    { id: 6, text: "Mediterranean" },
+    { id: 7, text: "Gluten-Free" },
+    { id: 8, text: "None" },
+  ];
   return (
-    <div className="min-h-screen bg-gray-50 p-6 overflow-y-scroll">
+    <div className="min-h-screen bg-gray-50 p-6 pt-22">
       {/* Toast Notification */}
       {toast && (
         <div className="toast toast-top toast-end">
@@ -147,34 +202,6 @@ export default function ProfileForm() {
             {/* Section 1: Profile Info */}
             <div>
               <h2 className="text-2xl font-semibold mb-6">Profile Info</h2>
-
-              {/* Profile Picture */}
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors">
-                  <svg
-                    className="w-8 h-8 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <p className="text-center text-sm text-gray-500 mb-6">
-                Upload Photo
-              </p>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -215,14 +242,14 @@ export default function ProfileForm() {
                   />
                 </div>
 
-                <input
+                {/* <input
                   type="text"
                   name="location"
                   placeholder="Location (optional)..."
                   value={formData.location}
                   onChange={handleInputChange}
                   className="input input-bordered w-full"
-                />
+                /> */}
 
                 <div className="grid grid-cols-2 gap-4">
                   <button
@@ -233,7 +260,7 @@ export default function ProfileForm() {
                   </button>
                   <button
                     onClick={handleChangePassword}
-                    className="btn btn-outline hover:text-white hover:bg-brandPrimary btn-success"
+                    className="btn btn-outline hover:text-white hover:bg-brandPrimary text-brandPrimary border-brandSecondary"
                   >
                     Change Password
                   </button>
@@ -335,13 +362,6 @@ export default function ProfileForm() {
                     className="toggle toggle-success"
                   />
                 </div>
-
-                <button
-                  onClick={handleRecalculateCycle}
-                  className="btn btn-outline w-full"
-                >
-                  Recalculate My Cycle
-                </button>
               </div>
             </div>
 
@@ -409,13 +429,6 @@ export default function ProfileForm() {
                     </select>
                   </div>
                 )}
-
-                <button
-                  onClick={handleSaveReminderPreferences}
-                  className="btn btn-success bg-brandPrimary text-white"
-                >
-                  Save Reminder Preferences
-                </button>
               </div>
             </div>
 
@@ -438,36 +451,6 @@ export default function ProfileForm() {
                     className="toggle toggle-success"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Adjust symptom tracking depth
-                  </label>
-                  <div className="flex space-x-4">
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        name="symptomTrackingDepth"
-                        value="Basic"
-                        checked={formData.symptomTrackingDepth === "Basic"}
-                        onChange={handleInputChange}
-                        className="radio radio-success"
-                      />
-                      <span>Basic</span>
-                    </label>
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        name="symptomTrackingDepth"
-                        value="Advanced"
-                        checked={formData.symptomTrackingDepth === "Advanced"}
-                        onChange={handleInputChange}
-                        className="radio radio-success"
-                      />
-                      <span>Advanced</span>
-                    </label>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -486,24 +469,18 @@ export default function ProfileForm() {
                   Dietary Style (Multi-select)
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  {[
-                    "Vegan",
-                    "Vegetarian",
-                    "Pescatarian",
-                    "Paleo",
-                    "Keto",
-                    "Mediterranean",
-                    "Gluten-Free",
-                    "None",
-                  ].map((diet) => (
-                    <label key={diet} className="flex items-center space-x-3">
+                  {dietaryStyle?.map((diet) => (
+                    <label
+                      key={diet?.id}
+                      className="flex items-center space-x-3"
+                    >
                       <input
                         type="checkbox"
-                        checked={formData.dietaryStyles.includes(diet)}
-                        onChange={() => handleDietaryStyleChange(diet)}
+                        checked={formData.dietaryStyles.includes(diet?.id)}
+                        onChange={() => handleDietaryStyleChange(diet?.id)}
                         className="checkbox checkbox-success"
                       />
-                      <span>{diet}</span>
+                      <span>{diet?.text}</span>
                     </label>
                   ))}
                 </div>
@@ -610,7 +587,7 @@ export default function ProfileForm() {
             </div>
 
             {/* Section 6: Data Control & Privacy */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white rounded-lg p-5 md:p-6 shadow-sm">
               <h2 className="text-2xl font-semibold mb-6">
                 Data Control & Privacy
               </h2>
@@ -619,13 +596,13 @@ export default function ProfileForm() {
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     onClick={() => handleExportData("CSV")}
-                    className="btn btn-outline"
+                    className="btn btn-outline text-[12px] md:text-sm"
                   >
                     Export data (CSV)
                   </button>
                   <button
                     onClick={() => handleExportData("PDF")}
-                    className="btn btn-outline"
+                    className="btn btn-outline text-[12px] md:text-sm"
                   >
                     Export data (PDF)
                   </button>
@@ -633,7 +610,7 @@ export default function ProfileForm() {
 
                 <button
                   onClick={handleClearSymptoms}
-                  className="btn btn-warning w-full"
+                  className="btn bg-brandSecondary w-full text-[12px] md:text-sm"
                 >
                   Clear logged symptoms and reset dashboard
                 </button>
@@ -649,7 +626,7 @@ export default function ProfileForm() {
 
                 <button
                   onClick={handleDeleteAccount}
-                  className="btn btn-error w-full text-white"
+                  className="btn btn-error w-full text-white text-[12px] md:text-sm"
                 >
                   Delete My Account
                 </button>
@@ -666,21 +643,6 @@ export default function ProfileForm() {
           >
             Save All Changes
           </button>
-
-          <div className="mt-4">
-            <label className="flex items-center justify-center space-x-3">
-              <input
-                type="checkbox"
-                name="autoSave"
-                checked={formData.autoSave}
-                onChange={handleInputChange}
-                className="checkbox checkbox-success"
-              />
-              <span className="text-sm text-gray-600">
-                Enable auto-save with toast notifications
-              </span>
-            </label>
-          </div>
         </div>
       </div>
     </div>

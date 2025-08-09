@@ -366,7 +366,7 @@ class CycleInfo(BaseModel):
         today = target_date or date.today()
         days_since_start = (today - self.start_date).days
 
-        cycle_day = (days_since_start % self.cycle_length) + 1
+        cycle_day = (days_since_start % self.cycle_length) 
 
         if 1 <= cycle_day <= 5:
             return 'menstrual'

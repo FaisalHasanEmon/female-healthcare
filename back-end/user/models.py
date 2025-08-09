@@ -2,9 +2,9 @@ from django.db import models
 from Core.models import BaseModel
 from django.conf import settings
 from datetime import date
-from django.db.models.signals import post_save
 from django.dispatch import receiver
-from datetime import date
+from django.db.models.signals import post_save, pre_save
+from datetime import date, timedelta
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -333,6 +333,7 @@ class CycleInfo(BaseModel):
         if self.start_date:
             today = date.today()
             days = (today - self.start_date).days
+            # days = (self.start_date - today).days
             # Ensure period_length is non-negative
             self.period_length = max(days, 0)
             print(f"Period length calculated: {self.period_length}")
@@ -340,27 +341,32 @@ class CycleInfo(BaseModel):
             self.period_length = None
             print("Period length not calculated: start_date is missing")
 
-    def calculate_current_phase(self, target_date=None):
-        """Determine the current phase based on cycle length and start date."""
+    def check_and_reset_cycle(self):
+        """If period_length exceeds cycle_length, start a new cycle."""
         if not self.start_date:
-            print("Cannot calculate phase: start_date is missing")
-            return 'menstrual'  # Fallback to default choice
+            return
+
+        today = date.today()
+        days_since_start = (today - self.start_date).days
+
+        if days_since_start >= self.cycle_length:
+            # Calculate how many cycles have passed
+            cycles_passed = days_since_start // self.cycle_length
+            # Move start_date forward to the new cycle start
+            self.start_date = self.start_date + timedelta(days=self.cycle_length * cycles_passed)
+            self.save()
+            print(f"Cycle reset: New start date = {self.start_date}")
+
+    def calculate_current_phase(self, target_date=None):
+        self.check_and_reset_cycle()
+
+        if not self.start_date:
+            return 'menstrual'
 
         today = target_date or date.today()
         days_since_start = (today - self.start_date).days
-        print(f"Days since start: {days_since_start}, Cycle length: {self.cycle_length}")
-
-        if days_since_start < 0:
-            print("Start date is in the future, using default phase")
-            return 'menstrual'  # Fallback to default choice
-
-        # Ensure cycle_length is positive to avoid division by zero
-        if self.cycle_length <= 0:
-            print("Invalid cycle length, using default phase")
-            return 'menstrual'
 
         cycle_day = (days_since_start % self.cycle_length) + 1
-        print(f"Cycle day: {cycle_day}")
 
         if 1 <= cycle_day <= 5:
             return 'menstrual'
@@ -374,9 +380,7 @@ class CycleInfo(BaseModel):
             return 'early_luteal'
         elif 22 <= cycle_day <= self.cycle_length:
             return 'late_luteal'
-        else:
-            print("Unexpected cycle day, using default phase")
-            return 'menstrual'
+        return 'menstrual'
 
     def update_current_phase(self, save=False):
         """Update the current phase if the user has a regular cycle."""
@@ -408,11 +412,15 @@ class CycleInfo(BaseModel):
         verbose_name_plural = "Cycle Infos"
         ordering = ['-id']
 
+
 @receiver(post_save, sender=Onboarding)
 def create_cycle_info_if_regular(sender, instance, created, **kwargs):
     if instance.has_regular_cycle:
-        cycle_info, created = CycleInfo.objects.get_or_create(profile=instance.profile)
-        print(f"CycleInfo created: {created} for profile: {instance.profile.name}")
+        cycle_info, created = CycleInfo.objects.get_or_create(
+            profile=instance.profile
+        )
+        print(
+            f"CycleInfo created: {created} for profile: {instance.profile.name}")
 
         if created and not cycle_info.start_date:
             cycle_info.start_date = date.today()
@@ -424,3 +432,25 @@ def create_cycle_info_if_regular(sender, instance, created, **kwargs):
         print(f"Period length: {cycle_info.period_length}, Current phase: {cycle_info.current_phase}")
         cycle_info.save()
         print(f"CycleInfo saved: {cycle_info}")
+
+
+@receiver(pre_save, sender=Onboarding)
+def delete_cycle_info_if_no_longer_regular(sender, instance, **kwargs):
+    """
+    Before saving Onboarding, if has_regular_cycle changes from True to False,
+    delete the related CycleInfo.
+    """
+    if not instance.pk:
+        # New onboarding object — nothing to check yet
+        return
+
+    try:
+        old_instance = Onboarding.objects.get(pk=instance.pk)
+        print(f"Old Onboarding instance found: {old_instance.has_regular_cycle}")
+    except Onboarding.DoesNotExist:
+        return
+
+    # Check if has_regular_cycle was True before and is now False
+    if old_instance.has_regular_cycle and not instance.has_regular_cycle:
+        CycleInfo.objects.filter(profile=instance.profile).delete()
+        print(f"CycleInfo deleted for profile: {instance.profile.name}")

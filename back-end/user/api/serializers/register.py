@@ -1,6 +1,6 @@
 import re
 from rest_framework import serializers
-from  user.models import User
+from user.models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -49,7 +49,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             )
 
         return data
-
 
     def create(self, validated_data):
         validated_data.pop('confirm_password')

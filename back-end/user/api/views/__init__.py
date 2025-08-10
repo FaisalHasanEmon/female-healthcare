@@ -24,11 +24,19 @@ from .onboarding import (
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
+    LifeStyleListAPIView,
 )
 from .profile_update import (
     UserProfileUpdateView,
-    VerifyEmailChangeView
+    VerifyEmailChangeView,
 )
+from .settings_page import (
+    OnboardingSettingsCreateAPIView,
+    OnboardingSettingsUpdateAPIView,
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
+)
+
 
 __all__ = [
     RegisterView,
@@ -52,5 +60,10 @@ __all__ = [
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
     UserProfileUpdateView,
-    VerifyEmailChangeView
+    VerifyEmailChangeView,
+    LifeStyleListAPIView,
+    OnboardingSettingsCreateAPIView,
+    OnboardingSettingsUpdateAPIView,
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
 ]

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'API',
     'user',
     'calander',
+    'ai',
 
 ]
 
@@ -205,6 +206,11 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
 
+try:
+    FENYX_OPENAI_API_KEY = env.str('FENYX_OPENAI_API_KEY')  # Debug
+except environ.ImproperlyConfigured:
+    print("Error: FENYX_OPENAI_API_KEY not found in .env file")  # Debug
+    FENYX_OPENAI_API_KEY = ''
 
 LOGGING = {
     'version': 1,

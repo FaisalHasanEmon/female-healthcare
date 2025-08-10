@@ -1,13 +1,13 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0MTU2OTAwLCJpYXQiOjE3NTQxNTMzMDAsImp0aSI6IjYxMDM0Yzg2YzM5ZDQxN2ZhMTIzNjZjYjhhYjA4MDZlIiwidXNlcl9pZCI6OH0.PmqNG-iFp6g-BOVjKTFJvPfE7L5N83kAbHfE93GmMnw
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTIxMDIwLCJpYXQiOjE3NTQ1MTc0MjAsImp0aSI6IjQzNTYyYTMyODI2MDQ4MWE4NWZkMWY3MTMwZDc4Mjg1IiwidXNlcl9pZCI6MX0.DM-fboYBBKZfwImnLCMPPisg-E_IIypU069rgkpnNuo
 
-@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDc1ODEwMCwiaWF0IjoxNzU0MTUzMzAwLCJqdGkiOiIxYTgwN2Y5YjBiOWI0MTk0YTgyNTBmYWVjZTU2OTZjZCIsInVzZXJfaWQiOjh9.9vK1_wNIqk6N2T195pDfmiZGbeTpRStPEpK-4s_kD6Q
+@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDk0NjUyNywiaWF0IjoxNzU0MzQxNzI3LCJqdGkiOiJhZmIxNGRjNWE2MDg0OWI4YTc5MmQ4YWViNTgyOWVjZSIsInVzZXJfaWQiOjJ9._eQjyJWmRDbLSR2OEahp00F8Li6_tozMjlVXtxGWWp4
 ### Register
 
 POST http://127.0.0.1:8000/api/v1/register/
 Content-Type: application/json
 
 {
-  "email": "cijoxaj176@foboxs.com",
+  "email": "shagorrobidasjvai@gmail.com",
   "password": "Sagor1234#",
   "confirm_password": "Sagor1234#"
 }
@@ -18,8 +18,8 @@ POST http://127.0.0.1:8000/api/v1/login/
 Content-Type: application/json
 
 {
-  "email": "cijoxaj176@foboxs.com",
-  "password": "Sagor1234#"
+  "email": "admin@gmail.com",
+  "password": "admin"
 }
 
 
@@ -86,11 +86,10 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "new_email": "jiyece8926@foboxs.com",
+  "new_email": "shagorrobidasjvai@gmail.com",
   "profile": {
     "name": "new_name",
-    "age": 27,
-    "address": "Dhaka, Bangladesh"
+    "age": 27
   }
 }
 
@@ -138,15 +137,14 @@ Content-Type: application/json
   "is_menopausal": false,
   "on_hormonal_treatment": false,
   "symptoms": [1, 2, 3],
-  "dietary_styles": 1,
-  "activity_level": 2,
-  "stress_level": 3,
+  "dietary_styles": [1, 2, 3],
+  "activity_level": 1,
+  "stress_level": 1,
   "supplements_medications": "Magnesium, Iron",
   "goals": [1, 2],
   "daily_reminder": true
 }
 
-###
 
 ### Get Onboarding Details (GET)
 GET http://localhost:8000/api/v1/onboarding/2/
@@ -200,4 +198,10 @@ Authorization: Bearer {{token}}
 
 ### Stress Levels/
 GET http://localhost:8000/api/v1/basic-questions/
+Authorization: Bearer {{token}}
+
+
+### Lifestyle
+
+GET http://localhost:8000/api/v1/lifestyle/
 Authorization: Bearer {{token}}

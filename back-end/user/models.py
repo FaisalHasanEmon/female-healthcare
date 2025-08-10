@@ -455,6 +455,7 @@ def delete_cycle_info_if_no_longer_regular(sender, instance, **kwargs):
         CycleInfo.objects.filter(profile=instance.profile).delete()
         print(f"CycleInfo deleted for profile: {instance.profile.name}")
 
+
 @receiver(pre_delete, sender=Onboarding)
 def delete_cycle_info_if_regular_cycle(sender, instance, **kwargs):
     """

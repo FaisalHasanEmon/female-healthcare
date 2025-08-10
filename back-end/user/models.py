@@ -3,7 +3,7 @@ from Core.models import BaseModel
 from django.conf import settings
 from datetime import date
 from django.dispatch import receiver
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, pre_delete
 from datetime import date, timedelta
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import (
@@ -454,3 +454,11 @@ def delete_cycle_info_if_no_longer_regular(sender, instance, **kwargs):
     if old_instance.has_regular_cycle and not instance.has_regular_cycle:
         CycleInfo.objects.filter(profile=instance.profile).delete()
         print(f"CycleInfo deleted for profile: {instance.profile.name}")
+
+@receiver(pre_delete, sender=Onboarding)
+def delete_cycle_info_if_regular_cycle(sender, instance, **kwargs):
+    """
+    Deletes CycleInfo if the Onboarding has a regular cycle.
+    """
+    if instance.has_regular_cycle:
+        CycleInfo.objects.filter(profile=instance.profile).delete()

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from user.api.views import (
     RegisterView,
@@ -32,6 +32,12 @@ from user.api.views import (
 
 
 urlpatterns = [
+    # AI Coach Api
+    path(
+        'ai/',
+        include('ai.api.urls'),
+        name='ai_api'
+    ),
     # Auth Api
     path(
         'register/',

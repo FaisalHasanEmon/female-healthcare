@@ -16,7 +16,7 @@ from .onboarding import (
     StressLevelSerializer,
 )
 from .profile_update import UserProfileUpdateSerializer
-
+from .settings_page import OnboardingSettingsSerializer
 
 __all__ = [
     RegisterSerializer,
@@ -32,5 +32,6 @@ __all__ = [
     ActivityLevelSerializer,
     StressLevelSerializer,
     UserProfileUpdateSerializer,
+    OnboardingSettingsSerializer
 
 ]

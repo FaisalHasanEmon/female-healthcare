@@ -1,0 +1,34 @@
+# requests.http
+# File to test FENYX FEMME API endpoints using HTTP requests
+# Use with VS Code REST Client or similar tools
+# Ensure the Django server is running with `python manage.py runserver`
+# Replace model IDs (symptoms, dietary_style, etc.) with actual IDs from your database
+
+@baseUrl = http://localhost:8000/api/v1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODY2Mzg2LCJpYXQiOjE3NTQ4NjI3ODYsImp0aSI6IjVlNGU1ODYwM2JmZDQ5ZmRiOTRjYWUwNTU1MTg2Zjg3IiwidXNlcl9pZCI6MX0.W29hl_g0PQ2PY98T80kpfbr4oFLC-8wJMuevwICHfFw
+
+### Login to Obtain JWT Token
+POST {{baseUrl}}/login/
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin"
+}
+
+### POST AI Coach Request
+# Replace {{token}} with the 'access' token from the login response
+POST {{baseUrl}}/ai/ai-coach/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "user_input": "I'm feeling tired and bloated today. Any suggestions?"
+}
+
+
+### GET Dashboard Request
+GET {{baseUrl}}/ai/dashboard/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json

@@ -4,6 +4,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from user.api.serializers.login import LoginSerializer
+from user.utils import send_verification_email
 
 
 class LoginView(APIView):
@@ -15,10 +16,13 @@ class LoginView(APIView):
         user = serializer.validated_data['user']
 
         if not user.email_verified:
-            raise AuthenticationFailed("Please verify your email before logging in.")
-
+            send_verification_email(user, request)
+            raise AuthenticationFailed(
+                "Please verify your email before logging in."
+            )
+        
         refresh = RefreshToken.for_user(user)
-
+        
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),

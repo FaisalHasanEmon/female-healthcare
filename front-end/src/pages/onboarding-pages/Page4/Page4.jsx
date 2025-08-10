@@ -1,42 +1,83 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 //onboarding page4
 const Page4 = () => {
-    return (
-        <div className="flex flex-col gap-10">
-      <h1 className="text-3xl font-playfair-display font-bold text-center ">
+  const [selectedValues, setSelectedValues] = useState([]);
+  const navigate = useNavigate();
+
+  // get selected values
+  const handleOptions = (event) => {
+    const checked = event.target.checked;
+    const value = event.target.value;
+
+    // set selected value in useState and filter which are unselected
+    setSelectedValues((prev) => {
+      if (checked) {
+        return [...prev, value];
+      } else {
+        return prev?.filter((item) => item !== value);
+      }
+    });
+  };
+
+  // set concers in localstorage and navigate
+  const setToLocalStorage = (event) => {
+    event.preventDefault();
+    localStorage.setItem("goals", JSON.stringify(selectedValues));
+    navigate("/onboarding/page5");
+  };
+
+  //get item from localstorage
+  useEffect(() => {
+    let items = localStorage.getItem("goals");
+    if (items) {
+      setSelectedValues(JSON.parse(items));
+    }
+  }, []);
+
+  return (
+    <div className="flex flex-col gap-5 items-center lg:gap-10">
+      <h1 className="text-2xl lg:text-3xl font-playfair-display font-bold text-center ">
         What are your goals?
       </h1>
-      <div className="flex flex-col gap-3 text-left w-[600px]">
+      <div className="flex flex-col gap-1 lg:gap-3 text-left  lg:w-[600px]">
+        {/* maped option  */}
         {options.map((data) => (
           <label
             key={data.id}
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center gap-1.5 lg:gap-2 cursor-pointer"
           >
             <input
+              onChange={handleOptions}
+              checked={selectedValues?.includes(data?.value)}
               type="checkbox"
               name="healthStatus"
               value={data?.value}
-              className="w-4 h-4 accent-brandPrimary"
+              className="w-3 md:w-4 h-3 md:h-4 accent-brandPrimary"
             />
-            <span className="font-montserrat">{data?.title}</span>
+            <span className="font-montserrat text-sm md:text-base">
+              {data?.title}
+            </span>
           </label>
         ))}
       </div>
+      {/* navigation link  */}
       <div className="text-right">
-        <Link to="/onboarding/page5" className="btn btn-md bg-brandPrimary px-10 py-2 rounded border-brandPrimary">
+        <button
+          onClick={setToLocalStorage}
+          className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary"
+        >
           Continue
-        </Link>
+        </button>
       </div>
     </div>
-    );
+  );
 };
 
 export default Page4;
 
-//options
+//options for page4
 const options = [
   {
     id: 1,
@@ -82,5 +123,5 @@ const options = [
     id: 9,
     title: "Other",
     value: "Other",
-  }
+  },
 ];

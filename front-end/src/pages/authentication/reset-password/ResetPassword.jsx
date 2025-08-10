@@ -9,7 +9,6 @@ const ResetPassword = () => {
     const email = e.target.email.value;
     const res = await resetUserPassword(email);
 
-    console.log(res.data);
     // Optionally use: await resetUserPassword(email);
   };
 

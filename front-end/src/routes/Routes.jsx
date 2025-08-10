@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home/Home";
-import AIChatBot from "../pages/ai-chatbot/AIChatBot";
+// import AIChatBot from "../pages/ai-chatbot/AIChatBot";
 import Testimonials from "../pages/testimonials/Testimonials";
 import About from "../pages/about/About";
 import FenyxLibrary from "../pages/fenyx-library/FenyxLibrary";
@@ -17,6 +17,13 @@ import Page4 from "../pages/onboarding-pages/Page4/Page4";
 import Page5 from "../pages/onboarding-pages/Page5/Page5";
 import Page6 from "../pages/onboarding-pages/Page6/Page6";
 import ResetPassword from "../pages/authentication/reset-password/ResetPassword";
+import UserDashboard from "../layout/user-dashboard-layout/DashboardLayout";
+import StartNewSession from "../pages/user-dashboard-pages/StartNewSession/StartNewSession";
+import ModeTracker from "../pages/user-dashboard-pages/ModeTracker/ModeTracker";
+import Settings from "../pages/user-dashboard-pages/Settings/Settings";
+import Dashboard from "../pages/user-dashboard-pages/Dashboard/Dashboard";
+import Analytics from "../pages/user-dashboard-pages/Dashboard/Analytics/Analytics";
+import Overview from "../pages/user-dashboard-pages/Dashboard/Overview/Overview";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -28,10 +35,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-      {
-        path: "/ai-chatbot",
-        element: <AIChatBot></AIChatBot>,
-      },
+      // {
+      //   path: "/ai-chatbot",
+      //   element: <AIChatBot></AIChatBot>,
+      // },
       {
         path: "/fenyx-library",
         element: <FenyxLibrary></FenyxLibrary>,
@@ -97,6 +104,32 @@ const router = createBrowserRouter([
         path: "/onboarding/page6",
         element: <Page6 />,
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <UserDashboard></UserDashboard>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+        children: [
+          {
+            path: "/dashboard/analytics",
+            element: <Analytics></Analytics>,
+          },
+          {
+            path: "/dashboard/overview",
+            element: <Overview></Overview>,
+          },
+        ],
+      },
+      {
+        path: "/dashboard/new-session",
+        element: <StartNewSession></StartNewSession>,
+      },
+      { path: "/dashboard/mode-tracker", element: <ModeTracker></ModeTracker> },
+      { path: "/dashboard/settings", element: <Settings></Settings> },
     ],
   },
 ]);

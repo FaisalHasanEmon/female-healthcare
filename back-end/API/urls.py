@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from user.api.views import (
     RegisterView,
@@ -8,11 +8,37 @@ from user.api.views import (
     PasswordResetRequestView,
     ChangePasswordView,
     VerifyEmailView,
-    
+    ProfileCreateView,
+    ProfileDetailView,
+    ProfileUpdateView,
+    ProfileDeleteView,
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView,
+    ActivityLevelListCreateAPIView,
+    StressLevelListCreateAPIView,
+    UserProfileUpdateView,
+    VerifyEmailChangeView,
+    LifeStyleListAPIView,
+    OnboardingSettingsCreateAPIView,
+    OnboardingSettingsUpdateAPIView,
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
 )
 
 
 urlpatterns = [
+    # AI Coach Api
+    path(
+        'ai/',
+        include('ai.api.urls'),
+        name='ai_api'
+    ),
+    # Auth Api
     path(
         'register/',
         RegisterView.as_view(),
@@ -48,6 +74,108 @@ urlpatterns = [
         VerifyEmailView.as_view(),
         name='verify-email'
     ),
+    path(
+        'verify-email-change/<uidb64>/<token>/',
+        VerifyEmailChangeView.as_view(),
+        name='verify_email_change'
+    ),
+    # Profile Api
+    path(
+        'profile/create/',
+        ProfileCreateView.as_view(),
+        name='profile-create'
+    ),
+    path(
+        'profile/me/',
+        ProfileDetailView.as_view(),
+        name='profile-detail'
+    ),
+    path(
+        'profile/me/update/',
+        ProfileUpdateView.as_view(),
+        name='profile-update'
+    ),
+    path(
+        'profile/me/delete/',
+        ProfileDeleteView.as_view(),
+        name='profile-delete'
+    ),
+    path(
+        'profile/update/',
+        UserProfileUpdateView.as_view(),
+        name='user-profile-update'
+    ),
 
-
+    # Onboarding Api
+    path(
+        'onboarding/create/',
+        OnboardingCreateAPIView.as_view(),
+        name='onboarding-create'
+    ),
+    path(
+        'onboarding/<int:pk>/',
+        OnboardingDetailAPIView.as_view(),
+        name='onboarding-detail'
+    ),
+    path(
+        'onboarding/<int:pk>/update/',
+        OnboardingUpdateAPIView.as_view(),
+        name='onboarding-update'
+    ),
+    path(
+        'onboarding/<int:pk>/delete/',
+        OnboardingDeleteAPIView.as_view(),
+        name='onboarding-delete'
+    ),
+    path(
+        'symptoms/',
+        SymptomListCreateAPIView.as_view(),
+        name='symptom-list-create'
+    ),
+    path(
+        'dietary-styles/',
+        DietaryStyleListCreateAPIView.as_view(),
+        name='dietary-style-list-create'
+    ),
+    path(
+        'goals/',
+        GoalListCreateAPIView.as_view(),
+        name='goal-list-create'
+    ),
+    path(
+        'activity-levels/',
+        ActivityLevelListCreateAPIView.as_view(),
+        name='activity-level-list-create'
+    ),
+    path(
+        'stress-levels/',
+        StressLevelListCreateAPIView.as_view(),
+        name='stress-level-list-create'
+    ),
+    path(
+        'lifestyle/',
+        LifeStyleListAPIView.as_view(),
+        name='lifestyle-list'
+    ),
+    # Settings Page Api
+    path(
+        'settings/onboarding/create/',
+        OnboardingSettingsCreateAPIView.as_view(),
+        name='onboarding-settings-create'
+    ),
+    path(
+        'settings/onboarding/update/<int:pk>/',
+        OnboardingSettingsUpdateAPIView.as_view(),
+        name='onboarding-settings-update'
+    ),
+    path(
+        'settings/onboarding/details/<int:pk>/',
+        OnboardingSettingsDetailsAPIView.as_view(),
+        name='onboarding-settings-details'
+    ),
+    path(
+        'settings/onboarding/details/',
+        OnboardingSettingsListAPIView.as_view(),
+        name='onboarding-settings-list'
+    ),
 ]

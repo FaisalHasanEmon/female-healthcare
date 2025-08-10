@@ -32,21 +32,3 @@ GET {{baseUrl}}/ai/dashboard/
 Authorization: Bearer {{token}}
 Content-Type: application/json
 Accept: application/json
-
-
-### POST Dashboard Request
-# Replace {{token}} with the 'access' token from the login response
-# Ensure model IDs (symptoms, dietary_style, etc.) exist in your database
-POST {{baseUrl}}/ai/dashboard/
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-    "has_regular_cycle": true,
-    "current_phase": "menstrual",
-    "symptoms": [1, 2],
-    "dietary_style": 3,
-    "activity_level": 2,
-    "stress_level": 1,
-    "goals": [1, 4]
-}

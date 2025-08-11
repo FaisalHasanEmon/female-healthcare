@@ -29,18 +29,18 @@ const DashboardSideBar = () => {
       path: "/dashboard/analytics",
       icon: "/dashboard-Icons/chat-icon.png",
     },
-    // {
-    //   id: 1,
-    //   name: "Start New Session",
-    //   path: "/dashboard/new-session",
-    //   icon: "/dashboard-Icons/chat-icon.png",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Mode Tracker",
-    //   path: "/dashboard/mode-tracker",
-    //   icon: "/dashboard-Icons/tracker-icon.png",
-    // },
+    {
+      id: 1,
+      name: "Start New Session",
+      path: "/dashboard/new-session",
+      icon: "/dashboard-Icons/chat-icon.png",
+    },
+    {
+      id: 2,
+      name: "Mode Tracker",
+      path: "/dashboard/mode-tracker",
+      icon: "/dashboard-Icons/tracker-icon.png",
+    },
     {
       id: 3,
       name: "Settings",

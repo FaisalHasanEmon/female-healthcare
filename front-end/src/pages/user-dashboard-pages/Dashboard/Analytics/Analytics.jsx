@@ -4,7 +4,7 @@ import AnalyticsCharts from "../../../../components/dashboardComponents/Analytic
 const Analytics = () => {
   return (
     <section>
-      <div className="grid lg:grid-cols-12 lg:grid-rows-12   gap-8 *:rounded-[20px] ">
+      <div className="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-12   gap-8 *:rounded-[20px] ">
         {/* Item - 1  */}
         <div className="lg:col-span-5 lg:row-span-6 ">
           <AnalyticsCharts heading="Mood"></AnalyticsCharts>

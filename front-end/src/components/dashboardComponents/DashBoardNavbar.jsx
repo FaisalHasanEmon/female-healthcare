@@ -167,7 +167,7 @@ const DashBoardNavbar = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="space-y-3 text-base-content min-h-full w-80 p-4 bg-gradient-to-tr from-brandSecondary via-brandPrimary to-brandSecondary">
+            <ul className="space-y-3 text-base-content h-full w-80 p-4 bg-gradient-to-tr from-brandSecondary via-brandPrimary to-brandSecondary">
               <li className="mb-3">
                 <div className="flex justify-between items-center pl-2 pr-4 pt-2">
                   <figure>

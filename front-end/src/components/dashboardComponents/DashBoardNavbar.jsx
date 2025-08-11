@@ -21,6 +21,97 @@ const DashBoardNavbar = () => {
     showPeroidTracker = false;
   }
 
+  const NavButtonsStyle = {
+    display: "flex",
+    justifyItems: "center",
+    alignItems: "center",
+    gap: "8px",
+    padding: "8px 0px 8px 8px",
+  };
+
+  // Navigation links configuration
+  const navLinks = [
+    {
+      id: 0,
+      name: "Dashboard",
+      path: "/dashboard/analytics",
+      icon: "/dashboard-Icons/chat-icon.png",
+    },
+    {
+      id: 1,
+      name: "Start New Session",
+      path: "/dashboard/new-session",
+      icon: "/dashboard-Icons/chat-icon.png",
+    },
+    {
+      id: 2,
+      name: "Mode Tracker",
+      path: "/dashboard/mode-tracker",
+      icon: "/dashboard-Icons/tracker-icon.png",
+    },
+    {
+      id: 3,
+      name: "Settings",
+      path: "/dashboard/settings",
+      icon: "/dashboard-Icons/settings-icon.png",
+      option: [{ id: 1, name: "Logout" }],
+    },
+  ];
+
+  // Navigation links rendering
+  const navigateLinks = (
+    <>
+      {navLinks.map((link) => (
+        <li key={link?.id}>
+          <div className="w-full flex bg-gradient-to-tr from-brandSecondary/30 via-brandPrimary to-brandSecondary/30">
+            <NavLink
+              to={link?.path}
+              className={({ isActive }) =>
+                isActive ? "bg-brandSecondary grow-1" : "bg-brandPrimary grow-1"
+              }
+              style={NavButtonsStyle}
+              onClick={() => setIsOpen(false)}
+              end={
+                location.pathname === `/dashboard/analytics` ||
+                location.pathname === `/dashboard/overview`
+                  ? false
+                  : true
+              }
+            >
+              <figure>
+                <img src={link?.icon} alt="Start New Session" />
+              </figure>
+              <p>{link?.name}</p>
+            </NavLink>
+            {/* Dropdown for logout */}
+            {link?.option && link?.option.length > 0 && (
+              <>
+                <div className="dropdown dropdown-bottom  h-full my-auto  ">
+                  <div tabIndex={0} role="button">
+                    <figure className="">
+                      <img
+                        src="/dashboard-Icons/dropdownIcon.png"
+                        alt="dropdown icon"
+                      />
+                    </figure>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu  rounded-box z-1 w-28  p-1 shadow-sm -left-16 mt-4 bg-gradient-to-tr from-brandSecondary to-brandPrimary "
+                  >
+                    <li>
+                      <a>Logout</a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
+        </li>
+      ))}
+    </>
+  );
+
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-45 flex justify-between items-center  bg-transparent backdrop-blur-3xl">
@@ -76,21 +167,21 @@ const DashBoardNavbar = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu text-base-content min-h-full w-80 p-4 bg-gradient-to-tr from-brandSecondary via-brandPrimary to-brandSecondary">
-              <li>
-                <a>Sidebar Item 1</a>
+            <ul className="space-y-3 text-base-content min-h-full w-80 p-4 bg-gradient-to-tr from-brandSecondary via-brandPrimary to-brandSecondary">
+              <li className="mb-3">
+                <div className="flex justify-between items-center pl-2 pr-4 pt-2">
+                  <figure>
+                    <img src="/logo3.png" alt="Logo" className="w-[60px]" />
+                  </figure>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <LuPanelLeftClose size={24} color="black" />
+                  </div>
+                </div>
               </li>
-              <li>
-                <a>Sidebar Item 2</a>
-              </li>
-              <li>
-                <button
-                  className="btn btn-error mt-4"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close
-                </button>
-              </li>
+              {navigateLinks}
             </ul>
           </div>
         </div>

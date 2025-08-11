@@ -76,7 +76,7 @@ const DashBoardNavbar = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+            <ul className="menu text-base-content min-h-full w-80 p-4 bg-gradient-to-tr from-brandSecondary via-brandPrimary to-brandSecondary">
               <li>
                 <a>Sidebar Item 1</a>
               </li>

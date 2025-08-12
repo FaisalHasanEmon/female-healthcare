@@ -1,5 +1,6 @@
 import React from "react";
 import AnalyticsCharts from "../../../../components/dashboardComponents/AnalyticsCharts";
+import { DoughnutChart } from "../../../../components/dashboardComponents/DoughnutChart";
 
 const Analytics = () => {
   return (
@@ -14,7 +15,9 @@ const Analytics = () => {
           <AnalyticsCharts heading="Energy"></AnalyticsCharts>
         </div>
         {/* Item - 3 */}
-        <div className="lg:col-span-3 lg:row-span-7 "></div>
+        <div className="lg:col-span-3 lg:row-span-7 border">
+          <DoughnutChart></DoughnutChart>
+        </div>
         {/* Item - 4 */}
         <div className="lg:col-span-5 lg:row-span-6 ">
           <AnalyticsCharts heading="Symptoms"></AnalyticsCharts>

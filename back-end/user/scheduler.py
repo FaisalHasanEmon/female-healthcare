@@ -16,5 +16,10 @@ def daily_update_job():
 def start():
     scheduler = BackgroundScheduler()
     # Runs every day at 00:01
-    scheduler.add_job(daily_update_job, CronTrigger(hour=0, minute=1))
+    scheduler.add_job(
+        daily_update_job,
+        CronTrigger(
+            hour=0, minute=0, second=1
+        )
+    )
     scheduler.start()

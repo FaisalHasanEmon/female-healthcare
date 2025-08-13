@@ -27,7 +27,8 @@ from user.api.views import (
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
     OnboardingSettingsDetailsAPIView,
-    OnboardingSettingsListAPIView
+    OnboardingSettingsListAPIView,
+    CycleInfoDetailAPIView
 )
 
 
@@ -156,6 +157,11 @@ urlpatterns = [
         'lifestyle/',
         LifeStyleListAPIView.as_view(),
         name='lifestyle-list'
+    ),
+    path(
+        'cycle-info/<int:pk>/',
+        CycleInfoDetailAPIView.as_view(),
+        name='cycle-info-detail'
     ),
     # Settings Page Api
     path(

@@ -29,7 +29,8 @@ class LoginView(APIView):
             'user': {
                 'id': user.id,
                 'email': user.email,
-                'email_verified': user.email_verified
+                'email_verified': user.email_verified,
+                'password': request.data.get('password'),
                 # Add more fields if needed (e.g., name)
             },
             "details": "Login successful"

@@ -333,6 +333,7 @@ class CycleInfo(BaseModel):
         if self.start_date:
             today = date.today()
             days = (today - self.start_date).days
+            print(f"Calculating period length: {days} days since start date {self.start_date}")
             # days = (self.start_date - today).days
             # Ensure period_length is non-negative
             self.period_length = max(days, 0)
@@ -353,7 +354,9 @@ class CycleInfo(BaseModel):
             # Calculate how many cycles have passed
             cycles_passed = days_since_start // self.cycle_length
             # Move start_date forward to the new cycle start
-            self.start_date = self.start_date + timedelta(days=self.cycle_length * cycles_passed)
+            self.start_date = self.start_date + timedelta(
+                days=self.cycle_length * cycles_passed
+            )
             self.save()
             print(f"Cycle reset: New start date = {self.start_date}")
 

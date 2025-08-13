@@ -10,6 +10,7 @@ from user.onboarding.onboarding_model import (
     ActivityLevel,
     StressLevel,
 )
+from datetime import date
 
 
 class OnboardingSerializer(serializers.ModelSerializer):
@@ -39,6 +40,8 @@ class OnboardingSerializer(serializers.ModelSerializer):
 
 
 class CycleInfoSerializer(serializers.ModelSerializer):
+    # day_in_cycle = serializers.SerializerMethodField()
+    # phase_distribution = serializers.SerializerMethodField()
     class Meta:
         model = CycleInfo
         fields = (
@@ -48,9 +51,35 @@ class CycleInfoSerializer(serializers.ModelSerializer):
             'end_date',
             'cycle_length',
             'period_length',
-            'current_phase'
+            'current_phase',
+            # 'day_in_cycle',
+            # 'phase_distribution'
         )
         read_only_fields = ['profile']
+
+    # def get_day_in_cycle(self, obj):
+    #     if not obj.start_date:
+    #         return None
+    #     today = date.today()
+    #     delta = (today - obj.start_date).days % obj.cycle_length
+    #     return delta + 1  # Day count starts from 1
+
+    # def get_phase_distribution(self, obj):
+    #     """
+    #     Returns a dict with phase names and lengths (in days) for the donut chart.
+    #     This is an example; adjust based on your medical logic.
+    #     """
+    #     period_days = obj.period_length or 5
+    #     follicular_days = 9  # early + late follicular
+    #     ovulatory_days = 4
+    #     luteal_days = obj.cycle_length - (period_days + follicular_days + ovulatory_days)
+
+    #     return {
+    #         "menstrual": period_days,
+    #         "follicular": follicular_days,
+    #         "ovulatory": ovulatory_days,
+    #         "luteal": luteal_days
+    #     }
 
 
 class BasicQuestionSerializer(serializers.ModelSerializer):

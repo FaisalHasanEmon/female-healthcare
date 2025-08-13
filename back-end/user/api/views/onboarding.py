@@ -17,7 +17,7 @@ from user.api.serializers import (
     GoalSerializer,
     ActivityLevelSerializer,
     StressLevelSerializer,
-    # CycleInfoSerializer
+    CycleInfoSerializer
 )
 
 from user.models import (
@@ -75,6 +75,14 @@ class OnboardingDetailAPIView(RetrieveAPIView):
 
     def get_queryset(self):
         return Onboarding.objects.filter(profile__user=self.request.user)
+    
+
+class CycleInfoDetailAPIView(RetrieveAPIView):
+    serializer_class = CycleInfoSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfOnboarding]
+
+    def get_queryset(self):
+        return CycleInfo.objects.filter(profile__user=self.request.user)
 
 
 class OnboardingUpdateAPIView(UpdateAPIView):

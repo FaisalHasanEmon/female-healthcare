@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTIxMDIwLCJpYXQiOjE3NTQ1MTc0MjAsImp0aSI6IjQzNTYyYTMyODI2MDQ4MWE4NWZkMWY3MTMwZDc4Mjg1IiwidXNlcl9pZCI6MX0.DM-fboYBBKZfwImnLCMPPisg-E_IIypU069rgkpnNuo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTE5MzIyLCJpYXQiOjE3NTUxMTU3MjIsImp0aSI6Ijc0ODdiNjM2Nzg2MDRiMjNiMjI2MDY3M2Q3YjQ4NWVlIiwidXNlcl9pZCI6MX0.hrmp_DkG8BBPxHHRDdQ_G18SrWnaPj_UDaCsQGX_udw
 
 @refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDk0NjUyNywiaWF0IjoxNzU0MzQxNzI3LCJqdGkiOiJhZmIxNGRjNWE2MDg0OWI4YTc5MmQ4YWViNTgyOWVjZSIsInVzZXJfaWQiOjJ9._eQjyJWmRDbLSR2OEahp00F8Li6_tozMjlVXtxGWWp4
 ### Register
@@ -205,3 +205,9 @@ Authorization: Bearer {{token}}
 
 GET http://localhost:8000/api/v1/lifestyle/
 Authorization: Bearer {{token}}
+
+
+### Get Cycle Info Detail
+GET http://127.0.0.1:8000/api/v1/cycle-info/19/
+Authorization: Bearer {{token}}
+Accept: application/json

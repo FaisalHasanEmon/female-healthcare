@@ -25,6 +25,7 @@ from .onboarding import (
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
     LifeStyleListAPIView,
+    CycleInfoDetailAPIView
 )
 from .profile_update import (
     UserProfileUpdateView,
@@ -65,5 +66,6 @@ __all__ = [
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
     OnboardingSettingsDetailsAPIView,
-    OnboardingSettingsListAPIView
+    OnboardingSettingsListAPIView,
+    CycleInfoDetailAPIView
 ]

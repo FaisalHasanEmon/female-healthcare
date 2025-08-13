@@ -5,7 +5,7 @@
 # Replace model IDs (symptoms, dietary_style, etc.) with actual IDs from your database
 
 @baseUrl = http://localhost:8000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0OTMzMDczLCJpYXQiOjE3NTQ5Mjk0NzMsImp0aSI6IjI3Njc2NWY5YWI2NTQ5YTZhZmExMGJiYjY5MDk5NWEwIiwidXNlcl9pZCI6MX0.z8C2OxW6Hy33rnXNkrkPrOptGGh2aL3CPuB3BMZETsI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0OTU3MDA3LCJpYXQiOjE3NTQ5NTM0MDcsImp0aSI6ImJkZGQzMDYzNDI5NzQ0N2Q5MjBmODRhNTg4NThmOTg2IiwidXNlcl9pZCI6MX0.Pvth4P1ygMcE05HP0gRbmA_g7q3cISjyLtZHV35zNPI
 
 ### Login to Obtain JWT Token
 POST {{baseUrl}}/login/
@@ -23,7 +23,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "user_input": "I'm feeling tired and bloated today. Any suggestions?"
+    "user_input": "Hi! can you help me? i feel sad today"
 }
 
 

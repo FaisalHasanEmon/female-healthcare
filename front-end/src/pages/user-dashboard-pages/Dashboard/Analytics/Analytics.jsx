@@ -15,7 +15,7 @@ const Analytics = () => {
           <AnalyticsCharts heading="Energy"></AnalyticsCharts>
         </div>
         {/* Item - 3 */}
-        <div className="lg:col-span-3 lg:row-span-7 border">
+        <div className="lg:col-span-3 lg:row-span-7">
           <DoughnutChart></DoughnutChart>
         </div>
         {/* Item - 4 */}

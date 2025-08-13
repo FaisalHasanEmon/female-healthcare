@@ -44,68 +44,62 @@ const ModeTracker = () => {
   };
 
   return (
-    <div className="min-h-screen mt-14">
-      <div className="container mx-auto px-5 ">
-        {/* Header */}
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-2 ">
+    <div className="min-h-screen mt-14 container px-5  mx-auto">
+      <div className="w-full sm:w-lg lg:w-2xl mx-auto flex flex-col justify-center items-center ">
+        {/* Wellness Tracker Section */}
+        <div className="mb-6">
+          <h1 className="text-xl sm:text-2xl lg:text-[40px] font-bold text-gray-800 mb-2 ">
             AI Women Wellness Coach!
           </h1>
-          <p className="text-gray-600 text-sm sm:text-base max-w-2xl ">
+          <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8 ">
             Talk to your wellness companion. I'm here to help you with your
             wellness journey
           </p>
-        </div>
-
-        {/* Wellness Tracker Section */}
-        <div className="mb-6">
-          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+          <h2 className="text-lg sm:text-xl lg:text-4xl font-semibold text-gray-800 mb-2">
             Wellness Tracker
           </h2>
           <p className="text-gray-600 text-sm sm:text-base mb-6">
             Track your wellness journey, symptoms, and mood over time.
           </p>
 
-          {/* Mood Selection */}
-          <div className="mb-6 sm:mb-8">
-            <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
-              Mood
-            </h3>
-            <div className="flex justify-between  gap-2 sm:gap-4 max-w-lg lg:max-w-xl">
-              {moodOptions.map((mood) => (
-                <button
-                  key={mood.value}
-                  onClick={() => setSelectedMood(mood.value)}
-                  className="flex flex-col items-center p-2 sm:p-3 rounded-lg transition-all hover:bg-gray-50"
-                >
-                  <span
-                    className={`mb-1 transition-all duration-200 ${
-                      selectedMood === mood.value
-                        ? "text-3xl sm:text-4xl"
-                        : "text-2xl sm:text-3xl"
-                    }`}
-                  >
-                    {mood.emoji}
-                  </span>
-                  <span
-                    className={`text-xs sm:text-sm font-medium ${mood.color}`}
-                  >
-                    {mood.label}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div>
-            {/* Left Column */}
             <div className="space-y-6">
+              {/* Mood Selection */}
+              <div>
+                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
+                  Mood
+                </h3>
+                <div className="flex justify-between  gap-2 sm:gap-4 ">
+                  {moodOptions.map((mood) => (
+                    <button
+                      key={mood.value}
+                      onClick={() => setSelectedMood(mood.value)}
+                      className="flex flex-col items-center p-2 sm:p-3 rounded-lg transition-all hover:bg-gray-50"
+                    >
+                      <span
+                        className={`mb-1 transition-all duration-200 ${
+                          selectedMood === mood.value
+                            ? "text-3xl sm:text-4xl"
+                            : "text-2xl sm:text-3xl"
+                        }`}
+                      >
+                        {mood.emoji}
+                      </span>
+                      <span
+                        className={`text-xs sm:text-sm font-medium ${mood.color}`}
+                      >
+                        {mood.label}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
               {/* Symptoms Selection */}
               <div>
                 <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
                   Symptoms
                 </h3>
-                <div className="dropdown dropdown-bottom w-full sm:w-lg lg:w-xl">
+                <div className="dropdown dropdown-bottom w-full ">
                   <div
                     tabIndex={0}
                     role="button"
@@ -166,7 +160,7 @@ const ModeTracker = () => {
                 <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
                   How Energetic Do You Feel Today?
                 </h3>
-                <div className="w-full sm:w-lg lg:w-xl">
+                <div className="w-full ">
                   <input
                     type="range"
                     min="1"
@@ -195,7 +189,7 @@ const ModeTracker = () => {
                   Food Log
                 </h3>
                 <textarea
-                  className="textarea textarea-bordered w-full sm:w-lg lg:w-xl h-32 sm:h-40 lg:h-48 resize-none text-sm sm:text-base"
+                  className="textarea textarea-bordered w-full sm:w-lg lg:w-2xl h-32 sm:h-40 lg:h-48 resize-none text-sm sm:text-base"
                   placeholder="Log your meals, snacks, and beverages today..."
                   value={foodLog}
                   onChange={(e) => setFoodLog(e.target.value)}

@@ -4,7 +4,32 @@ const ModeTracker = () => {
   const [selectedMood, setSelectedMood] = useState("");
   const [selectedSymptom, setSelectedSymptom] = useState("");
   const [energyLevel, setEnergyLevel] = useState(5);
-  const [foodLog, setFoodLog] = useState("");
+  const [log, setLog] = useState("symptoms");
+
+  // New food log state
+  const [foodLogData, setFoodLogData] = useState({
+    alcohol: 0,
+    caffeine: 0,
+    cold: 0,
+    commuting: 0,
+    crowds: 0,
+    family: 0,
+    finances: 0,
+    generalStress: 0,
+  });
+  // New symptomp log state
+  const [symptompLogData, setSymptompLogData] = useState({
+    fatigue: 0,
+    mood: 0,
+    sleep: 0,
+    cravings: 0,
+    weight: 0,
+    cramps: 0,
+    anxiety: 0,
+    brainFog: 0,
+    hotFlashes: 0,
+    irregularCycles: 0,
+  });
 
   const moodOptions = [
     { value: "happy", emoji: "😊", label: "Happy", color: "text-yellow-500" },
@@ -14,21 +39,73 @@ const ModeTracker = () => {
     { value: "neutral", emoji: "😐", label: "Neutral", color: "text-gray-500" },
   ];
 
-  const symptomOptions = [
-    "Fatigue",
-    "Mood",
-    "Sleep",
-    "Cravings",
-    "Weight",
-    "Cramps",
-    "Anxiety",
-    "Brain fog",
-    "Hot flashes",
-    "Irregular cycles",
+  // const symptomOptions = [
+  //   "Fatigue",
+  //   "Mood",
+  //   "Sleep",
+  //   "Cravings",
+  //   "Weight",
+  //   "Cramps",
+  //   "Anxiety",
+  //   "Brain fog",
+  //   "Hot flashes",
+  //   "Irregular cycles",
+  // ];
+
+  const foodLogItems = [
+    { key: "alcohol", label: "Alcohol", icon: "🍷" },
+    { key: "caffeine", label: "Caffeine", icon: "☕" },
+    { key: "cold", label: "Cold", icon: "🌡️" },
+    { key: "commuting", label: "Commuting", icon: "🚊" },
+    { key: "crowds", label: "Crowds", icon: "👥" },
+    { key: "family", label: "Family", icon: "🏠" },
+    { key: "finances", label: "Finances", icon: "💰" },
+    { key: "generalStress", label: "General Stress", icon: "🧠" },
   ];
 
-  const handleSymptomSelect = (symptom) => {
-    setSelectedSymptom(symptom === selectedSymptom ? "" : symptom);
+  const symptompsLogItems = [
+    { key: "fatigue", label: "Fatigue", icon: "😴" },
+    { key: "mood", label: "Mood", icon: "😊" },
+    { key: "sleep", label: "Sleep", icon: "🛌" },
+    { key: "cravings", label: "Cravings", icon: "🍫" },
+    { key: "weight", label: "Weight", icon: "⚖️" },
+    { key: "cramps", label: "Cramps", icon: "🤕" },
+    { key: "anxiety", label: "Anxiety", icon: "😟" },
+    { key: "brainFog", label: "Brain Fog", icon: "🌫️" },
+    { key: "hotFlashes", label: "Hot flashes", icon: "🔥" },
+    { key: "irregularCycles", label: "Irregular Cycles", icon: "📅" },
+  ];
+
+  // const handleSymptomSelect = (symptom) => {
+  //   setSelectedSymptom(symptom === selectedSymptom ? "" : symptom);
+  // };
+
+  const handleFoodLogChange = (key, value) => {
+    setFoodLogData((prev) => ({
+      ...prev,
+      [key]: parseInt(value),
+    }));
+  };
+
+  const handleSymptompLogChange = (key, value) => {
+    setSymptompLogData((prev) => ({
+      ...prev,
+      [key]: parseInt(value),
+    }));
+  };
+
+  const getSliderColor = (value) => {
+    if (value === 0) return "range-brandSecondary";
+    if (value <= 2) return "range-success";
+    if (value <= 3) return "range-warning";
+    return "range-error";
+  };
+
+  const getLevelText = (value) => {
+    if (value === 0) return "NONE";
+    if (value <= 1) return "LOW";
+    if (value <= 2) return "MED";
+    return "HIGH";
   };
 
   const handleSubmit = () => {
@@ -36,22 +113,22 @@ const ModeTracker = () => {
       mood: selectedMood,
       symptom: selectedSymptom,
       energyLevel,
-      foodLog,
+      symptompLog: symptompLogData,
+      foodLog: foodLogData,
     };
     console.log("Wellness data:", data);
-    // Here you would typically send the data to your backend
     alert("Wellness data submitted successfully!");
   };
 
   return (
-    <div className="min-h-screen mt-14 container px-5  mx-auto">
-      <div className="w-full sm:w-lg lg:w-2xl mx-auto flex flex-col justify-center items-center ">
+    <div className="min-h-screen mt-14 container px-5 mx-auto">
+      <div className="w-full sm:w-lg lg:w-2xl mx-auto flex flex-col justify-center items-center">
         {/* Wellness Tracker Section */}
         <div className="mb-6">
-          <h1 className="text-xl sm:text-2xl lg:text-[40px] font-bold text-gray-800 mb-2 ">
+          <h1 className="text-xl sm:text-2xl lg:text-[40px] font-bold text-gray-800 mb-2">
             AI Women Wellness Coach!
           </h1>
-          <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8 ">
+          <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8">
             Talk to your wellness companion. I'm here to help you with your
             wellness journey
           </p>
@@ -66,10 +143,10 @@ const ModeTracker = () => {
             <div className="space-y-6">
               {/* Mood Selection */}
               <div>
-                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
+                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-[18px]">
                   Mood
                 </h3>
-                <div className="flex justify-between  gap-2 sm:gap-4 ">
+                <div className="flex justify-between gap-2 sm:gap-4">
                   {moodOptions.map((mood) => (
                     <button
                       key={mood.value}
@@ -94,12 +171,13 @@ const ModeTracker = () => {
                   ))}
                 </div>
               </div>
+
               {/* Symptoms Selection */}
-              <div>
+              {/* <div>
                 <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
                   Symptoms
                 </h3>
-                <div className="dropdown dropdown-bottom w-full ">
+                <div className="dropdown dropdown-bottom w-full">
                   <div
                     tabIndex={0}
                     role="button"
@@ -153,14 +231,14 @@ const ModeTracker = () => {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </div> */}
 
               {/* Energy Level Slider */}
               <div>
-                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
+                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-[18px]">
                   How Energetic Do You Feel Today?
                 </h3>
-                <div className="w-full ">
+                <div className="w-full">
                   <input
                     type="range"
                     min="1"
@@ -179,21 +257,140 @@ const ModeTracker = () => {
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Column */}
-            <div>
-              {/* Food Log */}
+              {/* Tab Section for Symptoms/Food Log */}
               <div>
-                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
-                  Food Log
-                </h3>
-                <textarea
-                  className="textarea textarea-bordered w-full sm:w-lg lg:w-2xl h-32 sm:h-40 lg:h-48 resize-none text-sm sm:text-base"
-                  placeholder="Log your meals, snacks, and beverages today..."
-                  value={foodLog}
-                  onChange={(e) => setFoodLog(e.target.value)}
-                ></textarea>
+                <h1 className="font-semibold text-gray-700 mb-3 sm:mb-4 text-sm sm:text-[18px]">
+                  Log
+                </h1>
+                <div className="flex gap-4 sm:gap-6 lg:gap-8 mb-4">
+                  <h3
+                    onClick={() => setLog("symptoms")}
+                    className={`font-medium text-gray-700 text-sm sm:text-base cursor-pointer transition-all ${
+                      log === "symptoms"
+                        ? "underline text-primary font-semibold"
+                        : "hover:text-gray-900"
+                    }`}
+                  >
+                    Symptoms
+                  </h3>
+
+                  <h3
+                    onClick={() => setLog("trigger")}
+                    className={`font-medium text-gray-700 text-sm sm:text-base cursor-pointer transition-all ${
+                      log === "trigger"
+                        ? "underline text-primary font-semibold"
+                        : "hover:text-gray-900"
+                    }`}
+                  >
+                    Food Log
+                  </h3>
+                </div>
+
+                {/* Food Log Tab Content */}
+                {log === "trigger" && (
+                  <div className="space-y-4">
+                    {foodLogItems.map((item) => (
+                      <div
+                        key={item.key}
+                        className="flex items-center justify-between"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="text-lg">{item.icon}</span>
+                          <span className="text-sm sm:text-base font-medium text-gray-700">
+                            {item.label}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-4 flex-1 max-w-xs ml-4">
+                          <div className="flex-1">
+                            <input
+                              type="range"
+                              min="0"
+                              max="3"
+                              value={foodLogData[item.key]}
+                              onChange={(e) =>
+                                handleFoodLogChange(item.key, e.target.value)
+                              }
+                              className={`range w-full ${getSliderColor(
+                                foodLogData[item.key]
+                              )}`}
+                              step="1"
+                            />
+                          </div>
+                          <div className="min-w-12 text-center">
+                            <span
+                              className={`text-xs font-semibold px-2 py-1 rounded ${
+                                foodLogData[item.key] === 0
+                                  ? "bg-gray-100 text-gray-600"
+                                  : foodLogData[item.key] <= 1
+                                  ? "bg-green-100 text-green-600"
+                                  : foodLogData[item.key] <= 2
+                                  ? "bg-yellow-100 text-yellow-600"
+                                  : "bg-red-100 text-red-600"
+                              }`}
+                            >
+                              {getLevelText(foodLogData[item.key])}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Symptoms Tab Content */}
+                {log === "symptoms" && (
+                  <div className="space-y-4">
+                    {symptompsLogItems.map((item) => (
+                      <div
+                        key={item.key}
+                        className="flex items-center justify-between"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="text-lg">{item.icon}</span>
+                          <span className="text-sm sm:text-base font-medium text-gray-700">
+                            {item.label}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-4 flex-1 max-w-xs ml-4">
+                          <div className="flex-1">
+                            <input
+                              type="range"
+                              min="0"
+                              max="3"
+                              value={symptompLogData[item.key]}
+                              onChange={(e) =>
+                                handleSymptompLogChange(
+                                  item.key,
+                                  e.target.value
+                                )
+                              }
+                              className={`range w-full ${getSliderColor(
+                                symptompLogData[item.key]
+                              )}`}
+                              step="1"
+                            />
+                          </div>
+                          <div className="min-w-12 text-center">
+                            <span
+                              className={`text-xs font-semibold px-2 py-1 rounded ${
+                                symptompLogData[item.key] === 0
+                                  ? "bg-gray-100 text-gray-600"
+                                  : symptompLogData[item.key] <= 1
+                                  ? "bg-green-100 text-green-600"
+                                  : symptompLogData[item.key] <= 2
+                                  ? "bg-yellow-100 text-yellow-600"
+                                  : "bg-red-100 text-red-600"
+                              }`}
+                            >
+                              {getLevelText(symptompLogData[item.key])}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>

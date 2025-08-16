@@ -1,0 +1,54 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      
+    </title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Boxicons (icons) -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+
+    <!-- Toastify CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
+
+
+    <style type="text/tailwindcss">
+      @theme {
+        --font-inter: "Inter", sans-serif;
+        --color-brandPrimary: #a6c2b3;
+        --color-brandSecondary: #d4e6c1;
+        --color-textGray: #4d4d4d;
+      }
+
+      input::placeholder {
+        color: white;
+        opacity: 0.8;
+        font-weight: 500;
+      }
+
+      input:focus {
+        outline: none;
+      }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body class="bg-white min-h-screen flex items-center justify-center font-inter">
+    {% block content %}{% endblock %}
+
+    <!-- Toastify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0"></script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

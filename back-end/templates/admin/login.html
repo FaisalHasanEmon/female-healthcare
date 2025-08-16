@@ -1,0 +1,69 @@
+
+{% load static %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="min-h-screen flex justify-center items-center font-inter">
+  <div class="w-[350px] md:w-[580px] bg-gradient-to-b from-purple-400 to-purple-700 rounded-lg p-6 md:p-10 shadow-md">
+    <div class="text-center space-y-3">
+      <h2 class="font-semibold text-[38px] text-black">Login</h2>
+      <p>
+        Don't have an account?
+        <span class="text-[#808080] underline">
+          <a href="#">Create an account</a>
+        </span>
+      </p>
+    </div>
+
+    <div class="w-full mt-[26px] h-16">
+      <button class="w-full h-full bg-purple-600 text-white flex justify-center items-center gap-4">
+        <img src="{% static 'icons/Google.png' %}" alt="Google Icon" class="w-[18px] h-[18px]" />
+        <p>Continue With Google</p>
+      </button>
+    </div>
+
+    <div class="flex justify-center items-center my-6 text-gray-600 text-sm">
+      <hr class="w-[183px] border-t border-gray-500" />
+      <span class="mx-2">OR</span>
+      <hr class="w-[183px] border-t border-gray-500" />
+    </div>
+
+    <form method="post" action="{% url 'admin:login' %}">
+      {% csrf_token %}
+      {% if form.errors %}
+        <p class="text-red-500 text-sm mb-4">Invalid credentials. Please try again.</p>
+      {% endif %}
+      <div class="h-16 mb-[18px] relative">
+        <span class="flex items-center gap-2 text-white absolute ml-5 top-3 w-[50px] z-50">
+          <svg class="text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+          <p>|</p>
+        </span>
+        <input type="text" name="username" required autofocus class="w-full h-full bg-purple-600 text-white pl-[76px] placeholder:text-white rounded" placeholder="Email" />
+      </div>
+
+      <div class="h-16 mb-2.5 relative">
+        <span class="flex items-center gap-2 text-white absolute ml-5 top-3 w-[50px] z-50">
+          <svg class="text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+          <p>|</p>
+        </span>
+        <input type="password" name="password" required class="w-full h-full bg-purple-600 text-white pl-[76px] placeholder:text-white rounded" placeholder="Password" />
+      </div>
+
+      <div class="flex justify-end items-center mb-[30px]">
+        <a href="{% url 'password_reset' %}" class="text-white text-sm">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="w-full h-16 bg-gradient-to-r from-purple-500 to-purple-700 text-white font-medium rounded">
+        Log In
+      </button>
+    </form>
+
+    <div class="mt-3 text-center mb-2.5 text-white">
+      <p>Privacy Policy <span class="text-black">and</span> Terms Of Service</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

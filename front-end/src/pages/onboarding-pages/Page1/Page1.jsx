@@ -24,14 +24,15 @@ const Page1 = () => {
     // check input value and set data field
     if (healthStatus === "periods") {
       const date = event.target.date.value;
-      const cycleDay = event.target.cycleDay.value;
-      const periodDuration = event.target.periodDuration.value;
+      // const cycleDay = event.target.cycleDay.value;
+      // const periodDuration = event.target.periodDuration.value;
       cycleData = {
         isPeriod: true,
         isMenopause: false,
         ishormoneTherapy: false,
       };
-      cycleData.period = { date, cycleDay, periodDuration };
+      // cycleData.period = { date, cycleDay, periodDuration };
+      cycleData.period = { date };
     } else if (healthStatus === "menopause") {
       cycleData = {
         isPeriod: false,
@@ -105,7 +106,7 @@ const Page1 = () => {
               className="input input-sm outline-1 cursor-pointer px-1 outline-brandPrimary rounded-sm"
             />
           </label>
-          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
+          {/* <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
             <span className="font-montserrat ">Cycle length (Days)</span>
             <input
               type="number"
@@ -113,8 +114,8 @@ const Page1 = () => {
               defaultValue={28}
               name="cycleDay"
             />
-          </label>
-          <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
+          </label> */}
+          {/* <label className="border border-brandPrimary rounded flex justify-between px-2 py-2 lg:p-3 items-center">
             <span className="font-montserrat ">Period duration (Days)</span>
             <input
               type="number"
@@ -122,7 +123,7 @@ const Page1 = () => {
               defaultValue={7}
               name="periodDuration"
             />
-          </label>
+          </label> */}
         </div>
         <div>
           <button

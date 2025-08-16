@@ -1,5 +1,21 @@
 from django.contrib import admin
-from user.models import User, Gender, Lifestyle, DietType, Profile
+from user.forms import OnboardingAdminForm
+from user.models import (
+    User,
+    Gender,
+    Profile,
+    Onboarding
+)
+from user.onboarding.onboarding_model import (
+    Symptom,
+    DietaryStyle,
+    Goal,
+    Reminder,
+    ActivityLevel,
+    StressLevel,
+    BasicQuestion,
+    BasicAnswer,
+)
 
 
 @admin.register(User)
@@ -14,21 +30,7 @@ class UserAdmin(admin.ModelAdmin):
 class GenderAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'value')
     search_fields = ('name', 'value')
-    ordering = ('name',)
-
-
-@admin.register(DietType)
-class DietTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'value')
-    search_fields = ('name', 'value')
-    ordering = ('name',)
-
-
-@admin.register(Lifestyle)
-class LifestyleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'valu', 'discription')
-    search_fields = ('name', 'valu')
-    ordering = ('name',)
+    ordering = ('id',)
 
 
 @admin.register(Profile)
@@ -41,12 +43,119 @@ class ProfileAdmin(admin.ModelAdmin):
         'gender',
         'height',
         'weight',
-        'adderess',
-        'lifestyle',
-        'diet_type',
+        'address',
         'discription',
+        'calculated_age_display',
     )
-    search_fields = ('user__email', 'name', 'adderess')
-    list_filter = ('gender', 'lifestyle', 'diet_type')
+    search_fields = ('user__email', 'name', 'address')
     ordering = ('user__email',)
-    readonly_fields = ('calculated_age',)
+    readonly_fields = ('calculated_age_display',)
+
+    @admin.display(ordering='date_of_birth', description='Age')
+    def calculated_age_display(self, obj):
+        return obj.calculated_age
+
+
+@admin.register(Onboarding)
+class OnboardingAdmin(admin.ModelAdmin):
+    form = OnboardingAdminForm
+    list_display = (
+        'id',
+        'profile_name',
+        'has_regular_cycle',
+        'is_menopausal',
+        'on_hormonal_treatment',
+        'get_symptoms',
+        'dietary_styles',
+        'activity_level',
+        'stress_level',
+        'supplements_medications',
+        'get_goals',
+        'daily_reminder',
+    )
+    search_fields = ('profile__user__email', 'profile__name')
+    list_filter = (
+        'has_regular_cycle',
+        'is_menopausal',
+        'on_hormonal_treatment',
+        'activity_level',
+        'stress_level',
+        'daily_reminder',
+    )
+    autocomplete_fields = ['profile', 'symptoms', 'dietary_styles', 'goals']
+    ordering = ('-id',)
+
+    def profile_name(self, obj):
+        return obj.profile.name
+    profile_name.short_description = "Profile"
+
+    def get_symptoms(self, obj):
+        return ", ".join([s.name for s in obj.symptoms.all()])
+    get_symptoms.short_description = "Symptoms"
+
+    def get_goals(self, obj):
+        return ", ".join([g.name for g in obj.goals.all()])
+    get_goals.short_description = "Goals"
+
+
+@admin.register(Symptom)
+class SymptomAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'created_at', 'updated_at')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(DietaryStyle)
+class DietaryStyleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(Goal)
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(Reminder)
+class ReminderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'is_active', 'reminder_time')
+    search_fields = ('user__email',)
+    ordering = ('id',)
+    search_fields = ('user__email',)
+    ordering = ('id',)
+
+
+@admin.register(ActivityLevel)
+class ActivityLevelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(StressLevel)
+class StressLevelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    ordering = ('id',)
+
+
+@admin.register(BasicQuestion)
+class BasicQuestionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'key', 'question_text')
+    search_fields = ('question',)
+    ordering = ('id',)
+
+
+@admin.register(BasicAnswer)
+class BasicAnswerAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'onboarding',
+        'question',
+        'answer'
+    )
+    search_fields = ('answer',)
+    ordering = ('id',)

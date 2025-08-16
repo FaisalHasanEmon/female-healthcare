@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Flow Calendar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Updated Color Palette */
+            --primary-color: #6a1b9a; /* Deep Purple - elegant & futuristic */
+            --selected-color: #00bcd4; /* Cyan/Aqua - playful & futuristic pop */
+            --today-color: #e0f7fa; /* Very Light Cyan - subtle today indicator */
+            --text-color: #263238; /* Dark Blue-Grey - modern & elegant */
+            --border-color: #eceff1; /* Very Light Grey - minimalist */
+            --background-color: #ffffff; /* Clean White */
+            --secondary-background: #f8f9fa; /* Slightly off-white for headers */
+
+            /* New Gradient for Body Background - futuristic touch */
+            --body-gradient-start: #f8f9fa;
+            --body-gradient-end: #e0e0e0; /* Softer, slightly cooler grey */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Arial', sans-serif; /* Default to Roboto */
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--body-gradient-start) 0%, var(--body-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: auto; /* Ensure content is scrollable if needed */
+        }
+
+        .calendar {
+            background: var(--background-color);
+            border-radius: 16px; /* Slightly larger for modern elegance */
+            /* Refined, softer shadow for a floating, futuristic feel */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+            padding: 30px; /* More padding for spaciousness */
+            margin: 20px auto;
+            transition: all 0.5s ease-out; /* Smooth transition for potential animations */
+        }
+
+        .calendar h2 {
+            font-family: 'Montserrat', sans-serif; /* Modern & elegant font */
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-size: 2rem; /* Slightly larger, more prominent */
+            font-weight: 600; /* Bold but not heavy */
+            letter-spacing: -0.5px; /* Subtle tightening for modern feel */
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px; /* More space */
+        }
+
+        .form-container form {
+            display: flex;
+            gap: 12px; /* Slightly more space between elements */
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .form-container input[type="date"] {
+            padding: 12px 15px; /* More padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Softer corners */
+            font-size: 1.05rem; /* Slightly larger font */
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-color);
+            background-color: var(--secondary-background); /* Subtle fill */
+        }
+
+        .form-container input[type="date"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(106, 27, 154, 0.15); /* Primary color glow */
+        }
+
+        .form-container button {
+            padding: 12px 25px; /* More padding */
+            background: linear-gradient(45deg, var(--primary-color) 0%, #9c27b0 100%); /* Gradient for futuristic feel */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Softer corners */
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: all 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(106, 27, 154, 0.2); /* Soft shadow */
+        }
+
+        .form-container button:hover {
+            background: linear-gradient(45deg, #9c27b0 0%, var(--primary-color) 100%); /* Reverse gradient on hover */
+            transform: translateY(-3px) scale(1.02); /* More noticeable lift and slight scale */
+            box-shadow: 0 6px 15px rgba(106, 27, 154, 0.3); /* Enhanced shadow on hover */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate; /* Use separate to allow border-radius on cells */
+            border-spacing: 2px; /* Small spacing for a grid-like feel */
+            margin-top: 15px;
+            text-align: center;
+            border: none; /* No outer border */
+            overflow: hidden; /* For rounded corners on the table itself */
+            background: var(--background-color);
+            border-radius: 12px; /* Matching overall calendar box */
+        }
+
+        th, td {
+            padding: 14px; /* More padding for spaciousness */
+            text-align: center;
+            font-size: 1.05rem;
+            border: none; /* Remove individual cell borders for clean grid */
+            transition: all 0.2s ease-in-out; /* Smooth transitions for interactions */
+            border-radius: 6px; /* Slight rounding for cells */
+        }
+
+        th {
+            background: var(--secondary-background);
+            color: var(--text-color);
+            font-weight: 600; /* Bolder for prominence */
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            padding-bottom: 10px; /* Slightly less padding below for tighter header */
+            padding-top: 10px;
+        }
+        /* Ensure top-left, top-right corners of table header row are rounded */
+        table tr:first-child th:first-child {
+            border-top-left-radius: 10px;
+        }
+        table tr:first-child th:last-child {
+            border-top-right-radius: 10px;
+        }
+
+
+        td {
+            background: var(--background-color);
+            position: relative;
+            color: var(--text-color);
+        }
+
+        td:hover:not(:empty) {
+            background: var(--secondary-background); /* Gentle highlight */
+            cursor: pointer;
+            transform: translateY(-1px); /* Slight lift on hover */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow on hover */
+        }
+
+        /* Today State - Subtle Glow */
+        .today {
+            background: var(--today-color);
+            font-weight: 600;
+            position: relative;
+            /* Adding a subtle, soft glow for a futuristic "current" feel */
+            box-shadow: 0 0 8px rgba(0, 188, 212, 0.3); /* Cyan glow */
+        }
+        .today::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px; /* Small dot */
+            height: 8px;
+            background-color: var(--selected-color); /* Matches selected color for playful pop */
+            border-radius: 50%;
+            animation: pulse 1.5s infinite ease-out; /* Gentle pulsing animation */
+            opacity: 0.7;
+        }
+
+        /* Selected State - Playful & Distinct */
+        .selected {
+            background: linear-gradient(45deg, var(--selected-color) 0%, #4dd0e1 100%); /* Gradient for distinct look */
+            color: white;
+            font-weight: bold;
+            border-radius: 8px; /* Slightly more rounded */
+            transform: scale(1.05); /* Pop out slightly */
+            box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4); /* Stronger shadow with selected color */
+            z-index: 1; /* Ensure it stays above others */
+        }
+
+        .selected::before {
+            content: '◎'; /* A more abstract, futuristic marker */
+            position: absolute;
+            top: -8px; /* Position it slightly outside for flair */
+            right: -8px;
+            font-size: 1.2rem; /* Larger and more impactful */
+            color: white;
+            background: none; /* No background, let the glow handle it */
+            border-radius: 50%;
+            padding: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect for the marker */
+            animation: rotateMarker 3s linear infinite; /* Subtle rotation */
+            opacity: 0.9;
+        }
+
+        td:empty {
+            background: #fdfdfd; /* Even lighter for empty cells */
+            border-radius: 6px; /* Maintain cell rounding */
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes rotateMarker {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* Responsive Design - Adjustments for the new look */
+        @media (max-width: 600px) {
+            .calendar {
+                padding: 20px; /* Slightly less padding */
+                border-radius: 12px;
+            }
+
+            .calendar h2 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            th, td {
+                padding: 10px; /* Adjust padding for smaller screens */
+                font-size: 0.95rem;
+            }
+
+            .form-container input[type="date"],
+            .form-container button {
+                width: 100%;
+                max-width: 280px; /* Slightly less max-width */
+                font-size: 0.95rem;
+            }
+
+            .selected::before {
+                font-size: 1rem;
+                top: -6px;
+                right: -6px;
+            }
+            .today::after {
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            th, td {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            .calendar h2 {
+                font-size: 1.4rem;
+            }
+
+            .selected::before {
+                font-size: 0.9rem;
+                top: -5px;
+                right: -5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        <h2>{{ month_name }} {{ year }}</h2>
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                <input type="date" name="date" value="{{ selected_date|date:'Y-m-d' }}">
+                <button type="submit">Show Calendar</button>
+            </form>
+        </div>
+        <table>
+            <tr>
+                <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+            </tr>
+            {% for week in calendar %}
+                <tr>
+                    {% for day in week %}
+                        <td {% if day != 0 %}
+                                {% if day == selected_date.day and month == selected_date.month and year == selected_date.year %}
+                                    class="selected"
+                                {% elif day == today.day and month == today.month and year == today.year %}
+                                    class="today"
+                                {% endif %}
+                            {% endif %}>
+                            {% if day != 0 %}{{ day }}{% else %}&nbsp;{% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const ModeTracker = () => {
   const [selectedMood, setSelectedMood] = useState("");
-  const [selectedSymptom, setSelectedSymptom] = useState("");
+  // const [selectedSymptom, setSelectedSymptom] = useState("");
   const [energyLevel, setEnergyLevel] = useState(5);
   const [log, setLog] = useState("symptoms");
 
@@ -111,7 +111,7 @@ const ModeTracker = () => {
   const handleSubmit = () => {
     const data = {
       mood: selectedMood,
-      symptom: selectedSymptom,
+      // symptom: selectedSymptom,
       energyLevel,
       symptompLog: symptompLogData,
       foodLog: foodLogData,
@@ -241,7 +241,7 @@ const ModeTracker = () => {
                 <div className="w-full">
                   <input
                     type="range"
-                    min="1"
+                    min="0"
                     max="10"
                     value={energyLevel}
                     onChange={(e) => setEnergyLevel(parseInt(e.target.value))}
@@ -249,7 +249,7 @@ const ModeTracker = () => {
                     step="1"
                   />
                   <div className="flex justify-between text-xs sm:text-sm text-gray-500 mt-1">
-                    <span>1</span>
+                    <span>0</span>
                     <span className="font-medium text-primary text-sm sm:text-base">
                       {energyLevel}
                     </span>

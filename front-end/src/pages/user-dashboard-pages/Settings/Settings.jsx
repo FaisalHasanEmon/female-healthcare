@@ -23,6 +23,9 @@ export default function ProfileForm() {
     stressLevel: "Medium",
     medications: "",
 
+    // Top Three Concerns
+    topThreeConcerns: [],
+
     // Daily Reminders
     dailyReminder: false,
     reminderTime: "09:00",
@@ -66,6 +69,30 @@ export default function ProfileForm() {
     }));
     console.log("Selected dietary style:", style);
     // console.log("Updated dietary styles:", formData.dietaryStyles);
+  };
+
+  const handleTopThreeConcernsChange = (concern) => {
+    setFormData((prev) => {
+      const currentConcerns = prev.topThreeConcerns;
+
+      if (currentConcerns.includes(concern)) {
+        // Remove concern if already selected
+        return {
+          ...prev,
+          topThreeConcerns: currentConcerns.filter((c) => c !== concern),
+        };
+      } else if (currentConcerns.length < 3) {
+        // Add concern if less than 3 selected
+        return {
+          ...prev,
+          topThreeConcerns: [...currentConcerns, concern],
+        };
+      } else {
+        // Show toast if trying to select more than 3
+        showToast("You can only select up to 3 concerns");
+        return prev;
+      }
+    });
   };
 
   const handleUpdateInfo = () => {
@@ -129,6 +156,9 @@ export default function ProfileForm() {
         hasUterus: formData.hasUterus,
       },
 
+      // Top Three Concerns
+      topThreeConcerns: formData.topThreeConcerns,
+
       // Daily Reminders
       dailyReminders: {
         dailyReminder: formData.dailyReminder,
@@ -184,11 +214,26 @@ export default function ProfileForm() {
     { id: 7, text: "Gluten-Free" },
     { id: 8, text: "None" },
   ];
+
+  // Top Three Concerns options
+  const concernsOptions = [
+    "Fatigue",
+    "Mood",
+    "Sleep",
+    "Cravings",
+    "Weight",
+    "Cramps",
+    "Anxiety",
+    "Brain fog",
+    "Hot flashes",
+    "Irregular cycles",
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 p-6 pt-22">
       {/* Toast Notification */}
       {toast && (
-        <div className="toast toast-top toast-end">
+        <div className="toast toast-top toast-end z-50">
           <div className="alert alert-success text-white">
             <span>{toast}</span>
           </div>
@@ -361,6 +406,46 @@ export default function ProfileForm() {
                     onChange={handleInputChange}
                     className="toggle toggle-success"
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 3: Your Top Three Concerns */}
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">
+                Your Top Three Concerns
+              </h2>
+
+              <div className="space-y-4">
+                <p className="text-sm text-gray-600 mb-4">
+                  Select up to 3 concerns that are most important to you (
+                  {formData.topThreeConcerns.length}/3 selected)
+                </p>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {concernsOptions.map((concern) => (
+                    <label
+                      key={concern}
+                      className={`flex items-center space-x-3 cursor-pointer ${
+                        formData.topThreeConcerns.length >= 3 &&
+                        !formData.topThreeConcerns.includes(concern)
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.topThreeConcerns.includes(concern)}
+                        onChange={() => handleTopThreeConcernsChange(concern)}
+                        disabled={
+                          formData.topThreeConcerns.length >= 3 &&
+                          !formData.topThreeConcerns.includes(concern)
+                        }
+                        className="checkbox checkbox-success"
+                      />
+                      <span>{concern}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
             </div>

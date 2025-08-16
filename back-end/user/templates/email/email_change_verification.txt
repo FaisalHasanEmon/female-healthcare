@@ -1,0 +1,13 @@
+Hello,
+
+You have requested to change your email from {{ current_email }} to {{ new_email }}.
+
+Please click the following link to confirm this change:
+{{ verification_url }}
+
+This link will expire in 24 hours.
+
+If you didn't request this change, please secure your account immediately.
+
+Thank you,
+The Team

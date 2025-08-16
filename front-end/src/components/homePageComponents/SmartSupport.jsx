@@ -45,6 +45,7 @@ const SmartSupport = () => {
         <div className="relative w-full flex flex-col justify-center items-center lg:items-end  mb-[171px] text-center lg:text-right">
           {/* Your Body's been talking section starts */}
           {/* Background Text */}
+
           <h2 className="uppercase font-extrabold text-[24px] sm:text-[40px] lg:text-[64px] text-transparent font-playfair-display -z-10 [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#a6c2b3] whitespace-nowrap overflow-hidden mr-0">
             your body's been talking
           </h2>

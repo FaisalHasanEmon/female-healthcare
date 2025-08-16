@@ -8,7 +8,28 @@ from .reset_password import (
 )
 from .change_pasasword import ChangePasswordView
 from .verify_email import VerifyEmailView
-
+from .profile import (
+    ProfileCreateView,
+    ProfileDetailView,
+    ProfileUpdateView,
+    ProfileDeleteView
+)
+from .onboarding import (
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView,
+    ActivityLevelListCreateAPIView,
+    StressLevelListCreateAPIView,
+    BasicQuestionListCreateAPIView,
+)
+from .profile_update import (
+    UserProfileUpdateView,
+    VerifyEmailChangeView
+)
 
 __all__ = [
     RegisterView,
@@ -18,4 +39,20 @@ __all__ = [
     PasswordResetConfirmView,
     ChangePasswordView,
     VerifyEmailView,
+    ProfileCreateView,
+    ProfileDetailView,
+    ProfileUpdateView,
+    ProfileDeleteView,
+    OnboardingCreateAPIView,
+    OnboardingDetailAPIView,
+    OnboardingUpdateAPIView,
+    OnboardingDeleteAPIView,
+    SymptomListCreateAPIView,
+    DietaryStyleListCreateAPIView,
+    GoalListCreateAPIView,
+    ActivityLevelListCreateAPIView,
+    StressLevelListCreateAPIView,
+    BasicQuestionListCreateAPIView,
+    UserProfileUpdateView,
+    VerifyEmailChangeView
 ]

@@ -63,8 +63,8 @@ const DashboardSideBar = () => {
               }
               style={NavButtonsStyle}
               end={
-                location.pathname === `/dashboard/analytics` ||
-                location.pathname === `/dashboard/overview`
+                location.pathname === `/dashboard/overview` ||
+                location.pathname === `/dashboard/analytics`
                   ? false
                   : true
               }

@@ -6,10 +6,11 @@ import { NavLink, useLocation } from "react-router-dom";
 const DashBoardNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  console.log(location.pathname);
   let showPeroidTracker = false;
+  console.log(location.pathname);
 
   // Check if the current path is not the overview page
+
   if (
     location.pathname === "/dashboard/overview" ||
     location.pathname === "/dashboard/analytics" ||

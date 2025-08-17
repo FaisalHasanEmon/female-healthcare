@@ -7,8 +7,8 @@ const MyCarousel = ({ data, reverse = false, from = "none" }) => {
   const carouselRef = useRef(null);
 
   const responsive = {
-    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3 },
-    tablet: { breakpoint: { max: 1024, min: 640 }, items: 2 },
+    desktop: { breakpoint: { max: 3000, min: 1456 }, items: 3 },
+    tablet: { breakpoint: { max: 1456, min: 640 }, items: 2 },
     mobile: { breakpoint: { max: 640, min: 0 }, items: 1 },
   };
   // Render stars based on rating

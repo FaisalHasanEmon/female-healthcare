@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Page5 = () => {
   const navigate = useNavigate();
@@ -27,35 +28,32 @@ const Page5 = () => {
         Would you like to set a daily reminder to check in with your body?
       </h1>
       <form
-        onChange={()=>setReminder(!reminder)}
+        onChange={() => setReminder(!reminder)}
         className="flex flex-col mx-auto gap-3 md:gap-5 w-6/12"
       >
         {/* option  */}
         <label className="border border-brandPrimary rounded flex justify-between p-1 text-sm md:text-base md:p-3 items-center cursor-pointer">
           <span className="font-montserrat text-sm md:text-base ">YES</span>
-          <input
-            type="radio"
-            name="healthStatus"
-            value="yes"
-          />
+          <input type="radio" name="healthStatus" value="yes" />
         </label>
         <label className="border border-brandPrimary rounded flex justify-between p-1 text-sm md:text-base md:p-3  items-center cursor-pointer">
           <span className="font-montserrat text-sm md:text-base">No</span>
-          <input
-            type="radio"
-            name="healthStatus"
-            value="no"
-          />
+          <input type="radio" name="healthStatus" value="no" />
         </label>
 
         {/* navigation  */}
-        <div className="mr-auto">
+        <div className=" mt-5 flex justify-between items-center w-full">
           <button
-            type="submit"
-            onClick={submitData}
-            className=" btn bg-brandPrimary px-5 md:px-10 text-sm md:text-base hover:bg-[#7f9e90]"
+            className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90] "
+            onClick={() => navigate(-1)}
           >
-            Finish up
+            <FaArrowLeft className="inline" /> Previous
+          </button>
+          <button
+            className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90]"
+            onClick={submitData}
+          >
+            Finish up <FaArrowRight className="inline" />
           </button>
         </div>
       </form>

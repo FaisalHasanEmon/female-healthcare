@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 //onboarding page4
 const Page4 = () => {
@@ -63,12 +64,18 @@ const Page4 = () => {
         ))}
       </div>
       {/* navigation link  */}
-      <div className="text-right">
+      <div className=" mt-5 flex justify-between items-center w-full">
         <button
-          onClick={setToLocalStorage}
-          className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary"
+          className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90] "
+          onClick={() => navigate(-1)}
         >
-          Continue
+          <FaArrowLeft className="inline" /> Previous
+        </button>
+        <button
+          className="btn btn-md bg-brandPrimary px-5 md:px-10 py-2 rounded border-brandPrimary hover:bg-[#7f9e90]"
+          onClick={setToLocalStorage}
+        >
+          Continue <FaArrowRight className="inline" />
         </button>
       </div>
     </div>

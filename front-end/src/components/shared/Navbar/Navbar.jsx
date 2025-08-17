@@ -24,7 +24,7 @@ const Navbar = () => {
           {/* Brand logo started */}
           <Link to="/">
             <figure className="w-[50px] h-[50px] md:w-[62px] md:h-[62px]">
-              <img src="/logo.png" alt="Logo" className="w-full h-full" />
+              <img src="/logo3.png" alt="Logo" className="w-full h-full" />
             </figure>
           </Link>
           {/* Brand logo ended */}
@@ -91,7 +91,7 @@ const Navbar = () => {
                         isPending
                           ? "pending"
                           : isActive
-                          ? "text-brandPrimary "
+                          ? "text-brandSecondary"
                           : ""
                       }
                     >

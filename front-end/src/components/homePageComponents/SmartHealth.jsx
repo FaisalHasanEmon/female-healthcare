@@ -1,14 +1,6 @@
-import React, { useState } from "react";
-import BoxHeading from "./shared/BoxHeading";
-// import Marquee from "react-fast-marquee";
-import { Link } from "react-router-dom";
 import MyCarousel from "./MyCarousel";
 
 const SmartHealth = () => {
-  // Show Image Use State
-  const [showImage, setShowImage] = useState("");
-  // const [isHovered, setIsHovered] = useState(false);
-
   // Card Contents Information
   const fenyxLibraryCardsContent = [
     {
@@ -47,11 +39,6 @@ const SmartHealth = () => {
     },
   ];
 
-  // Show Modal Function
-  const handleCardClick = (contentImage) => {
-    setShowImage(contentImage);
-    document.getElementById("my_modal_4").showModal();
-  };
   return (
     <section>
       <div className=" py-14 mt-10">
@@ -81,20 +68,6 @@ const SmartHealth = () => {
         </div>
         {/* Carousels Section Ends */}
       </div>
-      {/* Modal Of Selected Image*/}
-      <dialog id="my_modal_4" className="modal ">
-        <div className="modal-box w-11/12 max-h-[95%] max-w-5xl bg-brandPrimary overflow-x-hidden">
-          <img
-            src={`${showImage}`}
-            className="w-full h-full object-top rounded-lg"
-          />
-          <div className="modal-action">
-            <form method="dialog" className="w-full">
-              <button className="btn w-full bg-brandSecondary">Close</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
     </section>
   );
 };

@@ -60,7 +60,7 @@ const Banner = () => {
               </span>
             </h2>
             {/* Paragraph */}
-            <p className="top-6 sm:mt-12 font-montserrat text-[#4D4D4D] text-base sm:text-lg md:text-2xl leading-relaxed text-center lg:text-left">
+            <p className="top-6 sm:mt-12 font-montserrat text-[#4D4D4D] text-base sm:text-lg md:text-2xl leading-relaxed text-center ">
               Hormone, mood, and nutritional support that{" "}
               <br className="hidden md:block" />
               evolves with you – finally a system that sees the{" "}
@@ -68,7 +68,7 @@ const Banner = () => {
               full picture.
             </p>
             {/* Buttons */}
-            <div className="mt-8 flex justify-center items-center lg:justify-start lg:items-start gap-2 sm:gap-[30px]">
+            <div className="mt-8 flex justify-center items-center  gap-1 sm:gap-[30px] sm:mb-12">
               <PrimaryButton text="Start Your Reset" />
               <SecondaryButton text="See How It Works" />
             </div>

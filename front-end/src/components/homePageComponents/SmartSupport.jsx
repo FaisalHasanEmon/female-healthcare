@@ -55,14 +55,14 @@ const SmartSupport = () => {
             your body's been talking
           </h2>
           {/* Your Body's been talking section ends */}
-          <h2 className="text-3xl md:text-4xl lg:text-[64px] font-bold text-gray-900 -mt-5 md:-mt-8 lg:-mt-13 z-45 relative">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 -mt-5 md:-mt-8 lg:-mt-13 z-45 relative">
             YOU DESERVE SM
-            <span className="after:content-[''] after:absolute  after:left-0 after:w-1/2  after:translate-1/2 lg:after:left-[58%] after:bottom-2 after:h-[12.5px] lg:after:h-[23px] lg:after:translate-0 lg:after:w-[414px]  after:bg-brandSecondary after:rounded-0 after:-z-50">
+            <span className="after:content-[''] after:absolute  after:left-0 after:w-1/2  after:translate-1/2 lg:after:left-[58%] after:bottom-2 after:h-[12.5px] lg:after:h-[15px] lg:after:translate-0 lg:after:w-[314px]  after:bg-brandSecondary after:rounded-0 after:-z-50">
               ART SUPPORT
             </span>{" "}
             <br />
           </h2>
-          <h2 className="text-3xl lg:text-[64px] font-bold text-gray-900  mb-10">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900  mb-10">
             FOR A COMPLEX SEASON
           </h2>
           <PrimaryButton

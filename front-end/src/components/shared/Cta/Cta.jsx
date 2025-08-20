@@ -10,7 +10,7 @@ const Cta = () => {
       </h2>
       <div className="flex justify-center gap-2 md:gap-4 flex-wrap">
         <PrimaryButton text="Get Started" link="#" />
-        <SecondaryButton text="Request Demo" link="#" />
+        {/* <SecondaryButton text="Request Demo" link="#" /> */}
       </div>
     </div>
   );

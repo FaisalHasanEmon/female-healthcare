@@ -7,24 +7,22 @@ const Banner = () => {
       <div className="container px-5 mx-auto pt-[100px] md:pt-[154px] pb-[44px]">
         <div className="flex justify-center   items-center  gap-8">
           {/* Left Section */}
-          <div className="w-full  relative">
+          <div className="w-full relative ">
             {/* Outlined Background Text */}
             {/* // Container with relative positioning */}
-            <div className="w-full overflow-hidden text-center flex justify-center items-center">
+            <div className="relative overflow-hidden text-center flex justify-center items-center  lg:w-5xl mx-auto ">
               {/* Outline Text (Background) */}
               <h1
                 className="
                 uppercase 
                 border
-                w-5xl 
-                border-black
                 font-extrabold 
-                text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] 
+                text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] 
                 font-playfair-display 
                 text-transparent
                 [-webkit-text-stroke-width:1px] 
                 [-webkit-text-stroke-color:#a6c2b3]
-                [text-stroke-width:1px]
+                [text-stroke-width:2px]
                 [text-stroke-color:#a6c2b3]
                 whitespace-nowrap
                 relative
@@ -32,37 +30,33 @@ const Banner = () => {
                 "
               >
                 your body's been talking
-                <h2
-                  className="
+              </h1>
+              <h2
+                className="
                     absolute 
-                    top-0 
+                    top-0.3 
+                    left-13.3
                     uppercase 
                     font-extrabold 
-                    left-13 lg:left-37
-                    text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] 
+                    text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] 
                     font-playfair-display 
                     text-[#FDFAF5]
-                    
-                 
                     z-10
                    
-                    
-                    "
-                >
-                  your body's been talking
-                </h2>
-              </h1>
-
+                   "
+              >
+                your body's been talking
+              </h2>
               {/* Solid Overlapping Text */}
 
               {/* translate-y-1 sm:translate-y-2 md:translate-y-3 lg:translate-y-4 text-[#FDFAF5] */}
             </div>
             {/* Main headline */}
-            <h2 className="text-center  -top-5 md:-top-7 lg:-top-7 uppercase font-bold text-2xl sm:text-[28px] md:text-4xl relative z-10 leading-tight">
-              Your Body's Been Talking. FENYX <br />
-              <span className="relative inline-block mt-1">
-                Helps You Listen.
-                <span className="absolute ml-6 left-0 bottom-1 h-[20px] sm:h-[23px] w-full bg-brandSecondary -z-10"></span>
+            <h2 className="text-center  -top-4 md:-top-7 lg:-top-7 uppercase font-bold text-lg sm:text-[28px] md:text-4xl relative z-10 leading-tight">
+              AI Driven Hormonal Health <br />
+              <span className="relative inline-block mt-1  ">
+                For Every Phase Of Your Life.
+                <span className="absolute left-2 bottom-0 sm:left-5  sm:bottom-1 h-[12px] sm:h-[20px] w-11/12   bg-brandSecondary -z-10 "></span>
               </span>
             </h2>
             {/* Paragraph */}

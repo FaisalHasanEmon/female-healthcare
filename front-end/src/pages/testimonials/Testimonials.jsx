@@ -2,10 +2,8 @@ import TestimonialsComponent from "../../components/shared/TestimonialsComponent
 
 const Testimonials = () => {
   return (
-    <section className="h-full ">
-      <div className="mt-40">
-        <TestimonialsComponent></TestimonialsComponent>
-      </div>
+    <section className="py-14  ">
+      <TestimonialsComponent></TestimonialsComponent>
     </section>
   );
 };

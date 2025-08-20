@@ -66,20 +66,6 @@ const TestimonialsComponent = () => {
     },
   ];
 
-  // Ratings Function
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <span
-        key={index}
-        className={`text-2xl ${
-          index < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
-      >
-        ★
-      </span>
-    ));
-  };
-
   return (
     <section className="my-10 md:my-20 pb-10">
       <div>
@@ -92,13 +78,11 @@ const TestimonialsComponent = () => {
 
         {/* Testimonials */}
         <div className="mt-2">
-          {/* <Marquee direction={"right"} speed={30}> */}
           <MyCarousel
             from="testimonials"
             data={commentsOfUsers}
             reverse
           ></MyCarousel>
-          {/* </Marquee> */}
         </div>
       </div>
     </section>

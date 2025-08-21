@@ -24,6 +24,7 @@ import Settings from "../pages/user-dashboard-pages/Settings/Settings";
 import Dashboard from "../pages/user-dashboard-pages/Dashboard/Dashboard";
 import Analytics from "../pages/user-dashboard-pages/Dashboard/Analytics/Analytics";
 import Overview from "../pages/user-dashboard-pages/Dashboard/Overview/Overview";
+import OverviewDetails from "../pages/user-dashboard-pages/Dashboard/Overview/OverviewDetails";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/overview",
             element: <Overview></Overview>,
+          },
+          {
+            path: "/dashboard/overview/:id",
+            element: <OverviewDetails></OverviewDetails>,
           },
         ],
       },

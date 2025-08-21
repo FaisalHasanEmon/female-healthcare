@@ -271,10 +271,10 @@ const ChatInterface = () => {
         <div
           className={`flex max-w-[80%] ${
             isUser ? "flex-row-reverse" : "flex-row"
-          } items-start gap-3`}
+          } items-end gap-3 `}
         >
           {/* Avatar */}
-          <div
+          {/* <div
             className={`avatar placeholder flex-shrink-0 ${
               isUser ? "ml-2" : "mr-2"
             }`}
@@ -290,7 +290,7 @@ const ChatInterface = () => {
             >
               {isUser ? "U" : "AI"}
             </div>
-          </div>
+          </div> */}
 
           {/* Message Content */}
           <div
@@ -299,7 +299,7 @@ const ChatInterface = () => {
             <div
               className={`px-4 py-3 rounded-2xl max-w-full word-wrap ${
                 isUser
-                  ? "bg-blue-500 text-white rounded-br-sm"
+                  ? "bg-brandPrimary/70 text-white font-medium rounded-br-sm"
                   : msg.isError
                   ? "bg-red-100 text-red-800 border border-red-200 rounded-bl-sm"
                   : "bg-gray-100 text-gray-800 rounded-bl-sm"
@@ -309,9 +309,9 @@ const ChatInterface = () => {
                 {msg.text}
               </p>
             </div>
-            <span className="text-xs text-gray-500 mt-1 px-2">
+            {/* <span className="text-xs text-gray-500 mt-1 px-2">
               {msg.timestamp}
-            </span>
+            </span> */}
           </div>
         </div>
       </div>
@@ -387,8 +387,8 @@ const ChatInterface = () => {
                 value={message}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                placeholder="Message ChatGPT..."
-                className="flex-1 resize-none border-none outline-none bg-transparent px-4 py-3 text-gray-700 placeholder-gray-400 text-base leading-6 max-h-48 min-h-12"
+                placeholder="How Can Fenyx Help You?"
+                className="flex-1 resize-none border-none outline-none bg-transparent px-4 py-3 text-gray-700 placeholder-white text-base leading-6 max-h-48 min-h-12"
                 rows={1}
                 style={{ height: "auto" }}
                 disabled={isLoading}

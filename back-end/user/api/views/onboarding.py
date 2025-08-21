@@ -1,13 +1,13 @@
-from rest_framework import serializers
 from rest_framework import permissions
-
+from rest_framework import serializers
+from datetime import date
+from rest_framework.views import APIView
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
     UpdateAPIView,
     DestroyAPIView,
     ListCreateAPIView,
-    ListAPIView
 )
 from user.api.views.permissions import IsOwnerOfOnboarding
 from user.api.serializers import (
@@ -17,11 +17,13 @@ from user.api.serializers import (
     GoalSerializer,
     ActivityLevelSerializer,
     StressLevelSerializer,
-    BasicQuestionSerializer
+    # CycleInfoSerializer
 )
+
 from user.models import (
     Profile,
-    Onboarding
+    Onboarding,
+    CycleInfo
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -30,17 +32,41 @@ from user.onboarding.onboarding_model import (
     ActivityLevel,
     StressLevel
 )
+from rest_framework.response import Response
 
 
 class OnboardingCreateAPIView(CreateAPIView):
     serializer_class = OnboardingSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         profile = Profile.objects.get(user=self.request.user)
         if Onboarding.objects.filter(profile=profile).exists():
             raise serializers.ValidationError("Onboarding already exists.")
-        serializer.save(profile=profile)
+        onboarding = serializer.save(profile=profile)
+
+        cycle_info = None
+
+        if onboarding.has_regular_cycle:
+            cycle_info = CycleInfo.objects.create(
+                profile=profile,
+                start_date=None,
+                end_date=None,
+                cycle_length=28,
+                period_length=5,
+                current_phase='Menstrual'
+                
+            )
+        
+        cycle_info_data = None
+        if cycle_info:
+            cycle_info_data = CycleInfoSerializer(cycle_info).data
+
+        responce_data = serializer.data
+        if cycle_info_data:
+            responce_data['cycle_info'] = cycle_info_data
+
+        return Response(responce_data)
 
 
 class OnboardingDetailAPIView(RetrieveAPIView):
@@ -92,6 +118,23 @@ class StressLevelListCreateAPIView(ListCreateAPIView):
     queryset = StressLevel.objects.all()
 
 
-class BasicQuestionListCreateAPIView(ListAPIView):
-    serializer_class = BasicQuestionSerializer
-    queryset = Onboarding.objects.all()
+class LifeStyleListAPIView(APIView):
+
+    def get(self, request):
+        dietary_styles = DietaryStyleSerializer(
+            DietaryStyle.objects.all(),
+            many=True
+        ).data
+        activity_levels = ActivityLevelSerializer(
+            ActivityLevel.objects.all(),
+            many=True
+        ).data
+        stress_levels = StressLevelSerializer(
+            StressLevel.objects.all(),
+            many=True
+        ).data
+        return Response({
+            "dietary_style": dietary_styles,
+            "activity_level": activity_levels,
+            "stress_level": stress_levels
+        })

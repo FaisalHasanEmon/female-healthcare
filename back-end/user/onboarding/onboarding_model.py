@@ -47,32 +47,6 @@ class Goal(BaseModel):
         verbose_name = "Goal"
         verbose_name_plural = "Goals"
 
-
-class Reminder(BaseModel):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='reminders',
-        help_text="User associated with this reminder"
-    )
-    is_active = models.BooleanField(
-        default=False,
-        help_text="Indicates whether the daily reminder is active"
-    )
-    reminder_time = models.TimeField(
-        blank=True,
-        null=True,
-        help_text="Time for the daily reminder"
-    )
-
-    def __str__(self):
-        return f"Reminder for {self.user.email} at {self.reminder_time or 'N/A'}"
-
-    class Meta:
-        verbose_name = "Reminder"
-        verbose_name_plural = "Reminders"
-
-
 class ActivityLevel(BaseModel):
     name = models.CharField(
         max_length=20,
@@ -103,56 +77,30 @@ class StressLevel(BaseModel):
         verbose_name_plural = "Stress Levels"
 
 
-class BasicQuestion(BaseModel):
-    key = models.SlugField(
-        max_length=100,
-        unique=True,
-        help_text="Unique identifier for the question (e.g., regular_cycle)"
+class Reminder(BaseModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='reminders',
+        help_text="User associated with this reminder"
     )
-    question_text = models.CharField(
-        max_length=255,
-        help_text="Text of the question (e.g., Do you have a regular cycle?)"
+    is_active = models.BooleanField(
+        default=False,
+        help_text="Indicates whether the daily reminder is active"
     )
-    description = models.TextField(
+    reminder_time = models.TimeField(
         blank=True,
         null=True,
-        help_text="Optional description or context for the question"
+        help_text="Time for the daily reminder"
     )
 
     def __str__(self):
-        return self.question_text
+        return f"Reminder for {self.user.email} at {self.reminder_time or 'N/A'}"
 
     class Meta:
-        verbose_name = "Basic Question"
-        verbose_name_plural = "Basic Questions"
-        ordering = ["-created_at"]
+        verbose_name = "Reminder"
+        verbose_name_plural = "Reminders"
 
 
-class BasicAnswer(BaseModel):
-    onboarding = models.ForeignKey(
-        'Onboarding',
-        blank=True,
-        on_delete=models.CASCADE,
-        related_name='basic_answers'
-    )    
-    question = models.ForeignKey(
-        BasicQuestion,
-        on_delete=models.CASCADE,
-        related_name="answers",
-        help_text="Question being answered"
-    )
-    answer = models.BooleanField(
-        null=True,
-        blank=True,
-        help_text="User's boolean answer to the question (True, False, or None)"
-    )
 
-    def __str__(self):
-        return f"{self.question.key}'s answer to '{self.question.question_text}': {self.answer}"
-
-    class Meta:
-        verbose_name = "Basic Answer"
-        verbose_name_plural = "Basic Answers"
-        unique_together = ('onboarding', 'question')
-        ordering = ["-created_at"]
 

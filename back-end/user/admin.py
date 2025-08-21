@@ -4,7 +4,8 @@ from user.models import (
     User,
     Gender,
     Profile,
-    Onboarding
+    Onboarding,
+    CycleInfo
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -13,8 +14,6 @@ from user.onboarding.onboarding_model import (
     Reminder,
     ActivityLevel,
     StressLevel,
-    BasicQuestion,
-    BasicAnswer,
 )
 
 
@@ -39,22 +38,17 @@ class ProfileAdmin(admin.ModelAdmin):
         'id',
         'user',
         'name',
+        'age',
+        'blood_group',
         'date_of_birth',
         'gender',
         'height',
         'weight',
         'address',
         'discription',
-        'calculated_age_display',
     )
     search_fields = ('user__email', 'name', 'address')
     ordering = ('user__email',)
-    readonly_fields = ('calculated_age_display',)
-
-    @admin.display(ordering='date_of_birth', description='Age')
-    def calculated_age_display(self, obj):
-        return obj.calculated_age
-
 
 @admin.register(Onboarding)
 class OnboardingAdmin(admin.ModelAdmin):
@@ -66,12 +60,15 @@ class OnboardingAdmin(admin.ModelAdmin):
         'is_menopausal',
         'on_hormonal_treatment',
         'get_symptoms',
-        'dietary_styles',
+        # 'get_dietary_styles',
         'activity_level',
         'stress_level',
         'supplements_medications',
         'get_goals',
         'daily_reminder',
+        'reminder_time',
+        'show_fenyx_insights',
+        'has_uterus'
     )
     search_fields = ('profile__user__email', 'profile__name')
     list_filter = (
@@ -142,20 +139,24 @@ class StressLevelAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
 
-@admin.register(BasicQuestion)
-class BasicQuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'key', 'question_text')
-    search_fields = ('question',)
-    ordering = ('id',)
-
-
-@admin.register(BasicAnswer)
-class BasicAnswerAdmin(admin.ModelAdmin):
+@admin.register(CycleInfo)
+class CycleInfoAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'onboarding',
-        'question',
-        'answer'
+        'profile',
+        'cycle_length',
+        'start_date',
+        'end_date',
+        'period_length',
+        'get_current_phase'
     )
-    search_fields = ('answer',)
-    ordering = ('id',)
+    search_fields = ('profile__user__email', 'profile__name')
+    ordering = ('-id',)
+    autocomplete_fields = ['profile']
+    
+    def profile(self, obj):
+        return obj.profile.name
+    profile.short_description = "Profile"
+
+    def get_current_phase(self, obj):
+        return obj.current_phase.capitalize() if obj.current_phase else "-"

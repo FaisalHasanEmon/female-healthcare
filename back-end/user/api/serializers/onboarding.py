@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from user.models import (
-    Onboarding
+    Onboarding,
+    CycleInfo,
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -33,6 +34,21 @@ class OnboardingSerializer(serializers.ModelSerializer):
             'supplements_medications',
             'goals',
             'daily_reminder'
+        )
+        read_only_fields = ['profile']
+
+
+class CycleInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CycleInfo
+        fields = (
+            'id',
+            'profile',
+            'start_date',
+            'end_date',
+            'cycle_length',
+            'period_length',
+            'current_phase'
         )
         read_only_fields = ['profile']
 
@@ -76,3 +92,5 @@ class StressLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = StressLevel
         fields = ('id', 'name')
+
+

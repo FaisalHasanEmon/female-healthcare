@@ -1,4 +1,19 @@
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  "hash": "608e5243",
+  "configHash": "60b6ef9b",
+  "lockfileHash": "d0d26430",
+  "browserHash": "01fff13b",
+=======
+  "hash": "8c465548",
+  "configHash": "23c25d48",
+  "lockfileHash": "24372c59",
+  "browserHash": "2eff4b6f",
+>>>>>>> main
+  "optimized": {},
+  "chunks": {}
+=======
   "hash": "8c465548",
   "configHash": "23c25d48",
   "lockfileHash": "24372c59",
@@ -106,4 +121,5 @@
       "file": "chunk-G3PMV62Z.js"
     }
   }
+>>>>>>> emon
 }

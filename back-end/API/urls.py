@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from user.api.views import (
     RegisterView,
@@ -21,13 +21,23 @@ from user.api.views import (
     GoalListCreateAPIView,
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
-    BasicQuestionListCreateAPIView,
     UserProfileUpdateView,
-    VerifyEmailChangeView
+    VerifyEmailChangeView,
+    LifeStyleListAPIView,
+    OnboardingSettingsCreateAPIView,
+    OnboardingSettingsUpdateAPIView,
+    OnboardingSettingsDetailsAPIView,
+    OnboardingSettingsListAPIView
 )
 
 
 urlpatterns = [
+    # AI Coach Api
+    path(
+        'ai/',
+        include('ai.api.urls'),
+        name='ai_api'
+    ),
     # Auth Api
     path(
         'register/',
@@ -143,8 +153,29 @@ urlpatterns = [
         name='stress-level-list-create'
     ),
     path(
-        'basic-questions/',
-        BasicQuestionListCreateAPIView.as_view(),
-        name='basic-question-list-create'
+        'lifestyle/',
+        LifeStyleListAPIView.as_view(),
+        name='lifestyle-list'
+    ),
+    # Settings Page Api
+    path(
+        'settings/onboarding/create/',
+        OnboardingSettingsCreateAPIView.as_view(),
+        name='onboarding-settings-create'
+    ),
+    path(
+        'settings/onboarding/update/<int:pk>/',
+        OnboardingSettingsUpdateAPIView.as_view(),
+        name='onboarding-settings-update'
+    ),
+    path(
+        'settings/onboarding/details/<int:pk>/',
+        OnboardingSettingsDetailsAPIView.as_view(),
+        name='onboarding-settings-details'
+    ),
+    path(
+        'settings/onboarding/details/',
+        OnboardingSettingsListAPIView.as_view(),
+        name='onboarding-settings-list'
     ),
 ]

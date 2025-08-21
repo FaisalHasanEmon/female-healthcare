@@ -27,7 +27,7 @@ const DashboardSideBar = () => {
       id: 0,
       name: "Dashboard",
       path: "/dashboard/analytics",
-      icon: "/dashboard-Icons/chat-icon.png",
+      icon: "/dashboard-Icons/dashboard.png",
     },
     {
       id: 1,

@@ -106,16 +106,9 @@ const ModeTracker = () => {
 
   return (
     <div className="min-h-screen mt-14 container px-5 mx-auto">
-      <div className="w-full sm:w-lg lg:w-2xl mx-auto flex flex-col justify-center items-center">
+      <div className="w-full sm:w-lg lg:w-3xl mx-auto flex flex-col justify-center items-center">
         {/* Wellness Tracker Section */}
         <div className="mb-6">
-          <h1 className="text-xl sm:text-2xl lg:text-[40px] font-bold text-gray-800 mb-2">
-            AI Women Wellness Coach!
-          </h1>
-          <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8">
-            Talk to your wellness companion. I'm here to help you with your
-            wellness journey
-          </p>
           <h2 className="text-lg sm:text-xl lg:text-4xl font-semibold text-gray-800 mb-2">
             Wellness Tracker
           </h2>

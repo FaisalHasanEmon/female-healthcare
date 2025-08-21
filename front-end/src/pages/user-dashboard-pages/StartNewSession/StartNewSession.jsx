@@ -1,129 +1,4 @@
-// import React, { useState, useRef, useEffect } from "react";
-
-// const ChatInput = () => {
-//   const [message, setMessage] = useState("");
-//   const [isLoading, setIsLoading] = useState(false);
-//   const textareaRef = useRef(null);
-
-//   // Auto-resize textarea based on content
-//   useEffect(() => {
-//     const textarea = textareaRef.current;
-//     if (textarea) {
-//       // Reset height to auto to get the correct scrollHeight
-//       textarea.style.height = "auto";
-//       // Set height to scrollHeight, with max height constraint
-//       const newHeight = Math.min(textarea.scrollHeight, 200); // Max height of 200px
-//       textarea.style.height = `${newHeight}px`;
-//     }
-//   }, [message]);
-
-//   const handleSubmit = async () => {
-//     if (!message.trim() || isLoading) return;
-
-//     const userMessage = message.trim();
-//     setMessage("");
-//     setIsLoading(true);
-
-//     try {
-//       // Simulate API call
-//       console.log("Sending message:", userMessage);
-
-//       // Here you would typically make your API call
-//       // const response = await fetch('/api/chat', {
-//       //   method: 'POST',
-//       //   headers: { 'Content-Type': 'application/json' },
-//       //   body: JSON.stringify({ message: userMessage })
-//       // });
-
-//       // Simulate loading delay
-//       await new Promise((resolve) => setTimeout(resolve, 1000));
-
-//       // Handle response here
-//       console.log("Message sent successfully");
-//     } catch (error) {
-//       console.error("Error sending message:", error);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   const handleKeyDown = (e) => {
-//     // Send message on Enter (but not Shift+Enter for new lines)
-//     if (e.key === "Enter" && !e.shiftKey) {
-//       e.preventDefault();
-//       handleSubmit();
-//     }
-//   };
-
-//   const handleInputChange = (e) => {
-//     setMessage(e.target.value);
-//   };
-
-//   return (
-//     <section className="min-h-[calc(100vh-64px)] mt-16 flex flex-col items-center justify-between container px-5 mx-auto border border-red-500 pb-8">
-//       <div className="w-full max-w-4xl mx-auto border"></div>
-//       <div className="w-full max-w-4xl mx-auto border">
-//         {/* Chat Input Container */}
-//         <div className="relative">
-//           <div className="relative">
-//             {/* Input Field Container */}
-//             <div className="relative bg-brandPrimary py-2 px-2 flex items-end  border border-gray-300 rounded-[14px] shadow-lg hover:shadow-xl transition-all duration-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-//               {/* Textarea */}
-//               <textarea
-//                 ref={textareaRef}
-//                 value={message}
-//                 onChange={handleInputChange}
-//                 onKeyDown={handleKeyDown}
-//                 placeholder="Message ChatGPT..."
-//                 className="flex-1 resize-none border-none outline-none bg-transparent px-4 py-3 text-gray-700 placeholder-gray-400 text-base leading-6 max-h-48 min-h-12"
-//                 rows={1}
-//                 style={{ height: "auto" }}
-//                 disabled={isLoading}
-//               />
-
-//               {/* Send Button */}
-//               <div className="flex items-center p-2">
-//                 <button
-//                   type="button"
-//                   onClick={handleSubmit}
-//                   disabled={!message.trim() || isLoading}
-//                   className={`btn btn-circle btn-sm transition-all duration-200 ${
-//                     message.trim() && !isLoading
-//                       ? "btn-secondary hover:btn-primary-focus shadow-md hover:shadow-lg"
-//                       : "btn-disabled bg-gray-200 border-gray-200"
-//                   }`}
-//                 >
-//                   {isLoading ? (
-//                     <span className="loading loading-spinner loading-sm"></span>
-//                   ) : (
-//                     <svg
-//                       className="w-4 h-4"
-//                       fill="none"
-//                       stroke="#a6c2b3"
-//                       viewBox="0 0 24 24"
-//                     >
-//                       <path
-//                         strokeLinecap="round"
-//                         strokeLinejoin="round"
-//                         strokeWidth={2}
-//                         d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-//                       />
-//                     </svg>
-//                   )}
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default ChatInput;
-
-// Last Part
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const ChatInterface = () => {
   const [message, setMessage] = useState("");
@@ -302,7 +177,7 @@ const ChatInterface = () => {
                   ? "bg-brandPrimary/70 text-white font-medium rounded-br-sm"
                   : msg.isError
                   ? "bg-red-100 text-red-800 border border-red-200 rounded-bl-sm"
-                  : "bg-gray-100 text-gray-800 rounded-bl-sm"
+                  : "bg-brandSecondary/70 text-gray-800 rounded-bl-sm"
               }`}
             >
               <p className="whitespace-pre-wrap text-sm leading-relaxed">
@@ -412,7 +287,7 @@ const ChatInterface = () => {
                     <svg
                       className="w-4 h-4"
                       fill="none"
-                      stroke="#a6c2b3"
+                      stroke="white"
                       viewBox="0 0 24 24"
                     >
                       <path

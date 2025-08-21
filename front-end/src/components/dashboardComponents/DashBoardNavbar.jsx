@@ -233,7 +233,7 @@ const DashBoardNavbar = () => {
                 </div>
                 <div
                   tabIndex={0}
-                  className="dropdown-content bg-base-100 rounded-2xl shadow-xl border w-72 sm:w-80 md:w-96 lg:w-80 xl:w-96 p-3 sm:p-4 mt-2 z-10"
+                  className="dropdown-content bg-base-100 rounded-2xl  border-white shadow-brandPrimary shadow-lg w-64 sm:w-80 md:w-96 lg:w-80 xl:w-96 p-3 sm:p-4 mt-2 z-10"
                 >
                   {/* Calendar Header */}
                   <div className="flex items-center justify-center mb-3 sm:mb-4">

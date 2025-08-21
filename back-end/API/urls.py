@@ -39,6 +39,11 @@ urlpatterns = [
         include('ai.api.urls'),
         name='ai_api'
     ),
+    path(
+        'user/',
+        include('user.api.urls'),
+        name='user_api'
+    ),
     # Auth Api
     path(
         'register/',

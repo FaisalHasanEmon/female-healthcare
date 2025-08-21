@@ -2,6 +2,7 @@ from rest_framework import serializers
 from user.models import (
     Onboarding,
     CycleInfo,
+    SymptomActivityLevel
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -123,3 +124,10 @@ class StressLevelSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 
+class SymptomActivityLevelSerializer(serializers.ModelSerializer):
+    symptom_name = serializers.CharField(source='symptom.name')
+    activity_level_name = serializers.CharField(source='activity_level.name')
+
+    class Meta:
+        model = SymptomActivityLevel
+        fields = ['day', 'symptom_name', 'activity_level_name']

@@ -466,3 +466,30 @@ def delete_cycle_info_if_regular_cycle(sender, instance, **kwargs):
     """
     if instance.has_regular_cycle:
         CycleInfo.objects.filter(profile=instance.profile).delete()
+
+
+class SymptomActivityLevel(BaseModel):
+    DAYS = [
+        ('Sunday', 'Sunday'),
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday'),
+    ]
+
+    profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='symptom_levels'
+    )
+    symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE, related_name="levels")
+    activity_level = models.ForeignKey(ActivityLevel, on_delete=models.CASCADE, related_name="symptoms")
+    day = models.CharField(max_length=10, choices=DAYS)
+
+    class Meta:
+        unique_together = ("symptom", "day")
+
+    def __str__(self):
+        return f"{self.day}: {self.symptom.name} - {self.activity_level.name}"

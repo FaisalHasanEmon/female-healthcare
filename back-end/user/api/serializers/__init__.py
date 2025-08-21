@@ -14,7 +14,8 @@ from .onboarding import (
     GoalSerializer,
     ActivityLevelSerializer,
     StressLevelSerializer,
-    CycleInfoSerializer
+    CycleInfoSerializer,
+    SymptomActivityLevelSerializer
 )
 from .profile_update import UserProfileUpdateSerializer
 from .settings_page import OnboardingSettingsSerializer
@@ -34,6 +35,7 @@ __all__ = [
     StressLevelSerializer,
     UserProfileUpdateSerializer,
     OnboardingSettingsSerializer,
-    CycleInfoSerializer
+    CycleInfoSerializer,
+    SymptomActivityLevelSerializer
 
 ]

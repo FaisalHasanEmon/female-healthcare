@@ -16,6 +16,7 @@ const ModeTracker = () => {
     family: 0,
     finances: 0,
     generalStress: 0,
+    water: 0,
   });
   // New symptomp log state
   const [symptompLogData, setSymptompLogData] = useState({
@@ -39,19 +40,6 @@ const ModeTracker = () => {
     { value: "neutral", emoji: "😐", label: "Neutral", color: "text-gray-500" },
   ];
 
-  // const symptomOptions = [
-  //   "Fatigue",
-  //   "Mood",
-  //   "Sleep",
-  //   "Cravings",
-  //   "Weight",
-  //   "Cramps",
-  //   "Anxiety",
-  //   "Brain fog",
-  //   "Hot flashes",
-  //   "Irregular cycles",
-  // ];
-
   const foodLogItems = [
     { key: "alcohol", label: "Alcohol", icon: "🍷" },
     { key: "caffeine", label: "Caffeine", icon: "☕" },
@@ -61,6 +49,7 @@ const ModeTracker = () => {
     { key: "family", label: "Family", icon: "🏠" },
     { key: "finances", label: "Finances", icon: "💰" },
     { key: "generalStress", label: "General Stress", icon: "🧠" },
+    { key: "water", label: "Water", icon: "💧" },
   ];
 
   const symptompsLogItems = [
@@ -75,10 +64,6 @@ const ModeTracker = () => {
     { key: "hotFlashes", label: "Hot flashes", icon: "🔥" },
     { key: "irregularCycles", label: "Irregular Cycles", icon: "📅" },
   ];
-
-  // const handleSymptomSelect = (symptom) => {
-  //   setSelectedSymptom(symptom === selectedSymptom ? "" : symptom);
-  // };
 
   const handleFoodLogChange = (key, value) => {
     setFoodLogData((prev) => ({
@@ -111,7 +96,6 @@ const ModeTracker = () => {
   const handleSubmit = () => {
     const data = {
       mood: selectedMood,
-      // symptom: selectedSymptom,
       energyLevel,
       symptompLog: symptompLogData,
       foodLog: foodLogData,
@@ -171,67 +155,6 @@ const ModeTracker = () => {
                   ))}
                 </div>
               </div>
-
-              {/* Symptoms Selection */}
-              {/* <div>
-                <h3 className="font-medium text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base">
-                  Symptoms
-                </h3>
-                <div className="dropdown dropdown-bottom w-full">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-outline w-full justify-between text-sm sm:text-base"
-                  >
-                    {selectedSymptom || "Select a symptom"}
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content menu bg-base-100 rounded-box z-10 w-full p-2 shadow-lg border max-h-60 overflow-y-auto"
-                  >
-                    {symptomOptions.map((symptom) => (
-                      <li key={symptom}>
-                        <button
-                          className={`flex items-center justify-between text-sm sm:text-base ${
-                            selectedSymptom === symptom
-                              ? "bg-primary text-white"
-                              : ""
-                          }`}
-                          onClick={() => handleSymptomSelect(symptom)}
-                        >
-                          <span>{symptom}</span>
-                          {selectedSymptom === symptom && (
-                            <svg
-                              className="w-4 h-4"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div> */}
 
               {/* Energy Level Slider */}
               <div>

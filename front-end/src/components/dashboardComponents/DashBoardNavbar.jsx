@@ -10,7 +10,6 @@ const DashBoardNavbar = () => {
   console.log(location.pathname);
 
   // Check if the current path is not the overview page
-
   if (
     location.pathname === "/dashboard/overview" ||
     location.pathname === "/dashboard/analytics" ||
@@ -58,6 +57,107 @@ const DashBoardNavbar = () => {
       option: [{ id: 1, name: "Logout" }],
     },
   ];
+
+  // Calendar component data - replace with your backend data
+  const calendarData = {
+    phaseInsights:
+      "Your cycle patterns show consistent ovulation timing around day 14-15. Energy levels tend to be highest during the follicular phase.",
+    suggestions:
+      "Consider tracking your mood and energy levels alongside your cycle. Light exercise during menstruation can help reduce cramping.",
+  };
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Calendar helper functions
+  const getDaysInMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  };
+
+  const getFirstDayOfMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  };
+
+  const renderCalendar = () => {
+    const selectedMonth = new Date(); // Current month
+    const daysInMonth = getDaysInMonth(selectedMonth);
+    const firstDay = getFirstDayOfMonth(selectedMonth);
+    const today = new Date();
+    const isCurrentMonth =
+      selectedMonth.getMonth() === today.getMonth() &&
+      selectedMonth.getFullYear() === today.getFullYear();
+
+    const days = [];
+
+    // Previous month's trailing days
+    const prevMonth = new Date(
+      selectedMonth.getFullYear(),
+      selectedMonth.getMonth() - 1
+    );
+    const daysInPrevMonth = getDaysInMonth(prevMonth);
+
+    for (let i = firstDay - 1; i >= 0; i--) {
+      days.push(
+        <div
+          key={`prev-${daysInPrevMonth - i}`}
+          className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-gray-400 text-xs sm:text-sm"
+        >
+          {daysInPrevMonth - i}
+        </div>
+      );
+    }
+
+    // Current month's days
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isToday = isCurrentMonth && day === today.getDate();
+
+      days.push(
+        <div
+          key={day}
+          className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
+        >
+          <span
+            className={`text-xs sm:text-sm ${
+              isToday
+                ? "bg-blue-500 text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-medium"
+                : "text-gray-700"
+            }`}
+          >
+            {day}
+          </span>
+        </div>
+      );
+    }
+
+    // Next month's leading days
+    const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+    const remainingCells = totalCells - (firstDay + daysInMonth);
+
+    for (let day = 1; day <= remainingCells; day++) {
+      days.push(
+        <div
+          key={`next-${day}`}
+          className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-gray-400 text-xs sm:text-sm"
+        >
+          {day}
+        </div>
+      );
+    }
+
+    return days;
+  };
 
   // Navigation links rendering
   const navigateLinks = (
@@ -126,22 +226,63 @@ const DashBoardNavbar = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn m-1 border-2 border-brandPrimary rounded-[8px] text-black text-[16px] font-medium"
+                  className="btn m-1 border-2 border-brandPrimary rounded-[8px] text-black text-sm sm:text-[16px] font-medium px-2 sm:px-4"
                   hidden={showPeroidTracker ? false : true}
                 >
                   Period Tracker
                 </div>
-                <ul
+                <div
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                  className="dropdown-content bg-base-100 rounded-2xl shadow-xl border w-72 sm:w-80 md:w-96 lg:w-80 xl:w-96 p-3 sm:p-4 mt-2 z-10"
                 >
-                  <li>
-                    <a>Item 1</a>
-                  </li>
-                  <li>
-                    <a>Item 2</a>
-                  </li>
-                </ul>
+                  {/* Calendar Header */}
+                  <div className="flex items-center justify-center mb-3 sm:mb-4">
+                    <h3 className="text-gray-800 font-medium text-base sm:text-lg">
+                      {monthNames[new Date().getMonth()]}{" "}
+                      {new Date().getFullYear()}
+                    </h3>
+                  </div>
+
+                  {/* Calendar Grid */}
+                  <div className="mb-3 sm:mb-4">
+                    {/* Day headers */}
+                    <div className="grid grid-cols-7 gap-0.5 sm:gap-1 mb-2">
+                      {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
+                        <div
+                          key={day}
+                          className="w-8 h-6 sm:w-10 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-medium text-gray-600"
+                        >
+                          {day}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Calendar days */}
+                    <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
+                      {renderCalendar()}
+                    </div>
+                  </div>
+
+                  {/* Phase Insights Section */}
+                  <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-blue-50 rounded-lg">
+                    <h4 className="text-xs sm:text-sm font-semibold text-blue-800 mb-1 sm:mb-2">
+                      Phase Insights
+                    </h4>
+                    <p className="text-xs text-blue-700 leading-relaxed">
+                      {calendarData.phaseInsights}
+                    </p>
+                  </div>
+
+                  {/* Suggestions Section */}
+                  <div className="p-2 sm:p-3 bg-green-50 rounded-lg">
+                    <h4 className="text-xs sm:text-sm font-semibold text-green-800 mb-1 sm:mb-2">
+                      Suggestions
+                    </h4>
+                    <p className="text-xs text-green-700 leading-relaxed">
+                      {calendarData.suggestions}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="text-brandPrimary">

@@ -16,11 +16,7 @@ const AuthProvider = ({ children }) => {
   //   User Login API
   const userLogin = async (email, password) => {
     const loginData = { email, password };
-    try {
-      return await axiosRequest.post("login/", loginData);
-    } catch (err) {
-      return { data: null, error: err.message };
-    }
+    return await axiosRequest.post("login/", loginData);
   };
 
   //   User Logout API

@@ -53,33 +53,35 @@ const DashboardSideBar = () => {
   // Navigation links rendering
   const navigateLinks = (
     <>
-      {navLinks.map((link) => (
-        <li key={link?.id}>
-          <div className="w-full flex bg-gradient-to-tr from-brandSecondary/30 via-brandPrimary to-brandSecondary/30">
-            <NavLink
-              to={link?.path}
-              className={({ isActive }) =>
-                isActive ? "bg-brandSecondary grow-1" : "bg-brandPrimary grow-1"
-              }
-              style={NavButtonsStyle}
-              end={
-                location.pathname === `/dashboard/overview` ||
-                location.pathname === `/dashboard/analytics`
-                  ? false
-                  : true
-              }
-            >
-              <figure>
-                <img src={link?.icon} alt="Start New Session" />
-              </figure>
-              <p>{link?.name}</p>
-            </NavLink>
-            {/* Dropdown for logout */}
-            {link?.option && link?.option.length > 0 && (
-              <>
-                <div className="dropdown dropdown-bottom  h-full my-auto  ">
+      {navLinks.map((link) => {
+        const isDashboardActive =
+          link.name === "Dashboard" &&
+          (location.pathname === "/dashboard" ||
+            location.pathname === "/dashboard/overview" ||
+            location.pathname === "/dashboard/analytics");
+        return (
+          <li key={link?.id}>
+            <div className="w-full flex bg-gradient-to-tr from-brandSecondary/30 via-brandPrimary to-brandSecondary/30">
+              <NavLink
+                to={link?.path}
+                className={() =>
+                  isDashboardActive || location.pathname === link.path
+                    ? "bg-brandSecondary grow-1"
+                    : "bg-brandPrimary grow-1"
+                }
+                style={NavButtonsStyle}
+              >
+                <figure>
+                  <img src={link?.icon} alt={link?.name} />
+                </figure>
+                <p>{link?.name}</p>
+              </NavLink>
+
+              {/* Dropdown for logout */}
+              {link?.option && link?.option.length > 0 && (
+                <div className="dropdown dropdown-bottom h-full my-auto">
                   <div tabIndex={0} role="button">
-                    <figure className="">
+                    <figure>
                       <img
                         src="/dashboard-Icons/dropdownIcon.png"
                         alt="dropdown icon"
@@ -88,18 +90,18 @@ const DashboardSideBar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu  rounded-box z-1 w-28  p-1 shadow-sm -left-16 mt-4 bg-gradient-to-tr from-brandSecondary to-brandPrimary "
+                    className="dropdown-content menu rounded-box z-1 w-28 p-1 shadow-sm -left-16 mt-4 bg-gradient-to-tr from-brandSecondary to-brandPrimary"
                   >
                     <li>
                       <a>Logout</a>
                     </li>
                   </ul>
                 </div>
-              </>
-            )}
-          </div>
-        </li>
-      ))}
+              )}
+            </div>
+          </li>
+        );
+      })}
     </>
   );
   return (

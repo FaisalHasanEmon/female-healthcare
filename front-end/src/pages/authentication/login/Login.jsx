@@ -8,6 +8,12 @@ import UseAuth from "../../../hooks/useAuth";
 const Login = () => {
   const { userLogin } = UseAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [toast, setToast] = useState("");
+
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => setToast(""), 3000);
+  };
   const navigate = useNavigate();
   // Handle Goolge Sign Up
   const handleGoogleLogin = async () => {};
@@ -18,14 +24,34 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const loginData = { email, password };
+    try {
+      const res = await userLogin(email, password);
+      console.log(res);
+      if (res?.status === 200) {
+        localStorage.setItem("fenyxFemme-accessToken", res?.data?.access);
+        localStorage.setItem("fenyxFemme-refreshToken", res?.data?.refresh);
 
-    // const res = await userLogin(email, password);
+        // Check if the user is logging for the first time or not
 
-    navigate("/onboarding");
+        res?.data?.onboarding_completed
+          ? navigate("/dashboard/analytics") // step 1: if the user not logging for the first time -> navigate to dashboard
+          : navigate("/onboarding"); // step 2 : if the user logging for the first time -> navigate to onboarding page
+      }
+      console.log(res);
+    } catch (er) {
+      console.log(er);
+      showToast(er?.response?.data?.error);
+    }
   };
   return (
     <div className="min-h-screen flex justify-center items-center font-inter ">
+      {toast && (
+        <div className="toast toast-top toast-center z-50">
+          <div className="alert alert-error text-white">
+            <span>{toast}</span>
+          </div>
+        </div>
+      )}
       <div className="w-[350px] md:w-[580px] bg-gradient-to-b from-brandSecondary to-brandPrimary rounded-lg p-6 md:p-10 shadow-md">
         {/* Heading and Login page link */}
         <div className="*:text-center space-y-3">
@@ -109,7 +135,7 @@ const Login = () => {
               </Link>
             </div>
             {/* Login Button */}
-            <div className="w-full ">
+            <div className="w-full">
               <button className="w-full btn btn-neutral mt-4 h-16 bg-gradient-to-r from-brandSecondary to-brandPrimary text-black! font-inter text-[16px] border-brandSecondary">
                 Log In
               </button>

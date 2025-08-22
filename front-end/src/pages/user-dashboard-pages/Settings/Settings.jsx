@@ -109,14 +109,6 @@ export default function ProfileForm() {
     showToast("Password change initiated. Check your email!");
   };
 
-  // const handleRecalculateCycle = () => {
-  //   showToast("Cycle recalculated based on recent data!");
-  // };
-
-  // const handleSaveReminderPreferences = () => {
-  //   showToast("Reminder preferences saved!");
-  // };
-
   const handleExportData = (format) => {
     showToast(`Data export (${format}) started. Download will begin shortly.`);
   };
@@ -286,15 +278,6 @@ export default function ProfileForm() {
                     className="input input-bordered w-full"
                   />
                 </div>
-
-                {/* <input
-                  type="text"
-                  name="location"
-                  placeholder="Location (optional)..."
-                  value={formData.location}
-                  onChange={handleInputChange}
-                  className="input input-bordered w-full"
-                /> */}
 
                 <div className="grid grid-cols-2 gap-4">
                   <button

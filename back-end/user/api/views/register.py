@@ -31,6 +31,6 @@ class RegisterView(CreateAPIView):
 
         return Response({
             "message": "User registered successfully. Please check your inbox to verify your email.",
-            "user": {"email": user.email},
-            "profile": {"name": profile.name},
+            # "user": {"email": user.email},
+            # "profile": {"name": profile.name},
         }, status=status.HTTP_201_CREATED)

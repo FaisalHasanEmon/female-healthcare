@@ -25,6 +25,9 @@ from .onboarding import (
     ActivityLevelListCreateAPIView,
     StressLevelListCreateAPIView,
     LifeStyleListAPIView,
+    CycleInfoDetailAPIView,
+    SymptomActivityLevelChartView
+
 )
 from .profile_update import (
     UserProfileUpdateView,
@@ -34,7 +37,8 @@ from .settings_page import (
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
     OnboardingSettingsDetailsAPIView,
-    OnboardingSettingsListAPIView
+    OnboardingSettingsListAPIView,
+    
 )
 
 
@@ -65,5 +69,7 @@ __all__ = [
     OnboardingSettingsCreateAPIView,
     OnboardingSettingsUpdateAPIView,
     OnboardingSettingsDetailsAPIView,
-    OnboardingSettingsListAPIView
+    OnboardingSettingsListAPIView,
+    CycleInfoDetailAPIView,
+    SymptomActivityLevelChartView
 ]

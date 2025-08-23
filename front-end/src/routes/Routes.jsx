@@ -25,6 +25,7 @@ import Dashboard from "../pages/user-dashboard-pages/Dashboard/Dashboard";
 import Analytics from "../pages/user-dashboard-pages/Dashboard/Analytics/Analytics";
 import Overview from "../pages/user-dashboard-pages/Dashboard/Overview/Overview";
 import OverviewDetails from "../pages/user-dashboard-pages/Dashboard/Overview/OverviewDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   // Home Layout Paths
@@ -75,7 +76,11 @@ const router = createBrowserRouter([
   // Onboarding Layout Paths
   {
     path: "/onboarding",
-    element: <OnBoardingLayout />,
+    element: (
+      <PrivateRoute>
+        <OnBoardingLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/onboarding",

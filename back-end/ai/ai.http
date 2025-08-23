@@ -5,7 +5,7 @@
 # Replace model IDs (symptoms, dietary_style, etc.) with actual IDs from your database
 
 @baseUrl = http://localhost:8000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0ODY2Mzg2LCJpYXQiOjE3NTQ4NjI3ODYsImp0aSI6IjVlNGU1ODYwM2JmZDQ5ZmRiOTRjYWUwNTU1MTg2Zjg3IiwidXNlcl9pZCI6MX0.W29hl_g0PQ2PY98T80kpfbr4oFLC-8wJMuevwICHfFw
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NzI5MTI4LCJpYXQiOjE3NTU3MjU1MjgsImp0aSI6IjRlZTg5NDFhY2ViMTQ0ODlhMWE2NTdmNDE1YzljYTI1IiwidXNlcl9pZCI6MX0.Co0h-rm-BhsDkM1DngJwekKNxfubxgYvha3WTZV9d2Y
 
 ### Login to Obtain JWT Token
 POST {{baseUrl}}/login/
@@ -23,7 +23,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "user_input": "I'm feeling tired and bloated today. Any suggestions?"
+    "user_input": "Hi! can you help me? i feel sick"
 }
 
 
@@ -31,4 +31,28 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/ai/dashboard/
 Authorization: Bearer {{token}}
 Content-Type: application/json
+Accept: application/json
+
+
+### Get Insight
+GET {{baseUrl}}/ai/insight/
+Authorization: Bearer {{token}}
+Accept: application/json
+
+
+### Get Goal
+GET {{baseUrl}}/ai/goal/
+Authorization: Bearer {{token}}
+Accept: application/json
+
+
+### Get Food Suggestions
+GET {{baseUrl}}/ai/food/
+Authorization: Bearer {{token}}
+Accept: application/json
+
+
+### Get Supplement Suggestions
+GET {{baseUrl}}/ai/supplement/
+Authorization: Bearer {{token}}
 Accept: application/json

@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTIxMDIwLCJpYXQiOjE3NTQ1MTc0MjAsImp0aSI6IjQzNTYyYTMyODI2MDQ4MWE4NWZkMWY3MTMwZDc4Mjg1IiwidXNlcl9pZCI6MX0.DM-fboYBBKZfwImnLCMPPisg-E_IIypU069rgkpnNuo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NzM2MzAyLCJpYXQiOjE3NTU3MzI3MDIsImp0aSI6ImQzYzA0Yjc3NjZiYjRmYzc5YWRlMGYyODAwYmIzZjNlIiwidXNlcl9pZCI6MX0.rBYjVaIO1sqHlRNKUcUk5qWqFkq71_9VxbPq2o9R2zY
 
 @refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NDk0NjUyNywiaWF0IjoxNzU0MzQxNzI3LCJqdGkiOiJhZmIxNGRjNWE2MDg0OWI4YTc5MmQ4YWViNTgyOWVjZSIsInVzZXJfaWQiOjJ9._eQjyJWmRDbLSR2OEahp00F8Li6_tozMjlVXtxGWWp4
 ### Register
@@ -9,7 +9,7 @@ Content-Type: application/json
 {
   "email": "shagorrobidasjvai@gmail.com",
   "password": "Sagor1234#",
-  "confirm_password": "Sagor1234#"
+  "confirm_password": "Sagor1234!"
 }
 
 ### Login
@@ -18,8 +18,8 @@ POST http://127.0.0.1:8000/api/v1/login/
 Content-Type: application/json
 
 {
-  "email": "admin@gmail.com",
-  "password": "admin"
+  "email": "faisalhasanemon@gmail.com",
+  "password": "Abcd123!"
 }
 
 
@@ -205,3 +205,9 @@ Authorization: Bearer {{token}}
 
 GET http://localhost:8000/api/v1/lifestyle/
 Authorization: Bearer {{token}}
+
+
+### Get Cycle Info Detail
+GET http://127.0.0.1:8000/api/v1/cycle-info/19/
+Authorization: Bearer {{token}}
+Accept: application/json

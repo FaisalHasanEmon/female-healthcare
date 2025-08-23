@@ -1,5 +1,8 @@
 from django.urls import path
 from .views import PasswordResetConfirmPageView, test_view
+from .chart_views import (
+    chart_view
+)
 
 urlpatterns = [
     path(
@@ -12,6 +15,12 @@ urlpatterns = [
         test_view,
         name='test_view'
     ),
-
+    path(
+        'chart/',
+        chart_view,
+        name='chart_view'
+    ),
     
 ]
+
+    

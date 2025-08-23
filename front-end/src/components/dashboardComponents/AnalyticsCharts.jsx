@@ -38,13 +38,13 @@ function AnalyticsCharts({ heading }) {
   };
 
   const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
   ];
 
   const data = {

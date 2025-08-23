@@ -5,7 +5,8 @@ from user.models import (
     Gender,
     Profile,
     Onboarding,
-    CycleInfo
+    CycleInfo,
+    SymptomActivityLevel
 )
 from user.onboarding.onboarding_model import (
     Symptom,
@@ -160,3 +161,12 @@ class CycleInfoAdmin(admin.ModelAdmin):
 
     def get_current_phase(self, obj):
         return obj.current_phase.capitalize() if obj.current_phase else "-"
+    
+
+@admin.register(SymptomActivityLevel)
+class SymptomActivityLevelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'symptom', 'activity_level', 'profile', 'day')
+    list_filter = ('symptom', 'activity_level', 'profile')
+    search_fields = ('symptom__name',)
+    
+   

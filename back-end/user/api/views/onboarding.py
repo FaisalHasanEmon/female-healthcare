@@ -157,12 +157,14 @@ class SymptomActivityLevelChartView(APIView):
     def get(self, request, profile_id=None):
         # Map activity levels to numeric values for chart
         activity_map = {'None': 0, 'Low': 1, 'Moderate': 2, 'High': 3}
-        
+
         # Fetch data for the given profile
         try:
-            queryset = SymptomActivityLevel.objects.filter(profile_id=profile_id).select_related('symptom', 'activity_level')
+            queryset = SymptomActivityLevel.objects.filter(
+                profile_id=profile_id
+            ).select_related('symptom', 'activity_level')
             serializer = SymptomActivityLevelSerializer(queryset, many=True)
-            
+
             # Transform data for chart
             chart_data = {
                 'days': [item['day'] for item in serializer.data],
@@ -171,7 +173,7 @@ class SymptomActivityLevelChartView(APIView):
                 'days_order': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 'activity_levels_order': ['None', 'Low', 'Moderate', 'High']
             }
-            
+
             return Response(chart_data, status=status.HTTP_200_OK)
         except SymptomActivityLevel.DoesNotExist:
             return Response({'error': 'No data found for this profile'}, status=status.HTTP_404_NOT_FOUND)

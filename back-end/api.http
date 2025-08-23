@@ -9,7 +9,7 @@ Content-Type: application/json
 {
   "email": "shagorrobidasjvai@gmail.com",
   "password": "Sagor1234#",
-  "confirm_password": "Sagor1234#"
+  "confirm_password": "Sagor1234!"
 }
 
 ### Login
@@ -18,8 +18,8 @@ POST http://127.0.0.1:8000/api/v1/login/
 Content-Type: application/json
 
 {
-  "email": "admin@gmail.com",
-  "password": "admin"
+  "email": "faisalhasanemon@gmail.com",
+  "password": "Abcd123!"
 }
 
 

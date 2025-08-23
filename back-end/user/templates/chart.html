@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Activity Level Chart</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Datalabels Plugin CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #chart-container {
+            width: 80%;
+            max-width: 800px;
+            height: 500px;
+        }
+        #error-message {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Symptom Activity Levels by Day</h1>
+    <canvas id="chart-container"></canvas>
+    <div id="error-message"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fallback data for testing
+            const fallbackData = {
+                datasets: [{
+                    label: 'Symptoms',
+                    data: [
+                        { x: 'Monday', y: 1, label: 'Fatigue' },
+                        { x: 'Tuesday', y: 2, label: 'Mood' },
+                        { x: 'Monday', y: 0, label: 'Sleep' }
+                    ],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    pointRadius: 6
+                }],
+                days_order: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                activity_levels_order: ['None', 'Low', 'Moderate', 'High']
+            };
+
+            function renderChart(data) {
+                console.log('Rendering chart with data:', data);
+                const ctx = document.getElementById('chart-container').getContext('2d');
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Symptom Activity Levels by Day',
+                                font: { size: 18 }
+                            },
+                            datalabels: {
+                                display: true,
+                                formatter: (value) => value.label,
+                                align: 'top',
+                                offset: 4,
+                                font: { size: 12 }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Day of the Week',
+                                    font: { size: 14 }
+                                },
+                                type: 'category',
+                                labels: data.days_order
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Activity Level',
+                                    font: { size: 14 }
+                                },
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: (value) => data.activity_levels_order[value] || ''
+                                },
+                                min: 0,
+                                max: 3
+                            }
+                        }
+                    },
+                    plugins: [ChartDataLabels]
+                });
+            }
+
+            // Try fetching data from API
+            fetch('http://127.0.0.1:8000/api/v1/user/symptom-activity-levels/1/')
+                .then(response => {
+                    console.log('API Response:', response);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('API Data:', data);
+                    // Transform API data to Chart.js format
+                    const chartData = {
+                        datasets: [{
+                            label: 'Symptoms',
+                            data: data.days.map((day, index) => ({
+                                x: day,
+                                y: data.activity_levels[index],
+                                label: data.symptoms[index]
+                            })),
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            pointRadius: 6
+                        }],
+                        days_order: data.days_order,
+                        activity_levels_order: data.activity_levels_order
+                    };
+                    if (chartData.datasets[0].data.length > 0) {
+                        renderChart(chartData);
+                    } else {
+                        console.warn('No data returned from API, using fallback data');
+                        document.getElementById('error-message').textContent = 'No data available for this profile. Showing sample data.';
+                        renderChart(fallbackData);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('error-message').textContent = 'Failed to load chart data. Showing sample data.';
+                    renderChart(fallbackData);
+                });
+        });
+    </script>
+</body>
+</html>

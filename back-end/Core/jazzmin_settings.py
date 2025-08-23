@@ -2,7 +2,7 @@ JAZZMIN_SETTINGS = {
     "site_title": "FENYX FEMME Admin",
     "site_header": "FENYX FEMME",
     "site_brand": "FENYX FEMME",
-    "site_logo": "fenyx/img/logo.png",
+    # "site_logo": "fenyx/img/logo.png",
 
     "login_logo": None,
 
@@ -75,7 +75,7 @@ JAZZMIN_SETTINGS = {
     "hide_models": [],
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+    "order_with_respect_to": ["auth", "user", "books.author", "books.book"],
 
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
